@@ -24,8 +24,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Study Screen.unity
     guid: d2f10b65c39b8e24594049faa9a07039
   - enabled: 1
+<<<<<<< HEAD
+    path: Assets/Scenes/Test scene.unity
+    guid: dc6548874c3c1c443b6aba952526c41e
+=======
     path: Assets/Scenes/Resting Scene.unity
     guid: 3a5472b41c459e840bfef5c68c948a31
+>>>>>>> b382d217fb983843ec517adf9efcfd7c9005d6c7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
