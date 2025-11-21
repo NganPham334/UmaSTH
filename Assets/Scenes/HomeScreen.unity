@@ -1199,8 +1199,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1038998034}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadSceneByName
+        m_TargetAssemblyTypeName: HomeStudyButton, Assembly-CSharp
+        m_MethodName: OnStudyButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2694,7 +2694,7 @@ GameObject:
   - component: {fileID: 1038998035}
   - component: {fileID: 1038998034}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: HomeStudyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2711,8 +2711,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6673b6c7bea56d24e99cb10185e7127e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  sceneName: Game Scene
+  m_EditorClassIdentifier: Assembly-CSharp::HomeStudyButton
 --- !u!4 &1038998035
 Transform:
   m_ObjectHideFlags: 0
