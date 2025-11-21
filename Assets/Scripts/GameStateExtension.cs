@@ -17,6 +17,8 @@ public static class GameStateExtensions
                 return "Run End Scene";
             case GameStateMan.GameState.Training:
                 return "Study Screen";
+            case GameStateMan.GameState.GameScene:
+                return "Game Scene";
             case GameStateMan.GameState.PreTest:
                 return "PreTestUI";  
             case GameStateMan.GameState.Exam:

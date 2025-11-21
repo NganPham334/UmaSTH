@@ -59,7 +59,7 @@ public class PreTestScene : MonoBehaviour
             return;
         }
 
-        GameStateMan.Instance.RequestState(GameStateMan.GameState.Training);
+        GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
     }
 
     void OnClickTest()
