@@ -1,37 +1,75 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class PreTestScene : MonoBehaviour
 {
-    [Header("Buttons")]
-    public Button testButton;
-    public Button returnButton;
+    [Header("UI References")]
+    public Button btnReturn;
+    public Button btnTest;
+    public TMP_Text timeText;
 
-    [Header("Date / Time")]
-    public TMP_Text dateTimeText;
-
-    private void Start()
+    void Awake()
     {
-        testButton.onClick.AddListener(OnClickTest);
-        returnButton.onClick.AddListener(OnClickReturn);
+        // Tự động tìm nếu quên gán trong Inspector
+        if (btnReturn == null)
+            btnReturn = GameObject.Find("ReturnButton")?.GetComponent<Button>();
+
+        if (btnTest == null)
+            btnTest = GameObject.Find("TestButton")?.GetComponent<Button>();
+
+        if (timeText == null)
+            timeText = GameObject.Find("DateTimeText")?.GetComponent<TMP_Text>();
+        if (GameStateMan.Instance == null)
+    {
+        Debug.LogWarning("GameStateMan missing – auto creating.");
+        var gsm = new GameObject("GameStateMan_Auto");
+        gsm.AddComponent<GameStateMan>();
+    }
     }
 
-    private void Update()
+    void Start()
     {
-        dateTimeText.text = System.DateTime.Now.ToString("dd/MM/yyyy\nHH:mm:ss");
+        // Kiểm tra null để tránh crash
+        if (btnReturn != null)
+            btnReturn.onClick.AddListener(OnClickReturn);
+        else
+            Debug.LogWarning("[PreTestScene] btnReturn chưa được gán!");
+
+        if (btnTest != null)
+            btnTest.onClick.AddListener(OnClickTest);
+        else
+            Debug.LogWarning("[PreTestScene] btnTest chưa được gán!");
+
+        if (timeText == null)
+            Debug.LogWarning("[PreTestScene] timeText chưa được gán!");
     }
 
-    void OnClickTest()
+    void Update()
     {
-        // Load scene test
-        SceneManager.LoadScene("Test(Combat)Screen");
+        if (timeText != null)
+            timeText.text = System.DateTime.Now.ToString("dd/MM/yyyy\nHH:mm:ss");
     }
 
     void OnClickReturn()
     {
-        // Load scene quay về
-        SceneManager.LoadScene("Study Screen");
+        if (GameStateMan.Instance == null)
+        {
+            Debug.LogError("[PreTestScene] GameStateMan.Instance == null");
+            return;
+        }
+
+        GameStateMan.Instance.RequestState(GameStateMan.GameState.Training);
+    }
+
+    void OnClickTest()
+    {
+        if (GameStateMan.Instance == null)
+        {
+            Debug.LogError("[PreTestScene] GameStateMan.Instance == null");
+            return;
+        }
+
+        GameStateMan.Instance.RequestState(GameStateMan.GameState.Exam);
     }
 }

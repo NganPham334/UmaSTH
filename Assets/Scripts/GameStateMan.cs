@@ -18,6 +18,7 @@ public class GameStateMan : MonoBehaviour
         Launcher,
         Training,
         Resting,
+        PreTest,
         Exam,
         StoryEvent,
         RunEnd
