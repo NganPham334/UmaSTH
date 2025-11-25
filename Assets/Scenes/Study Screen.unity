@@ -540,7 +540,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1235448925231915808, guid: 7096253a29eab2d409337479b940da79, type: 3}
       propertyPath: m_Name
-      value: Stat Box
+      value: Wit Stats
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1189690611}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnStudyButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StudyScreenController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2768204975482802596, guid: 7096253a29eab2d409337479b940da79, type: 3}
       propertyPath: m_Name
@@ -656,6 +688,67 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8083111642760038977, guid: 7096253a29eab2d409337479b940da79, type: 3}
   m_PrefabInstance: {fileID: 722606714}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &882273893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882273895}
+  - component: {fileID: 882273894}
+  m_Layer: 0
+  m_Name: Stats Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &882273894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882273893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ce6a28b5a34ae48b9b208641887d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatsManager
+  StudyGains:
+  - PrimaryStat: 0
+    SecondaryStat: 1
+    PrimaryGain: 10
+    SecondaryGain: 2
+  - PrimaryStat: 2
+    SecondaryStat: 0
+    PrimaryGain: 10
+    SecondaryGain: 2
+  - PrimaryStat: 1
+    SecondaryStat: 3
+    PrimaryGain: 10
+    SecondaryGain: 2
+  - PrimaryStat: 3
+    SecondaryStat: 2
+    PrimaryGain: 10
+    SecondaryGain: 2
+--- !u!4 &882273895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882273893}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 991.26135, y: 543.8294, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &970644716
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +762,7 @@ GameObject:
   - component: {fileID: 970644719}
   - component: {fileID: 970644718}
   m_Layer: 5
-  m_Name: Rest_button (4)
+  m_Name: Rest Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -815,7 +908,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1235448925231915808, guid: 7096253a29eab2d409337479b940da79, type: 3}
       propertyPath: m_Name
-      value: Luck Stat Header
+      value: Memory Stats
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1189690611}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnStudyButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StudyScreenController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2768204975482802596, guid: 7096253a29eab2d409337479b940da79, type: 3}
       propertyPath: m_Name
@@ -1211,7 +1336,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1235448925231915808, guid: 7096253a29eab2d409337479b940da79, type: 3}
       propertyPath: m_Name
-      value: Stat Box
+      value: Luck Stats
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1189690611}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnStudyButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StudyScreenController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2768204975482802596, guid: 7096253a29eab2d409337479b940da79, type: 3}
       propertyPath: m_Name
@@ -1702,7 +1859,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1235448925231915808, guid: 7096253a29eab2d409337479b940da79, type: 3}
       propertyPath: m_Name
-      value: Stat Box
+      value: Speed Stats
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1189690611}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnStudyButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StudyScreenController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532855986793063698, guid: 7096253a29eab2d409337479b940da79, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2768204975482802596, guid: 7096253a29eab2d409337479b940da79, type: 3}
       propertyPath: m_Name
@@ -1849,3 +2034,4 @@ SceneRoots:
   - {fileID: 462011757}
   - {fileID: 1189690610}
   - {fileID: 704118573}
+  - {fileID: 882273895}
