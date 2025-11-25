@@ -90,10 +90,21 @@ public class StatsManager : MonoBehaviour
 		}
 	}
 	
-	// ApplyGain function
+	// ApplyGain function, to make 10 + 10 = 20
 	private void ApplyGain(CharacterStat stat, int amount)
 	{
 		stat.CurrentValue += amount;
 		stat.CurrentValue = Mathf.Min(stat.CurrentValue, CharacterStat.MaxValue); // Enforce MaxValue
 	}
+	
+	// Getter method to read current stat value
+	public int GetStatValue(StatType type)
+	{
+		if (_stats.TryGetValue(type, out CharacterStat stat))
+		{
+			return stat.CurrentValue;
+		}
+		return 0; // If stat isn't found (somehow)
+	}
+	
 }
