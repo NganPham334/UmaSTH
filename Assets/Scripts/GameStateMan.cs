@@ -27,6 +27,9 @@ public class GameStateMan : MonoBehaviour
 
     private GameState _currentState;
     public GameState CurrentStateType => _currentState; // Getter thing, pretty sure this shows up in the editor as well
+
+    public CurrentRunData CurrentRunData { get; internal set; }
+
     private Dictionary<string, object> _stateParameters;
     
     void Awake()

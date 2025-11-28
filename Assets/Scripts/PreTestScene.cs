@@ -1,75 +1,109 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class PreTestScene : MonoBehaviour
 {
-    [Header("UI References")]
-    public Button btnReturn;
-    public Button btnTest;
-    public TMP_Text timeText;
+    [Header("Bindings")]
+    public TMP_Text SpeedText;
+    public TMP_Text MemoryText;
+    public TMP_Text WitText;
+    public TMP_Text LuckText;
+    public TMP_Text TurnText;
+    public TMP_Text ExamNameText;
 
-    void Awake()
-    {
-        // Tự động tìm nếu quên gán trong Inspector
-        if (btnReturn == null)
-            btnReturn = GameObject.Find("ReturnButton")?.GetComponent<Button>();
+    public Button TestButton;
+    public Button ReturnButton;
+    public Button CancelButton;
 
-        if (btnTest == null)
-            btnTest = GameObject.Find("TestButton")?.GetComponent<Button>();
-
-        if (timeText == null)
-            timeText = GameObject.Find("DateTimeText")?.GetComponent<TMP_Text>();
-        if (GameStateMan.Instance == null)
-    {
-        Debug.LogWarning("GameStateMan missing – auto creating.");
-        var gsm = new GameObject("GameStateMan_Auto");
-        gsm.AddComponent<GameStateMan>();
-    }
-    }
+    private CurrentRunData runData;
+    private ExamData examData;
+    private bool isOptionalTest = false;
 
     void Start()
     {
-        // Kiểm tra null để tránh crash
-        if (btnReturn != null)
-            btnReturn.onClick.AddListener(OnClickReturn);
-        else
-            Debug.LogWarning("[PreTestScene] btnReturn chưa được gán!");
+        // Lấy SO hiện tại
+        runData = GameStateMan.Instance.CurrentRunData;
 
-        if (btnTest != null)
-            btnTest.onClick.AddListener(OnClickTest);
-        else
-            Debug.LogWarning("[PreTestScene] btnTest chưa được gán!");
-
-        if (timeText == null)
-            Debug.LogWarning("[PreTestScene] timeText chưa được gán!");
-    }
-
-    void Update()
-    {
-        if (timeText != null)
-            timeText.text = System.DateTime.Now.ToString("dd/MM/yyyy\nHH:mm:ss");
-    }
-
-    void OnClickReturn()
-    {
-        if (GameStateMan.Instance == null)
+        // Lấy dữ liệu Exam từ GameStateMan
+        if (!GameStateMan.Instance.TryGetStateParameter("ExamData", out examData))
         {
-            Debug.LogError("[PreTestScene] GameStateMan.Instance == null");
+            Debug.LogError("PreTestScene: ExamData was not provided!");
             return;
         }
 
-        GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+        // Lấy flag Optional test
+        GameStateMan.Instance.TryGetStateParameter("OptionalTest", out isOptionalTest);
+
+        SetupUI();
+        SetupButtonLogic();
     }
 
-    void OnClickTest()
+    void SetupUI()
     {
-        if (GameStateMan.Instance == null)
-        {
-            Debug.LogError("[PreTestScene] GameStateMan.Instance == null");
-            return;
-        }
+        // Stats
+        SpeedText.text = runData.Speed.ToString();
+        MemoryText.text = runData.Memory.ToString();
+        WitText.text = runData.Wit.ToString();
+        LuckText.text = runData.Luck.ToString();
 
-        GameStateMan.Instance.RequestState(GameStateMan.GameState.Exam);
+        // Turn
+        TurnText.text = "Turn " + runData.CurrentTurn;
+
+        // Exam name
+        if (examData != null)
+            ExamNameText.text = examData.ExamName;
+        else
+            ExamNameText.text = "Unknown Test";
+
+        // Optional test → show cancel
+        CancelButton.gameObject.SetActive(isOptionalTest);
     }
+
+    void SetupButtonLogic()
+    {
+        TestButton.onClick.AddListener(() =>
+        {
+            // Chuyển sang state Exam (Test Scene)
+            var param = new Dictionary<string, object>
+            {
+                { "ExamData", examData }
+            };
+
+            GameStateMan.Instance.RequestState(GameStateMan.GameState.Exam, param);
+        });
+
+        ReturnButton.onClick.AddListener(() =>
+        {
+            if (isOptionalTest == true)
+            {
+                // Quay lại GameScene
+                GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+            }
+            else
+            {
+                // Forced test logic
+                if (runData.CurrentTurn > 1)
+                {
+                    GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+                }
+                else
+                {
+                    Debug.Log("PreTestScene: Return blocked because Turn == 1 and this is not optional.");
+                }
+            }
+        });
+
+        CancelButton.onClick.AddListener(() =>
+        {
+            // Optional test only → quay về GameScene
+            GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+        });
+    }
+}
+
+internal class ExamData
+{
+    public string ExamName { get; internal set; }
 }
