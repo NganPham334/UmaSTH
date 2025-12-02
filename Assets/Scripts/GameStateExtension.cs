@@ -13,6 +13,8 @@ public static class GameStateExtensions
                 return "LauncherScreen";
             case GameStateMan.GameState.Resting:
                 return "Resting Scene";
+            case GameStateMan.GameState.PastTime:
+                return "Past-time Scene";
             case GameStateMan.GameState.RunEnd:
                 return "Run End Scene";
             case GameStateMan.GameState.Training:

@@ -17,6 +17,7 @@ public class GameStateMan : MonoBehaviour
         MainMenu,
         Launcher,
         Training,
+        PastTime,
         GameScene,
         Resting,
         PreTest,
