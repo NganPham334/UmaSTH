@@ -5,105 +5,187 @@ using System.Collections.Generic;
 
 public class PreTestScene : MonoBehaviour
 {
-    [Header("Bindings")]
-    public TMP_Text SpeedText;
-    public TMP_Text MemoryText;
-    public TMP_Text WitText;
-    public TMP_Text LuckText;
-    public TMP_Text TurnText;
-    public TMP_Text ExamNameText;
+    [Header("=== Player Stats (Left Panel) ===")]
+    public TMP_Text PlayerSpeed;
+    public TMP_Text PlayerMemory;
+    public TMP_Text PlayerWit;
+    public TMP_Text PlayerLuck;
 
+    [Header("=== Exam Stats (Right Panel) ===")]
+    public TMP_Text TestSpeed;
+    public TMP_Text TestMemory;
+    public TMP_Text TestWit;
+    public TMP_Text TestLuck;
+
+    [Header("=== Center UI ===")]
+    public TMP_Text ExamName;
     public Button TestButton;
     public Button ReturnButton;
+
+    [Header("Optional Test Controls")]
     public Button CancelButton;
 
     private CurrentRunData runData;
-    private ExamData examData;
-    private bool isOptionalTest = false;
+    private ScheduledExam examData;
+    private bool isOptionalTest;
 
+
+
+    // ================================================================
+    // START
+    // ================================================================
     void Start()
     {
-        // Lấy SO hiện tại
-        runData = GameStateMan.Instance.CurrentRunData;
+        var gsm = GameStateMan.Instance;
+        bool hasRealExam = false;
 
-        // Lấy dữ liệu Exam từ GameStateMan
-        if (!GameStateMan.Instance.TryGetStateParameter("ExamData", out examData))
+        // ---------------------------------------------------------------
+        // TRY GET DATA FROM GAMESTATEMAN (REAL GAME MODE)
+        // ---------------------------------------------------------------
+        if (gsm != null)
         {
-            Debug.LogError("PreTestScene: ExamData was not provided!");
-            return;
+            runData = gsm.CurrentRunData;
+
+            if (gsm.TryGetStateParameter("ExamData", out examData))
+                hasRealExam = true;
+
+            gsm.TryGetStateParameter("OptionalTest", out isOptionalTest);
         }
 
-        // Lấy flag Optional test
-        GameStateMan.Instance.TryGetStateParameter("OptionalTest", out isOptionalTest);
+        // ---------------------------------------------------------------
+        // TEST MODE: IF NO REAL EXAM DATA FOUND
+        // ---------------------------------------------------------------
+        if (!hasRealExam)
+        {
+            Debug.LogWarning("PreTestScene: Running TEST MODE (scene launched directly).");
 
+            // mock run data
+            runData = ScriptableObject.CreateInstance<CurrentRunData>();
+            runData.Speed = 120;
+            runData.Wit = 80;
+            runData.Memory = 55;
+            runData.Luck = 35;
+
+            // mock exam
+            examData = new ScheduledExam()
+            {
+                ExamName = "TEST MODE EXAM",
+                Requirements = new List<StatRequirement>()
+                {
+                    new StatRequirement { Stat = StatRequirement.StatType.SPD, MinValue = 60 },
+                    new StatRequirement { Stat = StatRequirement.StatType.WIT, MinValue = 50 },
+                    new StatRequirement { Stat = StatRequirement.StatType.MEM, MinValue = 30 },
+                    new StatRequirement { Stat = StatRequirement.StatType.LUK, MinValue = 20 }
+                }
+            };
+
+            isOptionalTest = true; // luôn cho hiện Cancel cho dễ test
+        }
+
+
+        // ---------------------------------------------------------------
         SetupUI();
-        SetupButtonLogic();
+        SetupButtons();
     }
 
-    void SetupUI()
+
+
+    // ================================================================
+    // SETUP UI
+    // ================================================================
+    private void SetupUI()
     {
-        // Stats
-        SpeedText.text = runData.Speed.ToString();
-        MemoryText.text = runData.Memory.ToString();
-        WitText.text = runData.Wit.ToString();
-        LuckText.text = runData.Luck.ToString();
+        // Player Stats
+        PlayerSpeed.text = runData.Speed.ToString();
+        PlayerMemory.text = runData.Memory.ToString();
+        PlayerWit.text = runData.Wit.ToString();
+        PlayerLuck.text = runData.Luck.ToString();
 
-        // Turn
-        TurnText.text = "Turn " + runData.CurrentTurn;
+        // Exam Name
+        ExamName.text = examData.ExamName;
 
-        // Exam name
-        if (examData != null)
-            ExamNameText.text = examData.ExamName;
-        else
-            ExamNameText.text = "Unknown Test";
+        // Exam Requirements
+        int spd = 0, mem = 0, wit = 0, luk = 0;
+
+        foreach (var req in examData.Requirements)
+        {
+            switch (req.Stat)
+            {
+                case StatRequirement.StatType.SPD: spd = req.MinValue; break;
+                case StatRequirement.StatType.MEM: mem = req.MinValue; break;
+                case StatRequirement.StatType.WIT: wit = req.MinValue; break;
+                case StatRequirement.StatType.LUK: luk = req.MinValue; break;
+            }
+        }
+
+        TestSpeed.text = spd.ToString();
+        TestMemory.text = mem.ToString();
+        TestWit.text = wit.ToString();
+        TestLuck.text = luk.ToString();
 
         // Optional test → show cancel
         CancelButton.gameObject.SetActive(isOptionalTest);
     }
 
-    void SetupButtonLogic()
+
+
+    // ================================================================
+    // BUTTON SETUP
+    // ================================================================
+    private void SetupButtons()
     {
+        // ---------------------------------------------------------------
+        // TEST BUTTON
+        // ---------------------------------------------------------------
         TestButton.onClick.AddListener(() =>
         {
-            // Chuyển sang state Exam (Test Scene)
-            var param = new Dictionary<string, object>
+            if (GameStateMan.Instance != null)
             {
-                { "ExamData", examData }
-            };
+                var parameter = new Dictionary<string, object>()
+                {
+                    { "ExamData", examData }
+                };
 
-            GameStateMan.Instance.RequestState(GameStateMan.GameState.Exam, param);
+                GameStateMan.Instance.RequestState(GameStateMan.GameState.Exam, parameter);
+            }
+            else
+            {
+                Debug.Log("TEST MODE: Test button clicked (no GameStateMan present).");
+            }
         });
 
+
+
+        // ---------------------------------------------------------------
+        // RETURN BUTTON
+        // ---------------------------------------------------------------
         ReturnButton.onClick.AddListener(() =>
         {
-            if (isOptionalTest == true)
+            if (GameStateMan.Instance != null)
             {
-                // Quay lại GameScene
                 GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
             }
             else
             {
-                // Forced test logic
-                if (runData.CurrentTurn > 1)
-                {
-                    GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
-                }
-                else
-                {
-                    Debug.Log("PreTestScene: Return blocked because Turn == 1 and this is not optional.");
-                }
+                Debug.Log("TEST MODE: Return button clicked.");
             }
         });
 
+
+
+        // ---------------------------------------------------------------
+        // CANCEL (optional test only)
+        // ---------------------------------------------------------------
         CancelButton.onClick.AddListener(() =>
         {
-            // Optional test only → quay về GameScene
-            GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+            if (GameStateMan.Instance != null)
+            {
+                GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+            }
+            else
+            {
+                Debug.Log("TEST MODE: Cancel button clicked.");
+            }
         });
     }
-}
-
-internal class ExamData
-{
-    public string ExamName { get; internal set; }
 }

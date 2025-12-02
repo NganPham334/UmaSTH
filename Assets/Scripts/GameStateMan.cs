@@ -6,10 +6,10 @@ public class GameStateMan : MonoBehaviour
 {
     public static GameStateMan Instance { get; private set; }
 
-    [Header("Run Data")]
+    [Header("Run Data (leave empty during prototype)")]
     public CurrentRunData CurrentRun;
 
-    [Header("Run Logic SOs")]
+    [Header("Exam Schedule (leave empty during prototype)")]
     public ExamSchedule ExamSchedule;
 
     public enum GameState
@@ -27,35 +27,81 @@ public class GameStateMan : MonoBehaviour
     }
 
     private GameState _currentState;
-    public GameState CurrentStateType => _currentState; // Getter thing, pretty sure this shows up in the editor as well
-
+    public GameState CurrentStateType => _currentState;
     public CurrentRunData CurrentRunData { get; internal set; }
 
     private Dictionary<string, object> _stateParameters;
-    
+
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
             _currentState = GameState.Launcher;
             _stateParameters = new Dictionary<string, object>();
+
+
+            // -----------------------------------------------------
+            // TEST MODE: if no RunData assigned in Inspector
+            // -----------------------------------------------------
+            if (CurrentRun == null)
+            {
+                Debug.LogWarning("GameStateMan: CurrentRunData NOT assigned → Using MOCK data.");
+
+                CurrentRunData = ScriptableObject.CreateInstance<CurrentRunData>();
+                CurrentRunData.Speed = 120;
+                CurrentRunData.Wit = 80;
+                CurrentRunData.Memory = 50;
+                CurrentRunData.Luck = 40;
+                CurrentRunData.CurrentTurn = 1;
+            }
+            else
+            {
+                CurrentRunData = CurrentRun;
+                CurrentRunData.InitializeRun();
+            }
+
+
+            // -----------------------------------------------------
+            // TEST MODE: if no ExamSchedule assigned in Inspector
+            // -----------------------------------------------------
+            if (ExamSchedule == null)
+            {
+                Debug.LogWarning("GameStateMan: ExamSchedule NOT assigned → Using MOCK exam schedule.");
+
+                ExamSchedule = ScriptableObject.CreateInstance<ExamSchedule>();
+                ExamSchedule.exams = new List<ScheduledExam>()
+                {
+                    new ScheduledExam {
+                        ExamName = "Mock Exam",
+                        Turn = 1,
+                        Requirements = new List<StatRequirement>() {
+                            new StatRequirement { Stat = StatRequirement.StatType.SPD, MinValue = 50 },
+                            new StatRequirement { Stat = StatRequirement.StatType.WIT, MinValue = 40 },
+                            new StatRequirement { Stat = StatRequirement.StatType.MEM, MinValue = 30 },
+                            new StatRequirement { Stat = StatRequirement.StatType.LUK, MinValue = 20 }
+                        }
+                    }
+                };
+            }
         }
         else
         {
             Destroy(gameObject);
         }
     }
-    
+
+
     public void RequestState(GameState newState, Dictionary<string, object> parameters)
     {
         _stateParameters.Clear();
+
         if (parameters != null)
-        {
             _stateParameters = new Dictionary<string, object>(parameters);
-        }
-        Debug.Log($"State requested: {newState} with {_stateParameters.Count} parameters.");
+
         ChangeState(newState);
     }
 
@@ -64,66 +110,58 @@ public class GameStateMan : MonoBehaviour
         RequestState(newState, null);
     }
 
-    // Game scenes can call this upon creation to get params
-    // e.g. idek what to use this for but i think itll come in handy
-    // kinda like bundles when creating a fragment on android
+
+
     public bool TryGetStateParameter<T>(string key, out T result)
     {
         if (_stateParameters.TryGetValue(key, out object value))
         {
-            if (value is T)
+            if (value is T cast)
             {
-                result = (T)value;
+                result = cast;
                 return true;
             }
         }
-        result = default(T);
+
+        result = default;
         return false;
     }
 
 
+
     public void ReportActionComplete()
     {
-        Debug.Log("Action complete. Advancing turn.");
-        
-        CurrentRun.AdvanceTurn();
+        CurrentRunData.AdvanceTurn();
+        int turn = CurrentRunData.CurrentTurn;
+
         _stateParameters.Clear();
-        
-        if (ExamSchedule.IsExamScheduledForTurn(CurrentRun.CurrentTurn))
+
+        // If exam exists → go to PreTest
+        if (ExamSchedule.IsExamScheduledForTurn(turn))
         {
-            var exam = ExamSchedule.GetExamForTurn(CurrentRun.CurrentTurn);
-            var parameters = new Dictionary<string, object>
+            var exam = ExamSchedule.GetExamForTurn(turn);
+
+            var param = new Dictionary<string, object>
             {
-                { "ExamData", exam }
+                { "ExamData", exam },
+                { "OptionalTest", false }
             };
-            RequestState(GameState.Exam, parameters);
+
+            RequestState(GameState.PreTest, param);
+            return;
         }
-        else if (ShouldRandomEventTrigger())
-        {
-            RequestState(GameState.StoryEvent);
-        }
-        else if (CurrentRun.CurrentTurn >= CurrentRun.TotalTurns) 
-        {
-            RequestState(GameState.RunEnd);
-        }
-        else
-        {
-            RequestState(GameState.Training);
-        }
+
+        // Default loop
+        RequestState(GameState.GameScene);
     }
-    
+
+
+
     private void ChangeState(GameState newState)
     {
-        if (_currentState == newState) return;
-
         _currentState = newState;
-        Debug.Log($"--- Entering State: {_currentState} ---");
-        
-        SceneManager.LoadScene(_currentState.GetSceneName());
-    }
 
-    private bool ShouldRandomEventTrigger()
-    {
-        return Random.Range(0, 100) < 25; // 25% chance
+        string sceneName = _currentState.GetSceneName();
+        SceneManager.LoadScene(sceneName);
     }
 }
