@@ -70,7 +70,8 @@ public class StatsManager : MonoBehaviour
 		}
 	}
 	
-	public void IncrementStat(StatType primaryStatType)
+	// CHANGE: Increase Primary Stat and return Secondary Stat that was also changed
+	public StatType IncrementStat(StatType primaryStatType)
 	{
 		// Find the relationship/rule
 		StatGain gainRule = StudyGains.Find(g => g.PrimaryStat == primaryStatType);
@@ -88,6 +89,8 @@ public class StatsManager : MonoBehaviour
 			
 			Debug.Log($"Collateral damage to {gainRule.SecondaryStat}, new value: {secondaryStat.CurrentValue}");
 		}
+		
+		return gainRule.SecondaryStat;
 	}
 	
 	// ApplyGain function, to make 10 + 10 = 20

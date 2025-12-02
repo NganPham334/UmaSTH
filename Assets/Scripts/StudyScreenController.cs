@@ -11,13 +11,15 @@ public class StudyScreenController : MonoBehaviour
 	
 	public void OnStudyButtonPressed(int statIndex)
 	{
-		StatType selectedStat = (StatType)statIndex;
-		Debug.Log("Study Button Pressed for: " + selectedStat.ToString());
+		StatType primaryStat = (StatType)statIndex;
+		Debug.Log("Study Button Pressed for: " + primaryStat.ToString());
 		
 		if (StatsManager.Instance != null)
 		{
-			StatsManager.Instance.IncrementStat(selectedStat);
-			UpdateStatDisplay(selectedStat); // Update text on screen
+			// Now take the StatType of Secondary Stat
+			StatType secondaryStat = StatsManager.Instance.IncrementStat(primaryStat);
+			UpdateStatDisplay(primaryStat); // Update text on screen for Primary Stat
+			UpdateStatDisplay(secondaryStat); // Update text on screen for Secondary Stat
 		}
 		else
 		{
