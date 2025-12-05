@@ -63,16 +63,23 @@ public class StudyScreenController : MonoBehaviour
 		}
 	}
 	
+	// CHANGE: Use GameStateMan.cs global manager for scene change
 	public void OnRestButtonPressed()
 	{
 		Debug.Log("Rest button pressed");
-		GameStateMan.Instance.RequestState(GameStateMan.GameState.Resting);
+		if (GameStateMan.Instance != null)
+		{
+			GameStateMan.Instance.RequestState(GameStateMan.GameState.Resting);
+		}
 	}
 	
 	public void OnReturnButtonPressed()
 	{
 		Debug.Log("Return button pressed");
-		SceneManager.LoadScene("Game Scene");
+		if (GameStateMan.Instance != null)
+		{
+			GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+		}
 	}
     
 }

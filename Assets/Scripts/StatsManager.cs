@@ -7,7 +7,7 @@ public enum StatType
     SPD,
 	WIT,
 	MEM,
-	LUK // Value 0, 1, 2, 3 respectively
+	LUK // NOTE: Value 0, 1, 2, 3 respectively
 }
 
 [Serializable]
@@ -19,7 +19,7 @@ public class CharacterStat
 }
 
 [Serializable]
-public struct StatGain // Define a structure for PrimaryStat + SecondaryStat (string), and PrimaryGain + SecondaryGain (int)
+public struct StatGain
 {
 	public StatType PrimaryStat; // Chosen stat
 	public StatType SecondaryStat; // Collateral damage
@@ -30,6 +30,7 @@ public struct StatGain // Define a structure for PrimaryStat + SecondaryStat (st
 public class StatsManager : MonoBehaviour
 {
 	public static StatsManager Instance { get; private set; }
+	public CurrentRunData runData; // Reference to data storage ScriptableObject
 	public void Awake()
 	{
 		// Singleton Pattern
@@ -58,56 +59,39 @@ public class StatsManager : MonoBehaviour
 		new StatGain {PrimaryStat = StatType.LUK, SecondaryStat = StatType.MEM, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount}
 	};
 	
-	// Storing character stats in Dictionary
-	private Dictionary<StatType, CharacterStat> _stats = new Dictionary<StatType, CharacterStat>();
-	
-	private void Start()
-	{
-		// Initialize all stats to (0, 1000)
-		foreach (StatType type in System.Enum.GetValues(typeof(StatType)))
-		{
-			_stats.Add(type, new CharacterStat {Type = type, CurrentValue = 0});
-		}
-	}
+	// REMOVED: Start() and Dictionary initialization
 	
 	// CHANGE: Increase Primary Stat and return Secondary Stat that was also changed
 	public StatType IncrementStat(StatType primaryStatType)
 	{
+		if (runData == null) return primaryStatType;
 		// Find the relationship/rule
 		StatGain gainRule = StudyGains.Find(g => g.PrimaryStat == primaryStatType);
 		
-		if (_stats.TryGetValue(gainRule.PrimaryStat, out CharacterStat primaryStat))
-		{
-			ApplyGain(primaryStat, gainRule.PrimaryGain);
-			
-			Debug.Log($"Study {gainRule.PrimaryStat}, new value: {primaryStat.CurrentValue}");
-		}
-		
-		if (_stats.TryGetValue(gainRule.SecondaryStat, out CharacterStat secondaryStat))
-		{
-			ApplyGain(secondaryStat, gainRule.SecondaryGain);
-			
-			Debug.Log($"Collateral damage to {gainRule.SecondaryStat}, new value: {secondaryStat.CurrentValue}");
-		}
+		ApplyGain(gainRule.PrimaryStat, gainRule.PrimaryGain);
+		ApplyGain(gainRule.SecondaryStat, gainRule.SecondaryGain);
 		
 		return gainRule.SecondaryStat;
 	}
 	
-	// ApplyGain function, to make 10 + 10 = 20
-	private void ApplyGain(CharacterStat stat, int amount)
+	private void ApplyGain(StatType statType, int amount)
 	{
-		stat.CurrentValue += amount;
-		stat.CurrentValue = Mathf.Min(stat.CurrentValue, CharacterStat.MaxValue); // Enforce MaxValue
+		int currentValue = runData.GetStatValue(statType);
+		const int MaxValue = 1000;
+		
+		currentValue += amount;
+		currentValue = Mathf.Min(currentValue, MaxValue);
+		
+		runData.SetStatValue(statType, currentValue);
+		
+		Debug.Log($"{statType} = {currentValue} now");
 	}
 	
-	// Getter method to read current stat value
+	// Getter function for StudyScreenController
 	public int GetStatValue(StatType type)
 	{
-		if (_stats.TryGetValue(type, out CharacterStat stat))
-		{
-			return stat.CurrentValue;
-		}
-		return 0; // If stat isn't found (somehow)
+		if (runData == null) return 0;
+		return runData.GetStatValue(type); // Move reading value to CurrentRunData object
 	}
 	
 }

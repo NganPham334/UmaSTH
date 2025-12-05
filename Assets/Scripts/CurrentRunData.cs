@@ -40,6 +40,40 @@ public class CurrentRunData : ScriptableObject
         
         InitializeFlags();
     }
+	
+	// TODO: Transfer the Stat Storage from StatsManager.cs to CurrentRunData.cs
+	// Map the enum and the int storage
+	public int GetStatValue(StatType type)
+	{
+		switch (type)
+		{
+			case StatType.SPD: return Speed;
+			case StatType.WIT: return Wit;
+			case StatType.MEM: return Memory;
+			case StatType.LUK: return Luck;
+			default: return 0;
+			// NOTE: In the finished prototype, default case won't be needed
+		}
+	}
+	
+	public void SetStatValue(StatType type, int value)
+	{
+		switch (type)
+		{
+			case StatType.SPD: 
+				Speed = value;
+				break;
+			case StatType.WIT:
+				Wit = value;
+				break;
+			case StatType.MEM:
+				Memory = value;
+				break;
+			case StatType.LUK:
+				Luck = value;
+				break;
+		}
+	}
 
     public void AdvanceTurn()
     {
