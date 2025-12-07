@@ -6,6 +6,9 @@ public class GameStateMan : MonoBehaviour
 {
     public static GameStateMan Instance { get; private set; }
 
+    // pretty sure if claude has a reason for why this should be empty during prototype
+    // you should comment it here so other people can understand
+    // maybe document it also
     [Header("Run Data (leave empty during prototype)")]
     public CurrentRunData CurrentRun;
 
@@ -17,13 +20,13 @@ public class GameStateMan : MonoBehaviour
         MainMenu,
         Launcher,
         Training,
-        PastTime,
         GameScene,
-        Resting,
+        VisualNovel,
         PreTest,
         Exam,
-        StoryEvent,
+        
         RunEnd
+        // TODO: determine if this should be a separate scene
     }
 
     private GameState _currentState;
@@ -93,6 +96,27 @@ public class GameStateMan : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    
+#if UNITY_EDITOR
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void AutoLoadSingleton()
+    {
+        if (Instance != null) return;
+
+        var managerPrefab = Resources.Load<GameStateMan>("GameManContainer");
+        if (managerPrefab == null) return;
+
+        var instanceObj = Instantiate(managerPrefab);
+        
+        // to differentiate from normally created gamestateman
+        instanceObj.name = "GameStateManager (Auto-Loaded)"; 
+        
+        // testing
+        Debug.Log($"<color=#FFFF00><b>[Development Mode]</b> Auto-Initialized GameStateManager from Resources.</color>");
+        DontDestroyOnLoad(instanceObj);
+    }
+#endif
 
 
     public void RequestState(GameState newState, Dictionary<string, object> parameters)

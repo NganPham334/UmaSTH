@@ -4,6 +4,7 @@ public class PastTimeButton : MonoBehaviour
 {
     public void OnPastTimePressed()
     {
-        GameStateMan.Instance.RequestState(GameStateMan.GameState.PastTime);
+        // TODO: set params to define visualnovel type
+        GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel);
     }
 }
