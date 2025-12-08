@@ -40,6 +40,6 @@ public class DialogueController : MonoBehaviour
 
     private void Done()
     {
-        // do post dialogue stuff switch scenes or smth hsadoihasohwq 
+        VisualNovelHandler.FinishScene();
     }
 }

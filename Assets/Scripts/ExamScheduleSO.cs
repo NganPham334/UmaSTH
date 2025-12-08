@@ -2,10 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-/*
-    from the editor game designers can create objects like
-    GiuaKy1_Nam2.asset, etc.
-*/
 [CreateAssetMenu(fileName = "ExamSchedule", menuName = "Exam Schedule")]
 public class ExamSchedule : ScriptableObject
 {
