@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using VisualNovel;
 
 public class GameStateMan : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GameStateMan : MonoBehaviour
 
     [Header("Exam Schedule (leave empty during prototype)")]
     public ExamSchedule ExamSchedule;
+
+    public DeterminedEventsTemplate DeterminedEvents;
 
     public enum GameState
     {
@@ -175,7 +178,11 @@ public class GameStateMan : MonoBehaviour
             return;
         }
 
-        // Default loop
+        if (DeterminedEvents.GetEventForTurn(turn) != null)
+        {
+            RequestState(GameState.VisualNovel, new() {{"vn_type", "determined"}});
+        }
+
         RequestState(GameState.GameScene);
     }
 

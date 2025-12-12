@@ -18,7 +18,7 @@ MonoBehaviour:
     ExamSceneName: thingy thing
     Requirements:
     - Stat: 3
-      MinValue: 99999
+      MinValue: 3
     FailureFlagToSet: 
     SuccessFlagToSet: 
   - ExamName: Final ads
