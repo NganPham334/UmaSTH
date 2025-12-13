@@ -35,6 +35,13 @@ public class ScheduledExam
 
     [Tooltip("Flag to set if the player *meets* the objective (e.g., 'passed_quang_ads')")]
     public string SuccessFlagToSet;
+
+    [Header("Post-test dialogues")]
+    [Tooltip("Dialogue when passed")]
+    public TextAsset inkJsonPass;
+    
+    [Tooltip("Dialogue when failed")]
+    public TextAsset inkJsonFail;
     
     public bool CheckEntryRequirements(CurrentRunData runData)
     {

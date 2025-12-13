@@ -8,11 +8,11 @@ namespace VisualNovel
     {
         public List<TurnEvent> events;
 
-        public TurnEvent GetEventForTurn(int turn)
+        public TextAsset GetEventForTurn(int turn)
         {
             foreach (TurnEvent e in events)
             {
-                if (e.turnNumber == turn) return e;
+                if (e.turnNumber == turn) return e.inkJSON;
             }
             return null; 
         }

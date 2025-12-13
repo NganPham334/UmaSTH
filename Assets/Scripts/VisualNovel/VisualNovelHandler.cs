@@ -6,11 +6,10 @@ public class VisualNovelHandler : MonoBehaviour
 {
     /*
      * vn_type:
-     * studying: add another param named "study_type" with value spd / mem / wit / luk
+     * studying; add another param named "study_type" with value spd / mem / wit / luk
      * pastime
      * rest
-     * pre_test
-     * post_test
+     * post_test; add another parameter "post_test_dialogue" with the TextAsset inkJsonPass or inkJsonFail as the value
      * determined
      * random
      */
@@ -50,7 +49,7 @@ public class VisualNovelHandler : MonoBehaviour
         switch (_vnType)
         {
             case "determined":
-                TurnEvent storyEvent = timelineData.GetEventForTurn(currentRunData.CurrentTurn);
+                TextAsset storyEvent = timelineData.GetEventForTurn(currentRunData.CurrentTurn);
 
                 if (storyEvent != null)
                 {
@@ -61,15 +60,26 @@ public class VisualNovelHandler : MonoBehaviour
                     Debug.LogError("VisualNovelHandler: Determined event not found despite instruction from GameStateMan!");
                 }
                 break;
+            case "post_test":
+                GameStateMan.Instance.TryGetStateParameter<TextAsset>("post_test_dialogue", out var json);
+
+                if (json != null)
+                {
+                    PlayEvent(json);
+                }
+                else
+                {
+                    Debug.LogError("VisualNovelHandler: Post-test dialogue not found!");
+                }
+                break;
         }
     }
     
-    private void PlayEvent(TurnEvent evt)
+    private void PlayEvent(TextAsset json)
     {
         isEventPlaying = true;
         
-        // Removed 'evt.speakerName'
-        dialogueManager.StartDialogue(evt.inkJSON, () => {
+        dialogueManager.StartDialogue(json, () => {
             isEventPlaying = false;
             FinishScene();
         });

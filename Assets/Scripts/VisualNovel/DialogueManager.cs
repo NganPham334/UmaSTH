@@ -83,7 +83,6 @@ public class DialogueManager : MonoBehaviour
     {
         panel.SetActive(false);
         onDialogueComplete?.Invoke();
-        
     }
 
     void Update()
