@@ -46,6 +46,12 @@ public class GameStateMan : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            // FIX: Initializa data
+            if (CurrentRun != null) {
+                CurrentRun.InitializeRun();
+                Debug.Log("Run Data Initialized: Speed is " + CurrentRun.Speed);
+            }
+
             _currentState = GameState.Launcher;
             _stateParameters = new Dictionary<string, object>();
 
