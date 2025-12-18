@@ -72,7 +72,7 @@ public class StudyScreenController : MonoBehaviour
 		Debug.Log("Rest button pressed");
 		if (GameStateMan.Instance != null)
 		{
-			GameStateMan.Instance.RequestState(GameStateMan.GameState.Resting);
+			GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() {{"vn_type", "rest"}});
 		}
 	}
 	
