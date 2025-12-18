@@ -10,16 +10,29 @@ public class ActionBarController : MonoBehaviour
     public float max= 100;
     public float current= 0;
     public float speed;
+    public bool isRecharging = false;
 
     // Update is called once per frame
     void Update()
     {
-        current = Mathf.MoveTowards(current, max, speed/40 * Time.deltaTime);
-        UpdateActionValue();
+        if (!isRecharging)
+        {
+            current = Mathf.MoveTowards(current, max, speed/40 * Time.deltaTime);
+        }
+        if (isRecharging)
+        {
+            current = Mathf.MoveTowards(current, 0, 1000 * Time.deltaTime);
+        }
         if (current >= max)
         {
-            current = 0;
+            isRecharging = true;
         }
+        if (current <= 0)
+        {
+            isRecharging = false;
+        }
+        UpdateActionValue();
+
     }
     public void UpdateActionValue()
     {
