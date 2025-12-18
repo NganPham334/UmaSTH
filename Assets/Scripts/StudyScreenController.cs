@@ -57,6 +57,9 @@ public class StudyScreenController : MonoBehaviour
 	// Optional: Call UpdateStatDisplay when scene load to set initial value
 	private void Start()
 	{
+		// FIX: Change Script Execution Order to -100
+		// so that StatsManager.Awake() run before StudyScreenController.Start()
+		// If StatsManager.Instance is not null here, this will successfully call GetStatValue()
 		foreach (StatType type in System.Enum.GetValues(typeof(StatType)))
 		{
 			UpdateStatDisplay(type);

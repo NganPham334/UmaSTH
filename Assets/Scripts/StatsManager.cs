@@ -30,7 +30,10 @@ public struct StatGain
 public class StatsManager : MonoBehaviour
 {
 	public static StatsManager Instance { get; private set; }
+	
+	[Header("Current Run Data")]
 	public CurrentRunData runData; // Reference to data storage ScriptableObject
+
 	public void Awake()
 	{
 		// Singleton Pattern
@@ -51,6 +54,7 @@ public class StatsManager : MonoBehaviour
 	// TODO: GainAmount change base on Study Level
 		
 	// Primary stat and Secondary stat relationship
+	[Header("Study Gains Relationship")]
 	public List<StatGain> StudyGains = new List<StatGain>()
 	{
 		new StatGain {PrimaryStat = StatType.SPD, SecondaryStat = StatType.WIT, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount},
