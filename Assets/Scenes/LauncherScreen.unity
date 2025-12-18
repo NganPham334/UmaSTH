@@ -452,6 +452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 3672349875774890711, guid: 22956cb0d18877f7a95be402d974429d, type: 3}
+      propertyPath: DeterminedEvents
+      value: 
+      objectReference: {fileID: 11400000, guid: 8e28e90ae7875475f8335da5baf06e45, type: 2}
     - target: {fileID: 5062940500429661157, guid: 22956cb0d18877f7a95be402d974429d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.11523

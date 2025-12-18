@@ -930,7 +930,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Study
+  m_text: 'Start
 
 '
   m_isRightToLeft: 0
@@ -1127,8 +1127,9 @@ GameObject:
   - component: {fileID: 557372575}
   - component: {fileID: 557372574}
   - component: {fileID: 557372573}
+  - component: {fileID: 557372576}
   m_Layer: 5
-  m_Name: Study
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1198,7 +1199,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1038998034}
+      - m_Target: {fileID: 557372576}
         m_TargetAssemblyTypeName: HomeStudyButton, Assembly-CSharp
         m_MethodName: OnStudyButtonPressed
         m_Mode: 1
@@ -1248,6 +1249,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557372571}
   m_CullTransparentMesh: 1
+--- !u!114 &557372576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557372571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6673b6c7bea56d24e99cb10185e7127e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HomeStudyButton
 --- !u!1 &600925801
 GameObject:
   m_ObjectHideFlags: 0
@@ -2683,50 +2696,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 970747545}
   m_CullTransparentMesh: 1
---- !u!1 &1038998033
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1038998035}
-  - component: {fileID: 1038998034}
-  m_Layer: 0
-  m_Name: HomeStudyButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1038998034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038998033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6673b6c7bea56d24e99cb10185e7127e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HomeStudyButton
---- !u!4 &1038998035
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038998033}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1018.6528, y: 444.23785, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1049441856
 GameObject:
   m_ObjectHideFlags: 0
@@ -6278,4 +6247,3 @@ SceneRoots:
   - {fileID: 1851804225}
   - {fileID: 1547789184}
   - {fileID: 763358823}
-  - {fileID: 1038998035}

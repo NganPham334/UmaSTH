@@ -11,8 +11,8 @@ public static class GameStateExtensions
                 return "HomeScreen";
             case GameStateMan.GameState.Launcher:
                 return "LauncherScreen";
-            case GameStateMan.GameState.Resting:
-                return "Resting Scene";
+            case GameStateMan.GameState.VisualNovel:
+                return "Visual Novel Screen";
             case GameStateMan.GameState.RunEnd:
                 return "Run End Scene";
             case GameStateMan.GameState.Training:
@@ -23,8 +23,6 @@ public static class GameStateExtensions
                 return "PreTestUI";  
             case GameStateMan.GameState.Exam:
                 return "Test scene";
-            case GameStateMan.GameState.StoryEvent:
-                return "Visual Novel Screen";
             default:
                 Debug.LogError($"No scene name defined for state: {state}");
                 return "HomeScreen";
