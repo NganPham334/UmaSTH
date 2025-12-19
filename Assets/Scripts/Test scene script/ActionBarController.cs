@@ -17,7 +17,7 @@ public class ActionBarController : MonoBehaviour
     {
         if (!isRecharging)
         {
-            current = Mathf.MoveTowards(current, max, speed/40 * Time.deltaTime);
+            current = Mathf.MoveTowards(current, max, speed/20 * Time.deltaTime);
         }
         if (isRecharging)
         {
@@ -31,11 +31,7 @@ public class ActionBarController : MonoBehaviour
         {
             isRecharging = false;
         }
-        UpdateActionValue();
-
-    }
-    public void UpdateActionValue()
-    {
         actionBarSlider.value = current/max;
+
     }
 }
