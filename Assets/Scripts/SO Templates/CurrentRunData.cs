@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "CurrentRunData", menuName = "Current Run Data", order = 0)]
 public class CurrentRunData : ScriptableObject
 {
-    [HideInInspector] 
+    //[HideInInspector] 
     public int Speed, Wit, Memory, Luck, Clarity, CurrentTurn, TotalTurns;
     [HideInInspector]
     public string CurrentDate;
@@ -28,11 +28,11 @@ public class CurrentRunData : ScriptableObject
     // Run once on a new run
     public void InitializeRun()
     {
-        Speed = 200;
-        Wit = 100;
-        Memory = 10;
-        Luck = 10;
-        Clarity = 100;
+        Speed = 70;
+        Wit = 70;
+        Memory = 70;
+        Luck = 50;
+        Clarity = 50;
 
         // Reset progress
         CurrentTurn = 1;

@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e80e6ea4984538ab353d141672c9dd, type: 3}
   m_Name: CurrentRunData
   m_EditorClassIdentifier: Assembly-CSharp::CurrentRunData
-  Speed: 0
-  Wit: 0
-  Memory: 0
-  Luck: 0
-  Clarity: 0
-  CurrentTurn: 0
+  Speed: 70
+  Wit: 70
+  Memory: 70
+  Luck: 50
+  Clarity: 50
+  CurrentTurn: 1
   TotalTurns: 0
-  CurrentDate: 
+  CurrentDate: Junior Year, Week 1
   DefaultFlags:
   - Name: club_ucc
     IsSet: 0

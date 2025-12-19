@@ -11,6 +11,10 @@ public class ActionBarController : MonoBehaviour
     public float current= 0;
     public float speed;
     public bool isRecharging = false;
+    public GameObject CombatLogicObject;
+    public enum ActionBarType{Player,Test};
+    public ActionBarType actionBarType;
+
 
     // Update is called once per frame
     void Update()
@@ -23,9 +27,13 @@ public class ActionBarController : MonoBehaviour
         {
             current = Mathf.MoveTowards(current, 0, 1000 * Time.deltaTime);
         }
-        if (current >= max)
+        if (current == max)
         {
             isRecharging = true;
+            if (actionBarType == ActionBarType.Player)
+                CombatLogicObject.GetComponent<CombatLogic>().TestTakeDamage();
+            if (actionBarType == ActionBarType.Test)
+                CombatLogicObject.GetComponent<CombatLogic>().PlayerTakeDamage();
         }
         if (current <= 0)
         {
