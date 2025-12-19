@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameStateMan
   CurrentRun: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
   ExamSchedule: {fileID: 11400000, guid: af0786ec63477058ba8713e2c43b6506, type: 2}
+  mainScript: {fileID: 7545569452688597077, guid: 70010d890a8409a5ab9c4ee3920dc2c3, type: 3}

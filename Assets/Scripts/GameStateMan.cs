@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using VisualNovel;
+using System.Linq;
+using Yarn.Unity;
 
 public class GameStateMan : MonoBehaviour
 {
@@ -15,8 +16,7 @@ public class GameStateMan : MonoBehaviour
 
     [Header("Exam Schedule (leave empty during prototype)")]
     public ExamSchedule ExamSchedule;
-
-    public DeterminedEventsTemplate DeterminedEvents;
+    public YarnProject mainScript;
 
     public enum GameState
     {
@@ -184,7 +184,7 @@ public class GameStateMan : MonoBehaviour
             return;
         }
 
-        if (DeterminedEvents.GetEventForTurn(turn) != null)
+        if (HasEventForCurrentTurn(turn))
         {
             RequestState(GameState.VisualNovel, new() {{"vn_type", "determined"}});
         }
@@ -192,7 +192,12 @@ public class GameStateMan : MonoBehaviour
         RequestState(GameState.GameScene);
     }
 
-
+    public bool HasEventForCurrentTurn(int turn)
+    {
+        if (mainScript == null) return false;
+        string expectedNode = $"Turn_{turn}";
+        return mainScript.NodeNames.Contains(expectedNode);
+    }
 
     private void ChangeState(GameState newState)
     {

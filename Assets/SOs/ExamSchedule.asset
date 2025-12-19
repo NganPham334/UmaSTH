@@ -13,19 +13,12 @@ MonoBehaviour:
   m_Name: ExamSchedule
   m_EditorClassIdentifier: Assembly-CSharp::ExamSchedule
   exams:
-  - ExamName: Midterm ads
-    Turn: 30
-    ExamSceneName: thingy thing
+  - ExamName: iewnj
+    Turn: 3
     Requirements:
-    - Stat: 3
-      MinValue: 3
+    - Stat: 0
+      MinValue: 69
     FailureFlagToSet: 
     SuccessFlagToSet: 
-  - ExamName: Final ads
-    Turn: 50
-    ExamSceneName: thingy thing
-    Requirements:
-    - Stat: 3
-      MinValue: 99999
-    FailureFlagToSet: 
-    SuccessFlagToSet: 
+    nodeNamePass: 
+    nodeNameFail: 

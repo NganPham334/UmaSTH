@@ -27,9 +27,10 @@ public class ScheduledExam
     public int Turn;
 
     [Header("Entry Requirements")]
-    [Tooltip("The player MUST meet these to enter. Failure means a 'game over' or bad event.")]
+    [Tooltip("The player MUST meet these to enter.")]
     public List<StatRequirement> Requirements;
     
+    // IDEK if these flags are needed, phuc u decide
     [Tooltip("Flag to set if the player *fails* the objective (e.g., 'failed_quang_ads')")]
     public string FailureFlagToSet;
 
@@ -38,10 +39,10 @@ public class ScheduledExam
 
     [Header("Post-test dialogues")]
     [Tooltip("Dialogue when passed")]
-    public TextAsset inkJsonPass;
+    public string nodeNamePass;
     
     [Tooltip("Dialogue when failed")]
-    public TextAsset inkJsonFail;
+    public string nodeNameFail;
     
     public bool CheckEntryRequirements(CurrentRunData runData)
     {

@@ -1,93 +1,94 @@
-using System;
 using UnityEngine;
-using VisualNovel;
+using Yarn.Unity;
 
-public class VisualNovelHandler : MonoBehaviour
+namespace VisualNovel
 {
-    /*
-     * vn_type:
-     * studying; add another param named "study_type" with value spd / mem / wit / luk
-     * pastime
-     * rest
-     * post_test; add another parameter "post_test_dialogue" with the TextAsset inkJsonPass or inkJsonFail as the value
-     * determined
-     * random
-     */
 
-    // inspector configurations
-    public DeterminedEventsTemplate timelineData;
-    public DialogueManager dialogueManager; 
-    public CurrentRunData currentRunData;
-    
-    private bool isEventPlaying = false;
-    private String _vnType;
-    
-    void Awake()
+    public class VisualNovelHandler : MonoBehaviour
     {
-        if (!GameStateMan.Instance.TryGetStateParameter<String>("vn_type", out var type))
+        [Header("Yarn References")]
+        public DialogueRunner dialogueRunner;
+
+        [Header("Game Data")] 
+        public CurrentRunData currentRunData;
+        
+        /*
+         * vn_type:
+         * studying; add another param named "study_type" with value spd / mem / wit / luk
+         * pastime
+         * rest
+         * post_test; add another parameter "post_test_name" with the dialogue node's name as the value
+         * determined
+         * random
+         */
+        
+        private string _vnType;
+
+        void Awake()
         {
-            Debug.LogError("VisualNovelHandler: Novel Type not found");
-            return;
+            // Get the current Visual Novel Mode (Determined, Post-Test, etc.)
+            if (!GameStateMan.Instance.TryGetStateParameter<string>("vn_type", out var type))
+            {
+                Debug.LogError("VisualNovelHandler: Novel Type not found");
+                return;
+            }
+
+            _vnType = type;
+
+            if (dialogueRunner != null)
+            {
+                dialogueRunner.onDialogueComplete.AddListener(FinishScene);
+            }
         }
-        _vnType = type;
-        Debug.Log(type);
-    }
 
-    private void FinishScene()
-    {
-        if (_vnType == "determined")
+        void OnDestroy()
         {
-            GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+            // Clean up event listener to prevent memory leaks
+            if (dialogueRunner != null)
+            {
+                dialogueRunner.onDialogueComplete.RemoveListener(FinishScene);
+            }
+        }
+
+        void Start()
+        {
+            string nodeName = "";
+            switch (_vnType)
+            {
+                case "determined":
+                    nodeName = $"Turn_{currentRunData.CurrentTurn}";
+                    break;
+
+                case "post_test":
+                    GameStateMan.Instance.TryGetStateParameter("post_test_node", out nodeName);
+                    break;
+                
+                case "studying":
+                    GameStateMan.Instance.TryGetStateParameter("study_type", out nodeName);
+                    nodeName = "Study_" + nodeName;
+                    break;
+            }
+            
+            if (!string.IsNullOrEmpty(nodeName) && dialogueRunner.Dialogue.NodeExists(nodeName))
+            {
+                dialogueRunner.StartDialogue(nodeName);
+            }
+            else
+            {
+                Debug.LogError($"Yarn Node '{nodeName}' not found! Closing scene.");
+                FinishScene();
+            }
         }
         
-        GameStateMan.Instance.ReportActionComplete();
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        switch (_vnType)
+        private void FinishScene()
         {
-            case "determined":
-                TextAsset storyEvent = timelineData.GetEventForTurn(currentRunData.CurrentTurn);
-
-                if (storyEvent != null)
-                {
-                    PlayEvent(storyEvent);
-                }
-                else
-                {
-                    Debug.LogError("VisualNovelHandler: Determined event not found despite instruction from GameStateMan!");
-                }
-                break;
-            case "post_test":
-                GameStateMan.Instance.TryGetStateParameter<TextAsset>("post_test_dialogue", out var json);
-
-                if (json != null)
-                {
-                    PlayEvent(json);
-                }
-                else
-                {
-                    Debug.LogError("VisualNovelHandler: Post-test dialogue not found!");
-                }
-                break;
+            if (_vnType == "determined")
+            {
+                GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+                return; // god knows why this is needed
+            }
+            
+            GameStateMan.Instance.ReportActionComplete();
         }
-    }
-    
-    private void PlayEvent(TextAsset json)
-    {
-        isEventPlaying = true;
-        
-        dialogueManager.StartDialogue(json, () => {
-            isEventPlaying = false;
-            FinishScene();
-        });
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
