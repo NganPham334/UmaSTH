@@ -18,7 +18,7 @@ public class CombatLogic : MonoBehaviour
         testSpeed = 20;
         testWit = 10;
         testMemory = 5;
-        testLuck = 5;
+        testLuck = 500;
 
         Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}");
     }
@@ -31,6 +31,11 @@ public class CombatLogic : MonoBehaviour
 
     public void TestTakeDamage()
     {
+        if (Random.value >= ((float)playerLuck/(float)testLuck))
+        {
+            Debug.Log("Player's attack missed!");
+            return;
+        }
         testHpBar.GetComponent<HpBarController>().TakeDamage(playerWit);
         Debug.Log($"Test takes {playerWit} damage.");
     }
