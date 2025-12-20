@@ -28,5 +28,6 @@ public class HpBarController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         targetHp = currentHp - damage;
+        Debug.Log($"HP reduced by {damage}. Current HP: {targetHp}.");
     }
 }

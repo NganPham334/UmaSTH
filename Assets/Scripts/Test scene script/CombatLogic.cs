@@ -7,6 +7,9 @@ public class CombatLogic : MonoBehaviour
     public int testSpeed, testWit, testMemory, testLuck;
     public GameObject playerHpBar;
     public GameObject testHpBar;
+    public float playerHitChance, testHitChance;
+    public float playerCritChance, testCritChance;
+
 
     void Start()
     {
@@ -20,20 +23,43 @@ public class CombatLogic : MonoBehaviour
         testMemory = 5;
         testLuck = 500;
 
+        playerHitChance = (float)playerLuck/testLuck;
+        testHitChance = (float)testLuck/playerLuck;
+
+        playerCritChance = (float)playerLuck/1000;
+        testCritChance = (float)testLuck/1000;
+
         Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}");
     }
 
     public void PlayerTakeDamage()
     {
+        if (Random.value >= (testHitChance))
+        {
+            Debug.Log("Test's attack missed!");
+            return;
+        }
+        if (Random.value <= (testCritChance))
+        {
+            playerHpBar.GetComponent<HpBarController>().TakeDamage(testWit * 2);
+            Debug.Log($"Test critical attacked for {testWit * 2}!");
+            return;
+        }
         playerHpBar.GetComponent<HpBarController>().TakeDamage(testWit);
         Debug.Log($"Player takes {testWit} damage.");
     }
 
     public void TestTakeDamage()
     {
-        if (Random.value >= ((float)playerLuck/(float)testLuck))
+        if (Random.value >= (playerHitChance))
         {
             Debug.Log("Player's attack missed!");
+            return;
+        }
+        if (Random.value <= (playerCritChance))
+        {
+            testHpBar.GetComponent<HpBarController>().TakeDamage(playerWit * 2);
+            Debug.Log($"Player critical attacked for {playerWit * 2}!");
             return;
         }
         testHpBar.GetComponent<HpBarController>().TakeDamage(playerWit);

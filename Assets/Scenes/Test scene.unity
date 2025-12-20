@@ -159,6 +159,10 @@ MonoBehaviour:
   testLuck: 0
   playerHpBar: {fileID: 1265644296}
   testHpBar: {fileID: 200446480}
+  playerHitChance: 0
+  testHitChance: 0
+  playerCritChance: 0
+  testCritChance: 0
 --- !u!4 &1255339
 Transform:
   m_ObjectHideFlags: 0
@@ -434,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   hpBarSlider: {fileID: 200446483}
-  maxHp: 500
+  maxHp: 1000
   currentHp: 100
   targetHp: 0
   hpGradient:
