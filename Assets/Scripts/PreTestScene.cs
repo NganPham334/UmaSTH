@@ -25,14 +25,18 @@ public class PreTestScene : MonoBehaviour
     private CurrentRunData runData;
     private ScheduledExam examData;
     private bool isOptionalTest;
-    
-    //Start
+
+    // =========================================================
+    // START
+    // =========================================================
     void Start()
     {
         var gsm = GameStateMan.Instance;
         bool hasRealExam = false;
 
-        //Try get exam data from GameStateMan
+        // -----------------------------------------------------
+        // TRY GET REAL DATA FROM GAMESTATE MANAGER
+        // -----------------------------------------------------
         if (gsm != null)
         {
             runData = gsm.CurrentRunData;
@@ -43,19 +47,21 @@ public class PreTestScene : MonoBehaviour
             gsm.TryGetStateParameter("OptionalTest", out isOptionalTest);
         }
 
-        //Test mode
+        // -----------------------------------------------------
+        // TEST MODE (SCENE RUN DIRECTLY)
+        // -----------------------------------------------------
         if (!hasRealExam)
         {
             Debug.LogWarning("PreTestScene: Running TEST MODE.");
 
-            //mock run data
+            // Mock run data
             runData = ScriptableObject.CreateInstance<CurrentRunData>();
             runData.Speed = 120;
             runData.Wit = 80;
             runData.Memory = 55;
             runData.Luck = 35;
 
-            //mock exam
+            // Mock exam
             examData = new ScheduledExam()
             {
                 ExamName = "TEST MODE EXAM",
@@ -75,29 +81,34 @@ public class PreTestScene : MonoBehaviour
         SetupButtons();
     }
 
-    //Setup UI
+    // =========================================================
+    // SETUP UI
+    // =========================================================
     private void SetupUI()
     {
-        //fill player stats
+        // Player stats
         PlayerSpeed.text = runData.Speed.ToString();
         PlayerMemory.text = runData.Memory.ToString();
         PlayerWit.text = runData.Wit.ToString();
         PlayerLuck.text = runData.Luck.ToString();
 
-        //exam name
-        ExamName.text = examData.ExamName;
+        // Exam name (safe)
+        ExamName.text = examData?.ExamName ?? "UNKNOWN EXAM";
 
-        //requirements
+        // Exam requirements
         int spd = 0, mem = 0, wit = 0, luk = 0;
 
-        foreach (var req in examData.Requirements)
+        if (examData != null && examData.Requirements != null)
         {
-            switch (req.Stat)
+            foreach (var req in examData.Requirements)
             {
-                case StatRequirement.StatType.SPD: spd = req.MinValue; break;
-                case StatRequirement.StatType.MEM: mem = req.MinValue; break;
-                case StatRequirement.StatType.WIT: wit = req.MinValue; break;
-                case StatRequirement.StatType.LUK: luk = req.MinValue; break;
+                switch (req.Stat)
+                {
+                    case StatRequirement.StatType.SPD: spd = req.MinValue; break;
+                    case StatRequirement.StatType.MEM: mem = req.MinValue; break;
+                    case StatRequirement.StatType.WIT: wit = req.MinValue; break;
+                    case StatRequirement.StatType.LUK: luk = req.MinValue; break;
+                }
             }
         }
 
@@ -107,20 +118,30 @@ public class PreTestScene : MonoBehaviour
         TestLuck.text = luk.ToString();
     }
 
-    //Setup buttons
+    // =========================================================
+    // BUTTON SETUP
+    // =========================================================
     private void SetupButtons()
     {
-        //Test button
+        TestButton.onClick.RemoveAllListeners();
+        ReturnButton.onClick.RemoveAllListeners();
+
+        // ------------------------------
+        // TEST BUTTON
+        // ------------------------------
         TestButton.onClick.AddListener(() =>
         {
             if (GameStateMan.Instance != null)
             {
-                var parameter = new Dictionary<string, object>()
+                var param = new Dictionary<string, object>
                 {
                     { "ExamData", examData }
                 };
 
-                GameStateMan.Instance.RequestState(GameStateMan.GameState.Exam, parameter);
+                GameStateMan.Instance.RequestState(
+                    GameStateMan.GameState.Exam,
+                    param
+                );
             }
             else
             {
@@ -128,30 +149,22 @@ public class PreTestScene : MonoBehaviour
             }
         });
 
-        //Return button
-        ReturnButton.onClick.RemoveAllListeners();
+        // ------------------------------
+        // RETURN BUTTON
+        // (Cancel + Return merged)
+        // ------------------------------
+        ReturnButton.onClick.AddListener(() =>
+        {
+            Debug.Log(isOptionalTest
+                ? "Optional Test: Return = Cancel"
+                : "Forced Exam: Return");
 
-        if (isOptionalTest)
-        {
-            ReturnButton.onClick.AddListener(() =>
+            if (GameStateMan.Instance != null)
             {
-                Debug.Log("Optional Test: Return → Cancel");
-                if (GameStateMan.Instance != null)
-                {
-                    GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
-                }
-            });
-        }
-        else
-        {
-            ReturnButton.onClick.AddListener(() =>
-            {
-                Debug.Log("Real Exam: Return → Go back to GameScene");
-                if (GameStateMan.Instance != null)
-                {
-                    GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
-                }
-            });
-        }
+                GameStateMan.Instance.RequestState(
+                    GameStateMan.GameState.GameScene
+                );
+            }
+        });
     }
 }
