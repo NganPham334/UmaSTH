@@ -1,3 +1,5 @@
+using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -89,6 +91,48 @@ namespace VisualNovel
             }
             
             GameStateMan.Instance.ReportActionComplete();
+        }
+        
+        [YarnCommand("stat")]
+        public void ModifyStat(string[] inputs)
+        {
+            foreach (string input in inputs)
+            {
+                // Regex matches: Name (Group 1), Operator (Group 2), Number (Group 3)
+                var match = Regex.Match(input, @"^(\w+)([-+])(\d+)$");
+
+                if (!match.Success)
+                {
+                    Debug.LogWarning($"[StatSystem] Invalid syntax: '{input}'. Usage: <<stat luk+5 mem-2>>");
+                    continue;
+                }
+
+                string statName = match.Groups[1].Value.ToLower();
+                int mod = match.Groups[2].Value == "+" ? 1 : -1;
+                int amount = int.Parse(match.Groups[3].Value);
+
+                switch (statName)
+                {
+                    case "spd":
+                        currentRunData.Speed = Math.Min(0, currentRunData.Speed + mod * amount);
+                        break;
+                    case "mem":
+                        currentRunData.Memory = Math.Min(0, currentRunData.Memory + mod * amount);
+                        break;
+                    case "wit":
+                        currentRunData.Wit = Math.Min(0, currentRunData.Wit + mod * amount);
+                        break;
+                    case "clr":
+                        currentRunData.Clarity = Math.Min(0, currentRunData.Clarity + mod * amount);
+                        break;
+                    case "luk":
+                        currentRunData.Luck = Math.Min(0, currentRunData.Luck + mod * amount);
+                        break;
+                    default:
+                        Debug.LogWarning($"[StatSystem] Unknown stat: '{statName}'");
+                        break;
+                }
+            }
         }
     }
 }
