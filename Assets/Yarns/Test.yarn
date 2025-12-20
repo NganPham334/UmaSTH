@@ -1,18 +1,15 @@
-title: Turn_1
+﻿title: Turn_1
 tags: 
 ---
-Mom: Wake up! You're going to be late for the exam!
-Hero: Ugh... five more minutes?
+Mom: Wake up! You're going to be late for the exam! #line:0543874 
+Hero: Ugh... five more minutes? #line:0210a7e 
 
-// RULE 1: There MUST be a space between '->' and the text
--> Get up immediately
-    // RULE 2: Everything that happens *inside* this choice must be INDENTED
-    Hero: Fine, I'm up.
-    Mom: Good. Breakfast is on the table.
--> Sleep in
-    Hero: Zzz...
-    Mom: I said WAKE UP!
+-> Get up immediately #line:01c62e2 
+    Hero: Fine, I'm up. #line:0d53e7a 
+    Mom: Good. Breakfast is on the table. #line:04c2f55 
+-> Sleep in #line:0b6c972 
+    Hero: Zzz... #line:0f815a8 
+    Mom: I said WAKE UP! #line:06f0547 
 
-// This happens after EITHER choice is finished
-Mom: Now go, before you miss the bus!
+Mom: Now go, before you miss the bus! #line:00ed421 
 ===
