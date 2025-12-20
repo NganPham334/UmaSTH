@@ -87,4 +87,20 @@ public class StatRequirement
                 return false;
         }
     }
+
+
+
+//Exam stat for blay
+    public int Speed, Wit, Memory, Luck;
+    public int GetStatValue(StatType type)
+	{
+        return type switch
+        {
+            StatType.SPD => Speed,
+            StatType.WIT => Wit,
+            StatType.MEM => Memory,
+            StatType.LUK => Luck,
+            _ => 0,
+        };
+    }
 }

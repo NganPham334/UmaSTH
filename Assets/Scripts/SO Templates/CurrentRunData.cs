@@ -23,7 +23,7 @@ public class CurrentRunData : ScriptableObject
     public List<Flag> DefaultFlags;
 
     // The actual runtime data
-    private Dictionary<string, bool> _runtimeFlags = new Dictionary<string, bool>();
+    private Dictionary<string, bool> _runtimeFlags = new();
     
     // Run once on a new run
     public void InitializeRun()
