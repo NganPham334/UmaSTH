@@ -65,13 +65,6 @@ public class PreTestScene : MonoBehaviour
             examData = new ScheduledExam()
             {
                 ExamName = "TEST MODE EXAM",
-                Requirements = new List<StatRequirement>()
-                {
-                    new StatRequirement { Stat = StatRequirement.StatType.SPD, MinValue = 60 },
-                    new StatRequirement { Stat = StatRequirement.StatType.WIT, MinValue = 50 },
-                    new StatRequirement { Stat = StatRequirement.StatType.MEM, MinValue = 30 },
-                    new StatRequirement { Stat = StatRequirement.StatType.LUK, MinValue = 20 }
-                }
             };
 
             isOptionalTest = true;
@@ -98,19 +91,6 @@ public class PreTestScene : MonoBehaviour
         // Exam requirements
         int spd = 0, mem = 0, wit = 0, luk = 0;
 
-        if (examData != null && examData.Requirements != null)
-        {
-            foreach (var req in examData.Requirements)
-            {
-                switch (req.Stat)
-                {
-                    case StatRequirement.StatType.SPD: spd = req.MinValue; break;
-                    case StatRequirement.StatType.MEM: mem = req.MinValue; break;
-                    case StatRequirement.StatType.WIT: wit = req.MinValue; break;
-                    case StatRequirement.StatType.LUK: luk = req.MinValue; break;
-                }
-            }
-        }
 
         TestSpeed.text = spd.ToString();
         TestMemory.text = mem.ToString();

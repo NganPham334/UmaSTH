@@ -13,12 +13,43 @@ MonoBehaviour:
   m_Name: ExamSchedule
   m_EditorClassIdentifier: Assembly-CSharp::ExamSchedule
   exams:
-  - ExamName: iewnj
-    Turn: 3
-    Requirements:
-    - Stat: 0
-      MinValue: 69
+  - ExamName: Year 1 final
+    Turn: 24
     FailureFlagToSet: 
     SuccessFlagToSet: 
     nodeNamePass: 
     nodeNameFail: 
+    Speed: 300
+    Wit: 300
+    Memory: 300
+    Luck: 300
+  - ExamName: Year 2 final
+    Turn: 48
+    FailureFlagToSet: 
+    SuccessFlagToSet: 
+    nodeNamePass: 
+    nodeNameFail: 
+    Speed: 500
+    Wit: 500
+    Memory: 500
+    Luck: 300
+  - ExamName: Year 3 final
+    Turn: 72
+    FailureFlagToSet: 
+    SuccessFlagToSet: 
+    nodeNamePass: 
+    nodeNameFail: 
+    Speed: 800
+    Wit: 800
+    Memory: 800
+    Luck: 500
+  - ExamName: Testing
+    Turn: 1
+    FailureFlagToSet: 
+    SuccessFlagToSet: 
+    nodeNamePass: 
+    nodeNameFail: 
+    Speed: 100
+    Wit: 100
+    Memory: 100
+    Luck: 100

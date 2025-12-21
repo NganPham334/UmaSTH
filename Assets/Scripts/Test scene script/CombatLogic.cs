@@ -7,7 +7,7 @@ public class CombatLogic : MonoBehaviour
     public ScheduledExam exam;
     public int playerSpeed, playerWit, playerMemory, playerLuck;
     public int testSpeed, testWit, testMemory, testLuck;
-    public int turn;
+    public int currentTurn;
     public GameObject playerHpBar;
     public GameObject testHpBar;
     public float playerHitChance, testHitChance;
@@ -16,14 +16,14 @@ public class CombatLogic : MonoBehaviour
 
     void Start()
     {
-        turn = currentRunData.CurrentTurn;
+        currentTurn = currentRunData.CurrentTurn;
         
         playerSpeed = currentRunData.GetStatValue(StatType.SPD);
         playerWit = currentRunData.GetStatValue(StatType.WIT);
         playerMemory = currentRunData.GetStatValue(StatType.MEM);
         playerLuck = currentRunData.GetStatValue(StatType.LUK);
 
-        exam = examSchedule.GetExamForTurn(turn);
+        exam = examSchedule.GetExamForTurn(currentTurn);
 
         testSpeed = exam.GetStatValue(StatType.SPD);
         testWit = exam.GetStatValue(StatType.WIT);
@@ -36,8 +36,8 @@ public class CombatLogic : MonoBehaviour
         playerCritChance = (float)playerLuck/1000;
         testCritChance = (float)testLuck/1000;
 
-        Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}");
-        Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}");
+        Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}, testHitChance: {testHitChance},testCritChance: {testCritChance}");
+        Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}, playerHitChance: {playerHitChance},playerCritChance: {playerCritChance}");
     }
 
     public void PlayerTakeDamage()

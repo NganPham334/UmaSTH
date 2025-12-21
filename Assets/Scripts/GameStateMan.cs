@@ -90,12 +90,7 @@ public class GameStateMan : MonoBehaviour
                     new ScheduledExam {
                         ExamName = "Mock Exam",
                         Turn = 1,
-                        Requirements = new List<StatRequirement>() {
-                            new StatRequirement { Stat = StatRequirement.StatType.SPD, MinValue = 50 },
-                            new StatRequirement { Stat = StatRequirement.StatType.WIT, MinValue = 40 },
-                            new StatRequirement { Stat = StatRequirement.StatType.MEM, MinValue = 30 },
-                            new StatRequirement { Stat = StatRequirement.StatType.LUK, MinValue = 20 }
-                        }
+                        
                     }
                 };
             }

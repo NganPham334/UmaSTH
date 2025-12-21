@@ -149,6 +149,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatLogic
   currentRunData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
+  examSchedule: {fileID: 11400000, guid: af0786ec63477058ba8713e2c43b6506, type: 2}
+  exam:
+    ExamName: 
+    Turn: 0
+    FailureFlagToSet: 
+    SuccessFlagToSet: 
+    nodeNamePass: 
+    nodeNameFail: 
+    Speed: 0
+    Wit: 0
+    Memory: 0
+    Luck: 0
   playerSpeed: 0
   playerWit: 0
   playerMemory: 0
@@ -157,6 +169,7 @@ MonoBehaviour:
   testWit: 0
   testMemory: 0
   testLuck: 0
+  currentTurn: 0
   playerHpBar: {fileID: 1265644296}
   testHpBar: {fileID: 200446480}
   playerHitChance: 0
