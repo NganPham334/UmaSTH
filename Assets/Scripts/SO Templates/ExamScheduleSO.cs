@@ -40,8 +40,10 @@ public class ScheduledExam
     [Tooltip("Dialogue when failed")]
     public string nodeNameFail;
 
+    [Header("Test's stats")]
 //Exam stat for blay
-    public int Speed, Wit, Memory, Luck;
+    public int Speed;
+    public int Wit, Memory, Luck;
     public int GetStatValue(StatType type)
 	{
         return type switch
