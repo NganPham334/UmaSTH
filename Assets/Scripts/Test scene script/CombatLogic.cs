@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CombatLogic : MonoBehaviour
 {    
@@ -12,17 +14,24 @@ public class CombatLogic : MonoBehaviour
     public GameObject testHpBar;
     public float playerHitChance, testHitChance;
     public float playerCritChance, testCritChance;
+    public String mood;
 
 
     void Start()
     {
         currentTurn = currentRunData.CurrentTurn;
-        
-        playerSpeed = currentRunData.GetStatValue(StatType.SPD);
-        playerWit = currentRunData.GetStatValue(StatType.WIT);
-        playerMemory = currentRunData.GetStatValue(StatType.MEM);
-        playerLuck = currentRunData.GetStatValue(StatType.LUK);
 
+        mood = currentRunData.GetMood();
+        Debug.Log($"Current Mood: {mood}");
+
+        playerSpeed = (int)((float)currentRunData.GetStatValue(StatType.SPD) * GetMoodMultiplier());
+        playerWit = (int)((float)currentRunData.GetStatValue(StatType.WIT) * GetMoodMultiplier());
+        playerMemory = (int)((float)currentRunData.GetStatValue(StatType.MEM) * GetMoodMultiplier());
+        playerLuck = (int)((float)currentRunData.GetStatValue(StatType.LUK) * GetMoodMultiplier());
+
+        playerHitChance = (float)playerLuck/testLuck;
+        playerCritChance = (float)playerLuck/1000;
+        
         exam = examSchedule.GetExamForTurn(currentTurn);
 
         testSpeed = exam.GetStatValue(StatType.SPD);
@@ -30,10 +39,7 @@ public class CombatLogic : MonoBehaviour
         testMemory = exam.GetStatValue(StatType.MEM);
         testLuck = exam.GetStatValue(StatType.LUK);
 
-        playerHitChance = (float)playerLuck/testLuck;
         testHitChance = (float)testLuck/playerLuck;
-
-        playerCritChance = (float)playerLuck/1000;
         testCritChance = (float)testLuck/1000;
 
         playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 15);
@@ -76,4 +82,19 @@ public class CombatLogic : MonoBehaviour
         testHpBar.GetComponent<HpBarController>().TakeDamage(playerWit);
         Debug.Log($"Test takes {playerWit} damage.");
     }
+
+    public float GetMoodMultiplier()
+{
+    // Return a different multiplier based on Mood
+    return mood switch
+    {
+        "Depressed" => 0.9f, 
+        "Bad" => 0.95f, 
+        "Normal" => 1.0f, 
+        "Good" => 1.05f, 
+        "Umazing" => 1.1f, 
+        _ => 1.0f  // Default
+    };
 }
+}
+

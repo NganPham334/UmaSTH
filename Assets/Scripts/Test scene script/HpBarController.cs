@@ -9,7 +9,6 @@ public class HpBarController : MonoBehaviour
     public float targetHp;
     public Gradient hpGradient;
     public Image fill;
-    public enum HpBarType{Player,Test};
     void Start()
     {
         currentHp = maxHp;
