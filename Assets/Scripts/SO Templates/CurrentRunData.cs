@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -5,9 +6,9 @@ using System.Collections.Generic;
 public class CurrentRunData : ScriptableObject
 {
     //[HideInInspector] 
-    public int Speed, Wit, Memory, Luck, Clarity, CurrentTurn, TotalTurns;
+    public int Speed, Wit, Memory, Luck, Clarity, CurrentTurn, TotalTurns, Mood;
     [HideInInspector]
-    public string CurrentDate;
+    public bool doneREvent = false; 
     
     [System.Serializable]
     public class Flag
@@ -33,10 +34,12 @@ public class CurrentRunData : ScriptableObject
         Memory = 70;
         Luck = 50;
         Clarity = 50;
-
+        Mood = 4;
+        
+        doneREvent = false;
+        
         // Reset progress
         CurrentTurn = 1;
-        CurrentDate = "Junior Year, Week 1";
         
         InitializeFlags();
     }
@@ -112,5 +115,16 @@ public class CurrentRunData : ScriptableObject
         {
             Debug.LogWarning($"StoryFlag '{flagName}' does not exist. Cannot set.");
         }
+    }
+
+    public string ChangeMood(int change)
+    {
+	    Mood = Math.Min(4, Math.Max(0, Mood + change));
+        return GetMood();
+    }
+
+    public string GetMood()
+    {
+	    return new string[] { "Depressed", "Bad", "Normal", "Good", "Umazing" }[Mood];
     }
 }

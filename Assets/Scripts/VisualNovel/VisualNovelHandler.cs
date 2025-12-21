@@ -2,6 +2,8 @@ using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using Yarn.Unity;
+using System.Linq;
+using Random = UnityEngine.Random;
 
 namespace VisualNovel
 {
@@ -17,6 +19,7 @@ namespace VisualNovel
         /*
          * vn_type:
          * studying; add another param named "study_type" with value spd / mem / wit / luk
+         * plus suffix pass / fail;  Exmaple: spd_fail, mem_pass
          * pastime
          * rest
          * post_test; add another parameter "post_test_name" with the dialogue node's name as the value
@@ -69,6 +72,12 @@ namespace VisualNovel
                     GameStateMan.Instance.TryGetStateParameter("study_type", out nodeName);
                     nodeName = "Study_" + nodeName;
                     break;
+                
+                case "random":
+                    var events = dialogueRunner.Dialogue.NodeNames
+                        .Where(node => node.StartsWith("Random_")).ToList();
+                    nodeName = events[Random.Range(0, events.Count())]; // for integers the max param is exclusive
+                    break;
             }
             
             if (!string.IsNullOrEmpty(nodeName) && dialogueRunner.Dialogue.NodeExists(nodeName))
@@ -77,7 +86,7 @@ namespace VisualNovel
             }
             else
             {
-                Debug.LogError($"Yarn Node '{nodeName}' not found! Closing scene.");
+                Debug.LogError($"Yarn Node '{nodeName}' of scene {_vnType} not found! Closing scene.");
                 FinishScene();
             }
         }
@@ -114,19 +123,22 @@ namespace VisualNovel
                 switch (statName)
                 {
                     case "spd":
-                        currentRunData.Speed = Math.Min(0, currentRunData.Speed + mod * amount);
+                        currentRunData.Speed = Math.Max(0, Math.Min(1000, currentRunData.Speed + mod * amount));
                         break;
                     case "mem":
-                        currentRunData.Memory = Math.Min(0, currentRunData.Memory + mod * amount);
+                        currentRunData.Memory = Math.Max(0, Math.Min(1000, currentRunData.Memory + mod * amount));
                         break;
                     case "wit":
-                        currentRunData.Wit = Math.Min(0, currentRunData.Wit + mod * amount);
+                        currentRunData.Wit = Math.Max(0, Math.Min(1000, currentRunData.Wit + mod * amount));
                         break;
                     case "clr":
-                        currentRunData.Clarity = Math.Min(0, currentRunData.Clarity + mod * amount);
+                        currentRunData.Clarity = Math.Max(0, Math.Min(1000, currentRunData.Clarity + mod * amount));
                         break;
                     case "luk":
-                        currentRunData.Luck = Math.Min(0, currentRunData.Luck + mod * amount);
+                        currentRunData.Luck = Math.Max(0, Math.Min(1000, currentRunData.Luck + mod * amount));
+                        break;
+                    case "mood":
+                        currentRunData.ChangeMood(mod * amount);
                         break;
                     default:
                         Debug.LogWarning($"[StatSystem] Unknown stat: '{statName}'");

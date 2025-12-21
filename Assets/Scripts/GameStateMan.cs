@@ -27,7 +27,6 @@ public class GameStateMan : MonoBehaviour
         VisualNovel,
         PreTest,
         Exam,
-        
         RunEnd
         // TODO: determine if this should be a separate scene
     }
@@ -37,8 +36,7 @@ public class GameStateMan : MonoBehaviour
     public CurrentRunData CurrentRunData { get; internal set; }
 
     private Dictionary<string, object> _stateParameters;
-
-
+    
     void Awake()
     {
         if (Instance == null)
@@ -159,6 +157,15 @@ public class GameStateMan : MonoBehaviour
 
     public void ReportActionComplete()
     {
+        if (CurrentRunData.CurrentTurn % 2 == 0 && !CurrentRunData.doneREvent)
+        {
+            CurrentRunData.doneREvent = true;
+            RequestState(GameState.VisualNovel, new() { { "vn_type", "random" } });
+            return;
+        }
+
+        CurrentRunData.doneREvent = false;
+        
         CurrentRunData.AdvanceTurn();
         int turn = CurrentRunData.CurrentTurn;
 
