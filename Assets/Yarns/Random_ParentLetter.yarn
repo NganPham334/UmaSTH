@@ -1,0 +1,15 @@
+﻿title:Random_ParentLetter
+tags:
+---
+Nighttime. #line:044d891 
+You close your laptop after an exhausting day. #line:04c2aa4 
+Your phone vibrates softly. #line:066a8e1 
+A new email appears. #line:03e3718 
+
+Blay:A letter… from Mom and Dad?It’s been a while since I last called home. #line:08daf49 
+
+->You take a deep breath and start reading. #line:0ceb9c2 
+    <<stat clr+25 mood+2>>
+
+Blay:Just a few lines…Yet somehow, I feel lighter after reading them.I’m not as alone as I thought.  #line:0803aa5 
+===

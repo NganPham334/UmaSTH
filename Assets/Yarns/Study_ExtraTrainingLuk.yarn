@@ -1,0 +1,14 @@
+﻿title:Study_ExtraTrainingLuk
+tags:
+---
+The classroom is empty. #line:07c496c 
+Only textbooks and a cold cup of coffee remain on the desk. #line:03f1fca 
+
+Blay:I could stop here…Or push just a little further. #line:0288e9c 
+-> Study for extra luck.  #line:0aeee52 
+    <<stat luk+5 clr-5>>
+    Blay:My body feels even more exhausted.But the sense of progress is real. #line:0300454 
+-> Take a break instead. #line:06bec45 
+    <<stat clr+5>>
+    Blay:My body needs a light rest.At least… everything is still under control. #line:0da548c 
+===
