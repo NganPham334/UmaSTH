@@ -9,6 +9,7 @@ public class HpBarController : MonoBehaviour
     public float targetHp;
     public Gradient hpGradient;
     public Image fill;
+    public enum HpBarType{Player,Test};
     void Start()
     {
         currentHp = maxHp;
@@ -29,5 +30,12 @@ public class HpBarController : MonoBehaviour
     {
         targetHp = currentHp - damage;
         Debug.Log($"HP reduced by {damage}. Current HP: {targetHp}.");
+    }
+
+    public void SetMaxHp(float hp)
+    {
+        maxHp = hp;
+        currentHp = maxHp;
+        targetHp = currentHp;
     }
 }

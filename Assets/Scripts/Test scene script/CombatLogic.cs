@@ -36,6 +36,9 @@ public class CombatLogic : MonoBehaviour
         playerCritChance = (float)playerLuck/1000;
         testCritChance = (float)testLuck/1000;
 
+        playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 15);
+        testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 15);
+
         Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}, testHitChance: {testHitChance},testCritChance: {testCritChance}");
         Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}, playerHitChance: {playerHitChance},playerCritChance: {playerCritChance}");
     }
