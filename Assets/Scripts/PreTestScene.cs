@@ -11,14 +11,10 @@ public class PreTestScene : MonoBehaviour
     public TMP_Text PlayerWit;
     public TMP_Text PlayerLuck;
 
-    [Header("Exam Stats")]
-    public TMP_Text TestSpeed;
-    public TMP_Text TestMemory;
-    public TMP_Text TestWit;
-    public TMP_Text TestLuck;
-
-    [Header("Center UI")]
+    [Header("Exam Info")]
     public TMP_Text ExamName;
+
+    [Header("Buttons")]
     public Button TestButton;
     public Button ReturnButton;
 
@@ -26,17 +22,11 @@ public class PreTestScene : MonoBehaviour
     private ScheduledExam examData;
     private bool isOptionalTest;
 
-    // =========================================================
-    // START
-    // =========================================================
     void Start()
     {
         var gsm = GameStateMan.Instance;
         bool hasRealExam = false;
 
-        // -----------------------------------------------------
-        // TRY GET REAL DATA FROM GAMESTATE MANAGER
-        // -----------------------------------------------------
         if (gsm != null)
         {
             runData = gsm.CurrentRunData;
@@ -47,24 +37,21 @@ public class PreTestScene : MonoBehaviour
             gsm.TryGetStateParameter("OptionalTest", out isOptionalTest);
         }
 
-        // -----------------------------------------------------
-        // TEST MODE (SCENE RUN DIRECTLY)
-        // -----------------------------------------------------
+        // ---------------- TEST MODE ----------------
         if (!hasRealExam)
         {
-            Debug.LogWarning("PreTestScene: Running TEST MODE.");
+            Debug.LogWarning("PreTestScene: TEST MODE");
 
-            // Mock run data
             runData = ScriptableObject.CreateInstance<CurrentRunData>();
             runData.Speed = 120;
             runData.Wit = 80;
             runData.Memory = 55;
             runData.Luck = 35;
 
-            // Mock exam
-            examData = new ScheduledExam()
+            examData = new ScheduledExam
             {
                 ExamName = "TEST MODE EXAM",
+                Turn = 0
             };
 
             isOptionalTest = true;
@@ -74,76 +61,37 @@ public class PreTestScene : MonoBehaviour
         SetupButtons();
     }
 
-    // =========================================================
-    // SETUP UI
-    // =========================================================
     private void SetupUI()
     {
-        // Player stats
-        PlayerSpeed.text = runData.Speed.ToString();
+        PlayerSpeed.text  = runData.Speed.ToString();
         PlayerMemory.text = runData.Memory.ToString();
-        PlayerWit.text = runData.Wit.ToString();
-        PlayerLuck.text = runData.Luck.ToString();
+        PlayerWit.text    = runData.Wit.ToString();
+        PlayerLuck.text   = runData.Luck.ToString();
 
-        // Exam name (safe)
-        ExamName.text = examData?.ExamName ?? "UNKNOWN EXAM";
-
-        // Exam requirements
-        int spd = 0, mem = 0, wit = 0, luk = 0;
-
-
-        TestSpeed.text = spd.ToString();
-        TestMemory.text = mem.ToString();
-        TestWit.text = wit.ToString();
-        TestLuck.text = luk.ToString();
+        ExamName.text = examData != null ? examData.ExamName : "UNKNOWN EXAM";
     }
 
-    // =========================================================
-    // BUTTON SETUP
-    // =========================================================
     private void SetupButtons()
     {
         TestButton.onClick.RemoveAllListeners();
         ReturnButton.onClick.RemoveAllListeners();
 
-        // ------------------------------
-        // TEST BUTTON
-        // ------------------------------
         TestButton.onClick.AddListener(() =>
         {
             if (GameStateMan.Instance != null)
             {
-                var param = new Dictionary<string, object>
-                {
-                    { "ExamData", examData }
-                };
-
                 GameStateMan.Instance.RequestState(
                     GameStateMan.GameState.Exam,
-                    param
+                    new Dictionary<string, object> { { "ExamData", examData } }
                 );
-            }
-            else
-            {
-                Debug.Log("TEST MODE: Test button clicked.");
             }
         });
 
-        // ------------------------------
-        // RETURN BUTTON
-        // (Cancel + Return merged)
-        // ------------------------------
         ReturnButton.onClick.AddListener(() =>
         {
-            Debug.Log(isOptionalTest
-                ? "Optional Test: Return = Cancel"
-                : "Forced Exam: Return");
-
             if (GameStateMan.Instance != null)
             {
-                GameStateMan.Instance.RequestState(
-                    GameStateMan.GameState.GameScene
-                );
+                GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
             }
         });
     }
