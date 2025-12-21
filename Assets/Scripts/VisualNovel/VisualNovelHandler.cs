@@ -112,14 +112,15 @@ namespace VisualNovel
 
                 if (!match.Success)
                 {
-                    Debug.LogWarning($"[StatSystem] Invalid syntax: '{input}'. Usage: <<stat luk+5 mem-2>>");
+                    Debug.LogWarning($"[VNHandler] Invalid syntax: '{input}'. Usage: <<stat luk+5 mem-2>>");
                     continue;
                 }
 
                 string statName = match.Groups[1].Value.ToLower();
                 int mod = match.Groups[2].Value == "+" ? 1 : -1;
                 int amount = int.Parse(match.Groups[3].Value);
-
+                
+                Debug.Log(statName + " " + mod * amount);
                 switch (statName)
                 {
                     case "spd":
@@ -141,9 +142,29 @@ namespace VisualNovel
                         currentRunData.ChangeMood(mod * amount);
                         break;
                     default:
-                        Debug.LogWarning($"[StatSystem] Unknown stat: '{statName}'");
+                        Debug.LogWarning($"[VNHandler] Unknown stat: '{statName}'");
                         break;
                 }
+            }
+        }
+
+        [YarnCommand("randMod")]
+        public void ModifyRandom(int change)
+        {
+            switch (Random.Range(0, 4))
+            {
+                case 0:
+                    currentRunData.Speed += change;
+                    break;
+                case 1:
+                    currentRunData.Memory += change;
+                    break;
+                case 2:
+                    currentRunData.Wit += change;
+                    break;
+                case 3:
+                    currentRunData.Luck += change;
+                    break;
             }
         }
     }
