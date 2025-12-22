@@ -11,6 +11,12 @@ public class PreTestScene : MonoBehaviour
     public TMP_Text PlayerWit;
     public TMP_Text PlayerLuck;
 
+    [Header("Exam Stats")]
+    public TMP_Text TestSpeed;
+    public TMP_Text TestMemory;
+    public TMP_Text TestWit;
+    public TMP_Text TestLuck;
+
     [Header("Exam Info")]
     public TMP_Text ExamName;
 
@@ -37,7 +43,7 @@ public class PreTestScene : MonoBehaviour
             gsm.TryGetStateParameter("OptionalTest", out isOptionalTest);
         }
 
-        // ---------------- TEST MODE ----------------
+        // ================= TEST MODE =================
         if (!hasRealExam)
         {
             Debug.LogWarning("PreTestScene: TEST MODE");
@@ -51,7 +57,10 @@ public class PreTestScene : MonoBehaviour
             examData = new ScheduledExam
             {
                 ExamName = "TEST MODE EXAM",
-                Turn = 0
+                Speed = 100,
+                Wit = 60,
+                Memory = 50,
+                Luck = 40
             };
 
             isOptionalTest = true;
@@ -63,12 +72,30 @@ public class PreTestScene : MonoBehaviour
 
     private void SetupUI()
     {
+        // -------- PLAYER STATS --------
         PlayerSpeed.text  = runData.Speed.ToString();
         PlayerMemory.text = runData.Memory.ToString();
         PlayerWit.text    = runData.Wit.ToString();
         PlayerLuck.text   = runData.Luck.ToString();
 
+        // -------- EXAM INFO --------
         ExamName.text = examData != null ? examData.ExamName : "UNKNOWN EXAM";
+
+        // -------- EXAM STATS --------
+        if (examData != null)
+        {
+            TestSpeed.text  = examData.GetStatValue(StatType.spd).ToString();
+            TestWit.text    = examData.GetStatValue(StatType.wit).ToString();
+            TestMemory.text = examData.GetStatValue(StatType.mem).ToString();
+            TestLuck.text   = examData.GetStatValue(StatType.luk).ToString();
+        }
+        else
+        {
+            TestSpeed.text  = "-";
+            TestWit.text    = "-";
+            TestMemory.text = "-";
+            TestLuck.text   = "-";
+        }
     }
 
     private void SetupButtons()
@@ -82,7 +109,10 @@ public class PreTestScene : MonoBehaviour
             {
                 GameStateMan.Instance.RequestState(
                     GameStateMan.GameState.Exam,
-                    new Dictionary<string, object> { { "ExamData", examData } }
+                    new Dictionary<string, object>
+                    {
+                        { "ExamData", examData }
+                    }
                 );
             }
         });
