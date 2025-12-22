@@ -1,9 +1,9 @@
-title:Study_wit_fail
+﻿title:Study_wit_fail
 tags:
 ---
-Blay:Today’s just not my day.Maybe I should stop here.
-->Stop studying for now.
+Blay:Today’s just not my day.Maybe I should stop here. #line:0407022 
+->Stop studying for now. #line:06c371b 
     <<stat wit-5 >>
-->Keep pushing through.
+->Keep pushing through. #line:0e7df26 
     <<stat wit-10 mod-1 >>
 ===
