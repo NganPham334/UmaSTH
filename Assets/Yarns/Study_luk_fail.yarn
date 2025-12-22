@@ -5,5 +5,5 @@ Blay:Today’s just not my day.Maybe I should stop here. #line:0c96ec5
 ->Stop studying for now. #line:0911af7 
     <<stat luk-5 >>
 ->Keep pushing through. #line:0a1c2fb 
-    <<stat luk-10 mod-1 >>
+    <<stat luk-10 mood-1 >>
 ===
