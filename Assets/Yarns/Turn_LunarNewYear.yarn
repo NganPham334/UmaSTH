@@ -16,7 +16,7 @@ Blay:“Lunar New Year at last…A rare break after months of tension.How should
     No deadlines. No alarms. #line:070d5b4 
     Maybe resting at the right time is a smart choice. #line:011c6dc 
 ->Rest, but review what really matters. #line:0e84bba 
-    <<stat wit+20>> 
+    <<randMod 10>> 
     You revisit the parts you once overlooked. #line:0759802 
     No pressure, but still making progress. #line:0f0eff6 
     At least… you’re not falling behind. #line:065689f 

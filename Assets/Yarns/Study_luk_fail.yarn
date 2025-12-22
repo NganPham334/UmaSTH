@@ -1,0 +1,9 @@
+title:Study_luk_fail
+tags:
+---
+Blay:Today’s just not my day.Maybe I should stop here.
+->Stop studying for now.
+    <<stat luk-5 >>
+->Keep pushing through.
+    <<stat luk-10 mod-1 >>
+===

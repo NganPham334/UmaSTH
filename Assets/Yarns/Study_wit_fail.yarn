@@ -1,0 +1,9 @@
+title:Study_wit_fail
+tags:
+---
+Blay:Today’s just not my day.Maybe I should stop here.
+->Stop studying for now.
+    <<stat wit-5 >>
+->Keep pushing through.
+    <<stat wit-10 mod-1 >>
+===
