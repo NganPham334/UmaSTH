@@ -10,6 +10,8 @@ namespace VisualNovel
 
     public class VisualNovelHandler : MonoBehaviour
     {
+        private static VisualNovelHandler Instance { get; set; }
+        
         [Header("Yarn References")]
         public DialogueRunner dialogueRunner;
 
@@ -31,6 +33,13 @@ namespace VisualNovel
 
         void Awake()
         {
+            if (Instance != null && Instance != this) 
+            { 
+                Destroy(gameObject); 
+                return;
+            }
+            Instance = this;
+            
             // Get the current Visual Novel Mode (Determined, Post-Test, etc.)
             if (!GameStateMan.Instance.TryGetStateParameter<string>("vn_type", out var type))
             {
@@ -48,6 +57,8 @@ namespace VisualNovel
 
         void OnDestroy()
         {
+            if (Instance == this) Instance = null;
+            
             // Clean up event listener to prevent memory leaks
             if (dialogueRunner != null)
             {
@@ -103,7 +114,7 @@ namespace VisualNovel
         }
         
         [YarnCommand("stat")]
-        public void ModifyStat(string[] inputs)
+        public static void ModifyStat(string[] inputs)
         {
             foreach (string input in inputs)
             {
@@ -120,26 +131,28 @@ namespace VisualNovel
                 int mod = match.Groups[2].Value == "+" ? 1 : -1;
                 int amount = int.Parse(match.Groups[3].Value);
                 
+                var runData = Instance.currentRunData;
+                
                 Debug.Log(statName + " " + mod * amount);
                 switch (statName)
                 {
                     case "spd":
-                        currentRunData.Speed = Math.Max(0, Math.Min(1000, currentRunData.Speed + mod * amount));
+                        runData.Speed = Math.Max(0, Math.Min(1000, runData.Speed + mod * amount));
                         break;
                     case "mem":
-                        currentRunData.Memory = Math.Max(0, Math.Min(1000, currentRunData.Memory + mod * amount));
+                        runData.Memory = Math.Max(0, Math.Min(1000, runData.Memory + mod * amount));
                         break;
                     case "wit":
-                        currentRunData.Wit = Math.Max(0, Math.Min(1000, currentRunData.Wit + mod * amount));
+                        runData.Wit = Math.Max(0, Math.Min(1000, runData.Wit + mod * amount));
                         break;
                     case "clr":
-                        currentRunData.Clarity = Math.Max(0, Math.Min(1000, currentRunData.Clarity + mod * amount));
+                        runData.Clarity = Math.Max(0, Math.Min(1000, runData.Clarity + mod * amount));
                         break;
                     case "luk":
-                        currentRunData.Luck = Math.Max(0, Math.Min(1000, currentRunData.Luck + mod * amount));
+                        runData.Luck = Math.Max(0, Math.Min(1000, runData.Luck + mod * amount));
                         break;
                     case "mood":
-                        currentRunData.ChangeMood(mod * amount);
+                        runData.ChangeMood(mod * amount);
                         break;
                     default:
                         Debug.LogWarning($"[VNHandler] Unknown stat: '{statName}'");
@@ -149,21 +162,23 @@ namespace VisualNovel
         }
 
         [YarnCommand("randMod")]
-        public void ModifyRandom(int change)
+        public static void ModifyRandom(int change)
         {
+            var runData = Instance.currentRunData;
+            
             switch (Random.Range(0, 4))
             {
                 case 0:
-                    currentRunData.Speed += change;
+                    runData.Speed += change;
                     break;
                 case 1:
-                    currentRunData.Memory += change;
+                    runData.Memory += change;
                     break;
                 case 2:
-                    currentRunData.Wit += change;
+                    runData.Wit += change;
                     break;
                 case 3:
-                    currentRunData.Luck += change;
+                    runData.Luck += change;
                     break;
             }
         }
