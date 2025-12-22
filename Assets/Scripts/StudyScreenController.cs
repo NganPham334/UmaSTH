@@ -30,7 +30,10 @@ public class StudyScreenController : MonoBehaviour
 			Debug.LogError("StatsManager.Instance is null. Check StatsManager in Script Execution Order");
 		}
 
-		GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() {{"vn_type", "studying"}});
+		GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() {
+			{"vn_type", "studying"},
+			{"study_type", $"{primaryStat}_pass"}
+			});
 	}
 	
 	public void UpdateStatDisplay(StatType statType)
