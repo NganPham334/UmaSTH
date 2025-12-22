@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public enum StatType
 {
-    SPD,
-	WIT,
-	MEM,
-	LUK // NOTE: Value 0, 1, 2, 3 respectively
+    spd,
+	wit,
+	mem,
+	luk // NOTE: Value 0, 1, 2, 3 respectively
 }
 
 [Serializable]
@@ -57,10 +57,10 @@ public class StatsManager : MonoBehaviour
 	[Header("Study Gains Relationship")]
 	public List<StatGain> StudyGains = new List<StatGain>()
 	{
-		new StatGain {PrimaryStat = StatType.SPD, SecondaryStat = StatType.WIT, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount},
-		new StatGain {PrimaryStat = StatType.MEM, SecondaryStat = StatType.SPD, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount},
-		new StatGain {PrimaryStat = StatType.WIT, SecondaryStat = StatType.LUK, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount},
-		new StatGain {PrimaryStat = StatType.LUK, SecondaryStat = StatType.MEM, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount}
+		new StatGain {PrimaryStat = StatType.spd, SecondaryStat = StatType.wit, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount},
+		new StatGain {PrimaryStat = StatType.mem, SecondaryStat = StatType.spd, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount},
+		new StatGain {PrimaryStat = StatType.wit, SecondaryStat = StatType.luk, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount},
+		new StatGain {PrimaryStat = StatType.luk, SecondaryStat = StatType.mem, PrimaryGain = PrimaryGainAmount, SecondaryGain = SecondaryGainAmount}
 	};
 	
 	// REMOVED: Start() and Dictionary initialization
@@ -87,8 +87,6 @@ public class StatsManager : MonoBehaviour
 		currentValue = Mathf.Min(currentValue, MaxValue);
 		
 		runData.SetStatValue(statType, currentValue);
-		
-		Debug.Log($"{statType} = {currentValue} now");
 	}
 	
 	// Getter function for StudyScreenController

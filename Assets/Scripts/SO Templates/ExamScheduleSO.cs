@@ -48,10 +48,10 @@ public class ScheduledExam
 	{
         return type switch
         {
-            StatType.SPD => Speed,
-            StatType.WIT => Wit,
-            StatType.MEM => Memory,
-            StatType.LUK => Luck,
+            StatType.spd => Speed,
+            StatType.wit => Wit,
+            StatType.mem => Memory,
+            StatType.luk => Luck,
             _ => 0,
         };
     }

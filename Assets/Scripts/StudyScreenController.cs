@@ -12,7 +12,6 @@ public class StudyScreenController : MonoBehaviour
 	public void OnStudyButtonPressed(int statIndex)
 	{
 		StatType primaryStat = (StatType)statIndex;
-		Debug.Log("Study Button Pressed for: " + primaryStat.ToString());
 		
 		if (StatsManager.Instance != null)
 		{
@@ -20,11 +19,18 @@ public class StudyScreenController : MonoBehaviour
 			StatType secondaryStat = StatsManager.Instance.IncrementStat(primaryStat);
 			UpdateStatDisplay(primaryStat); // Update text on screen for Primary Stat
 			UpdateStatDisplay(secondaryStat); // Update text on screen for Secondary Stat
+
+			if (GameStateMan.Instance != null)
+			{
+				GameStateMan.Instance.ReportActionComplete();
+			}
 		}
 		else
 		{
-			Debug.LogError("StatsManager.Instance is null. Is the StatsManager GameObject active in the scene?");
+			Debug.LogError("StatsManager.Instance is null. Check StatsManager in Script Execution Order");
 		}
+
+		GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() {{"vn_type", "studying"}});
 	}
 	
 	public void UpdateStatDisplay(StatType statType)
@@ -35,19 +41,19 @@ public class StudyScreenController : MonoBehaviour
 		
 		switch (statType)
 		{
-			case StatType.SPD:
+			case StatType.spd:
 				if (spdText != null)
 					spdText.text = currentValue.ToString();
 				break;
-			case StatType.WIT:
+			case StatType.wit:
 				if (witText != null)
 					witText.text = currentValue.ToString();
 				break;
-			case StatType.MEM:
+			case StatType.mem:
 				if (memText != null)
 					memText.text = currentValue.ToString();
 				break;
-			case StatType.LUK:
+			case StatType.luk:
 				if (lukText != null)
 					lukText.text = currentValue.ToString();
 				break;

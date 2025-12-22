@@ -50,10 +50,10 @@ public class CurrentRunData : ScriptableObject
 	{
 		switch (type)
 		{
-			case StatType.SPD: return Speed;
-			case StatType.WIT: return Wit;
-			case StatType.MEM: return Memory;
-			case StatType.LUK: return Luck;
+			case StatType.spd: return Speed;
+			case StatType.wit: return Wit;
+			case StatType.mem: return Memory;
+			case StatType.luk: return Luck;
 			default: return 0;
 			// NOTE: In the finished prototype, default case won't be needed
 		}
@@ -63,16 +63,16 @@ public class CurrentRunData : ScriptableObject
 	{
 		switch (type)
 		{
-			case StatType.SPD: 
+			case StatType.spd: 
 				Speed = value;
 				break;
-			case StatType.WIT:
+			case StatType.wit:
 				Wit = value;
 				break;
-			case StatType.MEM:
+			case StatType.mem:
 				Memory = value;
 				break;
-			case StatType.LUK:
+			case StatType.luk:
 				Luck = value;
 				break;
 		}

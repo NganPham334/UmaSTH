@@ -24,20 +24,20 @@ public class CombatLogic : MonoBehaviour
         mood = currentRunData.GetMood();
         Debug.Log($"Current Mood: {mood}");
 
-        playerSpeed = (int)((float)currentRunData.GetStatValue(StatType.SPD) * GetMoodMultiplier());
-        playerWit = (int)((float)currentRunData.GetStatValue(StatType.WIT) * GetMoodMultiplier());
-        playerMemory = (int)((float)currentRunData.GetStatValue(StatType.MEM) * GetMoodMultiplier());
-        playerLuck = (int)((float)currentRunData.GetStatValue(StatType.LUK) * GetMoodMultiplier());
+        playerSpeed = (int)((float)currentRunData.GetStatValue(StatType.spd) * GetMoodMultiplier());
+        playerWit = (int)((float)currentRunData.GetStatValue(StatType.wit) * GetMoodMultiplier());
+        playerMemory = (int)((float)currentRunData.GetStatValue(StatType.mem) * GetMoodMultiplier());
+        playerLuck = (int)((float)currentRunData.GetStatValue(StatType.luk) * GetMoodMultiplier());
 
         playerHitChance = (float)playerLuck/testLuck;
         playerCritChance = (float)playerLuck/1000;
         
         exam = examSchedule.GetExamForTurn(currentTurn);
 
-        testSpeed = exam.GetStatValue(StatType.SPD);
-        testWit = exam.GetStatValue(StatType.WIT);
-        testMemory = exam.GetStatValue(StatType.MEM);
-        testLuck = exam.GetStatValue(StatType.LUK);
+        testSpeed = exam.GetStatValue(StatType.spd);
+        testWit = exam.GetStatValue(StatType.wit);
+        testMemory = exam.GetStatValue(StatType.mem);
+        testLuck = exam.GetStatValue(StatType.luk);
 
         testHitChance = (float)testLuck/playerLuck;
         testCritChance = (float)testLuck/1000;
