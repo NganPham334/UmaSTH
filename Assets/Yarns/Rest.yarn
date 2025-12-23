@@ -1,0 +1,16 @@
+﻿title: Rest
+tags: 
+---
+<<set $roll = random_range(0, 2)>>
+
+<<if $roll == 0>>
+    <<stat clr+30>>
+    Blay:Staying up late too much makes me feel so drained... #line:0320a4c 
+<<elseif $roll == 1>>   
+    <<stat clr+50>>
+    Blay:Yeah… this is exactly what I needed. #line:0e22250 
+<<else>>
+    <<stat clr+70>>
+    Blay:Wow, I feel amazing! #line:0593f5a 
+<<endif>>
+===
