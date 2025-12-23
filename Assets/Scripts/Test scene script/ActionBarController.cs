@@ -6,14 +6,14 @@ public class ActionBarController : MonoBehaviour
 
 
 {
-    public Slider actionBarSlider;
-    public float max= 100;
-    public float current= 0;
-    public float speed;
-    public bool isRecharging = false;
-    public GameObject CombatLogicObject;
-    public enum ActionBarType{Player,Test};
-    public ActionBarType actionBarType;
+    [SerializeField] private Slider actionBarSlider;
+    [SerializeField] private float max= 100;
+    [SerializeField] private float current= 0;
+    [SerializeField] private float speed;
+    private bool isRecharging = false;
+    [SerializeField] private GameObject CombatLogicObject;
+    private enum ActionBarType{Player,Test};
+    [SerializeField] private ActionBarType actionBarType;
 
 
     // Update is called once per frame

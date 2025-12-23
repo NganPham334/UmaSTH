@@ -3,18 +3,12 @@ using UnityEngine.UI;
 //[ExecuteInEditMode]
 public class HpBarController : MonoBehaviour
 {
-    public Slider hpBarSlider;
-    public float maxHp;
-    public float currentHp;
-    public float targetHp;
-    public Gradient hpGradient;
-    public Image fill;
-    void Start()
-    {
-        currentHp = maxHp;
-        targetHp = currentHp;
-    }
-
+    [SerializeField] private Slider hpBarSlider;
+    private float maxHp;
+    private float currentHp;
+    private float targetHp;
+    [SerializeField] private Gradient hpGradient;
+    [SerializeField] private Image fill;
     void Update()
     {
         if (currentHp != targetHp)

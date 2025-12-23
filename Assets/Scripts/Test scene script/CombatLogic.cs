@@ -4,17 +4,19 @@ using Random = UnityEngine.Random;
 
 public class CombatLogic : MonoBehaviour
 {    
-    public CurrentRunData currentRunData;
-    public ExamSchedule examSchedule;
-    public ScheduledExam exam;
-    public int playerSpeed, playerWit, playerMemory, playerLuck;
-    public int testSpeed, testWit, testMemory, testLuck;
-    public int currentTurn;
-    public GameObject playerHpBar;
-    public GameObject testHpBar;
-    public float playerHitChance, testHitChance;
-    public float playerCritChance, testCritChance;
-    public String mood;
+    [SerializeField] private CurrentRunData currentRunData;
+    [SerializeField] private ExamSchedule examSchedule;
+    [SerializeField] private ScheduledExam exam;
+    [SerializeField] private GameObject playerHpBar;
+    [SerializeField] private GameObject testHpBar;
+    private int playerSpeed, playerWit, playerMemory, playerLuck;
+    private int testSpeed, testWit, testMemory, testLuck;
+    private int currentTurn;
+    private float playerHitChance, testHitChance;
+    private float playerCritChance, testCritChance;
+    private String mood;
+
+
 
 
     void Start()
@@ -47,6 +49,7 @@ public class CombatLogic : MonoBehaviour
 
         Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}, testHitChance: {testHitChance},testCritChance: {testCritChance}");
         Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}, playerHitChance: {playerHitChance},playerCritChance: {playerCritChance}");
+
     }
 
     public void PlayerTakeDamage()
