@@ -9,6 +9,8 @@ public class CombatLogic : MonoBehaviour
     [SerializeField] private ScheduledExam exam;
     [SerializeField] private GameObject playerHpBar;
     [SerializeField] private GameObject testHpBar;
+    [SerializeField] private Transform damagePopUpPrefab;
+    
     private int playerSpeed, playerWit, playerMemory, playerLuck;
     private int testSpeed, testWit, testMemory, testLuck;
     private int currentTurn;
@@ -87,17 +89,24 @@ public class CombatLogic : MonoBehaviour
     }
 
     public float GetMoodMultiplier()
-{
-    // Return a different multiplier based on Mood
-    return mood switch
     {
-        "Depressed" => 0.9f, 
-        "Bad" => 0.95f, 
-        "Normal" => 1.0f, 
-        "Good" => 1.05f, 
-        "Umazing" => 1.1f, 
-        _ => 1.0f  // Default
-    };
-}
+    // Return a different multiplier based on Mood
+        return mood switch
+        {
+            "Depressed" => 0.9f, 
+            "Bad" => 0.95f, 
+            "Normal" => 1.0f, 
+            "Good" => 1.05f, 
+            "Umazing" => 1.1f, 
+            _ => 1.0f  // Default
+        };
+    }
+
+    public void SpawnDamagePopUp(int damageAmount, Transform spawnPosition, bool isCrit)
+    {
+        Transform damagePopUpTransform = Instantiate(damagePopUpPrefab, spawnPosition.position, Quaternion.identity);
+        DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
+        damagePopUp.Setup(damageAmount, isCrit);
+    }
 }
 

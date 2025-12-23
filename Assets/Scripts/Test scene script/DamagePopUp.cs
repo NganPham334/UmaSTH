@@ -1,12 +1,28 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Diagnostics;
 
 public class DamagePopUp : MonoBehaviour
 {
-    public TextMeshPro damageText;
+    private TextMeshPro textMesh;
 
-    public void Setup(int damageAmount)
+    public void Awake()
     {
-        damageText.text = damageAmount.ToString();
+        textMesh = transform.GetComponent<TextMeshPro>();
+    }
+
+    public void Setup(int damageAmount, bool isCrit)
+    {
+        if (isCrit)
+        {
+            textMesh.color = Color.red;
+            textMesh.fontSize = 45;
+        }
+        else 
+        {
+            textMesh.color = Color.orange;
+            textMesh.fontSize = 36;
+        }
+        textMesh.SetText(damageAmount.ToString());
     }
 }
