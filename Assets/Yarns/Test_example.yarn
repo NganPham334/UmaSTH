@@ -3,6 +3,7 @@ tags:
 ---
 Mom: Wake up! You're going to be late for the exam! #line:0543874 
 Hero: Ugh... five more minutes? #line:0210a7e 
+<<scene navia_test>>
 
 -> Get up immediately #line:01c62e2 
     Hero: Fine, I'm up. #line:0d53e7a 

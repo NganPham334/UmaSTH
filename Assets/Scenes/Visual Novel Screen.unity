@@ -2255,7 +2255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0.5450981, a: 1}
+  m_Color: {r: 0.12829298, g: 0.15992753, b: 0.2924528, a: 0.54901963}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2470,8 +2470,8 @@ Camera:
   m_GameObject: {fileID: 1943865078}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 4
+  m_BackGroundColor: {r: 0.14257741, g: 0.2192061, b: 0.33962262, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2541,6 +2541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VisualNovelHandler
   dialogueRunner: {fileID: 215488365}
   currentRunData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
+  backgroundImage: {fileID: 1480983678}
 --- !u!1 &1973591023
 GameObject:
   m_ObjectHideFlags: 0

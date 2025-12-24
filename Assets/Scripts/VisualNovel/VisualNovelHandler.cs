@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using Yarn.Unity;
 using System.Linq;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace VisualNovel
@@ -17,6 +18,8 @@ namespace VisualNovel
 
         [Header("Game Data")] 
         public CurrentRunData currentRunData;
+        
+        public Image backgroundImage;
         
         /*
          * vn_type:
@@ -180,6 +183,27 @@ namespace VisualNovel
                 case 3:
                     runData.Luck += change;
                     break;
+            }
+        }
+        
+        // USAGE: <<scene "navia_test">> 
+        // Loads from: Assets/Resources/Backgrounds/navia_test.png (jpg should work too i think)
+        [YarnCommand("scene")]
+        public static void SetScene(string spriteName)
+        {
+            if (Instance == null || Instance.backgroundImage == null) return;
+            
+            Sprite newBg = Resources.Load<Sprite>($"Backgrounds/{spriteName}");
+
+            if (newBg != null)
+            {
+                Instance.backgroundImage.sprite = newBg;
+                Instance.backgroundImage.preserveAspect = true; 
+                Instance.backgroundImage.color = new Color(1f, 1f, 1f, 1f);
+            }
+            else
+            {
+                Debug.LogWarning($"[VNHandler] Could not find 'Resources/Backgrounds/{spriteName}'");
             }
         }
     }
