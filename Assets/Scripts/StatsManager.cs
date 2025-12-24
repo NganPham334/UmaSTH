@@ -48,10 +48,15 @@ public class StatsManager : MonoBehaviour
 		}
 	}
 		
-	// Define gain amount
-	private const int PrimaryGainAmount = 10;
-	private const int SecondaryGainAmount = 2; // const value for now
-	// TODO: GainAmount change base on Study Level
+	// Dictionary for Study Gain based on Study Level
+	private Dictionary<int, (int primary, int secondary)> levelRewards = new Dictionary<int, (int, int)>
+	{
+		{ 1, (10, 2) },
+		{ 2, (12, 3) },
+		{ 3, (18, 7) },
+		{ 4, (24, 11) },
+		{ 5, (30, 15) }
+	};
 		
 	// Primary stat and Secondary stat relationship
 	[Header("Study Gains Relationship")]
@@ -69,6 +74,14 @@ public class StatsManager : MonoBehaviour
 	public StatType IncrementStat(StatType primaryStatType)
 	{
 		if (runData == null) return primaryStatType;
+
+		// When study, only Primary Stat gain Study Weight
+		AddWeight(primaryStatType);
+
+		// Primary and Secondary Stat Gain calculation based on Study Level
+		int currentLevel = runData.GetLevel(primaryStatType);
+    	var gains = levelRewards[currentLevel];
+
 		// Find the relationship/rule
 		StatGain gainRule = StudyGains.Find(g => g.PrimaryStat == primaryStatType);
 		
@@ -76,6 +89,19 @@ public class StatsManager : MonoBehaviour
 		ApplyGain(gainRule.SecondaryStat, gainRule.SecondaryGain);
 		
 		return gainRule.SecondaryStat;
+	}
+
+	private void AddWeight(StatType type)
+	{
+		// If Study Level is maxed (5), no Weight will be added to that 
+		if (runData.GetLevel(type) >= 5) return;
+		// TODO: Check to see if maxed Stat consume Upgrade Point
+		// if yes, then the logic needs to be changed
+
+		if (type == StatType.spd) runData.spdWeight++;
+		if (type == StatType.wit) runData.witWeight++;
+		if (type == StatType.mem) runData.memWeight++;
+		if (type == StatType.luk) runData.lukWeight++;
 	}
 	
 	private void ApplyGain(StatType statType, int amount)

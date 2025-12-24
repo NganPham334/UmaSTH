@@ -25,6 +25,11 @@ public class CurrentRunData : ScriptableObject
 
     // The actual runtime data
     private Dictionary<string, bool> _runtimeFlags = new();
+
+    // Study Weight and Level
+    [Header("Study Levels & Weights")]
+    public int spdLevel = 1, witLevel = 1, memLevel = 1, lukLevel = 1;
+    public int spdWeight = 1, witWeight = 1, memWeight = 1, lukWeight = 1;
     
     // Run once on a new run
     public void InitializeRun()
@@ -37,6 +42,10 @@ public class CurrentRunData : ScriptableObject
         Mood = 4;
         
         doneREvent = false;
+
+        // Reset Levels and Weights
+        spdLevel = witLevel = memLevel = lukLevel = 1;
+        spdWeight = witWeight = memWeight = lukWeight = 1;
         
         // Reset progress
         CurrentTurn = 1;
@@ -44,8 +53,6 @@ public class CurrentRunData : ScriptableObject
         InitializeFlags();
     }
 	
-	// TODO: Transfer the Stat Storage from StatsManager.cs to CurrentRunData.cs
-	// Map the enum and the int storage
 	public int GetStatValue(StatType type)
 	{
 		switch (type)
@@ -77,6 +84,23 @@ public class CurrentRunData : ScriptableObject
 				break;
 		}
 	}
+
+    // Helper method for the Lottery logic in StatsManager
+    public int GetStatWeight(StatType type) => type switch {
+        StatType.spd => spdWeight,
+        StatType.wit => witWeight,
+        StatType.mem => memWeight,
+        StatType.luk => lukWeight,
+        _ => 0 // If [type] if not recognized, return Weight = 0
+    };
+
+    public int GetStatLevel(StatType type) => type switch {
+        StatType.spd => spdLevel,
+        StatType.wit => witLevel,
+        StatType.mem => memLevel,
+        StatType.luk => lukLevel,
+        _ => 1
+    };
 
     public void AdvanceTurn()
     {
