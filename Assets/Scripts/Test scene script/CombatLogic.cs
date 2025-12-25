@@ -10,6 +10,8 @@ public class CombatLogic : MonoBehaviour
     [SerializeField] private GameObject playerHpBar;
     [SerializeField] private GameObject testHpBar;
     [SerializeField] private Transform damagePopUpPrefab;
+    [SerializeField] private RectTransform playerHpRect, TestHpRect;
+    [SerializeField] private Transform canvasTransform;
     
     private int playerSpeed, playerWit, playerMemory, playerLuck;
     private int testSpeed, testWit, testMemory, testLuck;
@@ -56,6 +58,9 @@ public class CombatLogic : MonoBehaviour
 
     public void PlayerTakeDamage()
     {
+        float height = playerHpRect.rect.height;
+        float xPosition = -playerHpRect.rect.width;
+        float yPosition = (height * playerHpBar.GetComponent<HpBarController>().GetValue()) - (height / 2);
         if (Random.value >= (testHitChance))
         {
             Debug.Log("Test's attack missed!");
@@ -65,14 +70,19 @@ public class CombatLogic : MonoBehaviour
         {
             playerHpBar.GetComponent<HpBarController>().TakeDamage(testWit * 2);
             Debug.Log($"Test critical attacked for {testWit * 2}!");
+            SpawnDamagePopUp(testWit * 2, playerHpBar.transform.position + new Vector3(xPosition, yPosition, 0), true);
             return;
         }
         playerHpBar.GetComponent<HpBarController>().TakeDamage(testWit);
+        SpawnDamagePopUp(testWit, playerHpBar.transform.position + new Vector3(xPosition, yPosition, 0), false);
         Debug.Log($"Player takes {testWit} damage.");
     }
 
     public void TestTakeDamage()
     {
+        float height = TestHpRect.rect.height;
+        float xPosition = TestHpRect.rect.width;
+        float yPosition = (height * testHpBar.GetComponent<HpBarController>().GetValue()) - (height / 2);
         if (Random.value >= (playerHitChance))
         {
             Debug.Log("Player's attack missed!");
@@ -82,10 +92,12 @@ public class CombatLogic : MonoBehaviour
         {
             testHpBar.GetComponent<HpBarController>().TakeDamage(playerWit * 2);
             Debug.Log($"Player critical attacked for {playerWit * 2}!");
+            SpawnDamagePopUp(playerWit * 2, testHpBar.transform.position + new Vector3(xPosition, yPosition, 0), true);
             return;
         }
         testHpBar.GetComponent<HpBarController>().TakeDamage(playerWit);
         Debug.Log($"Test takes {playerWit} damage.");
+        SpawnDamagePopUp(playerWit, testHpBar.transform.position + new Vector3(xPosition, yPosition, 0), false);
     }
 
     public float GetMoodMultiplier()
@@ -102,9 +114,9 @@ public class CombatLogic : MonoBehaviour
         };
     }
 
-    public void SpawnDamagePopUp(int damageAmount, Transform spawnPosition, bool isCrit)
+    public void SpawnDamagePopUp(int damageAmount, Vector3 spawnPosition, bool isCrit)
     {
-        Transform damagePopUpTransform = Instantiate(damagePopUpPrefab, spawnPosition.position, Quaternion.identity);
+        Transform damagePopUpTransform = Instantiate(damagePopUpPrefab, spawnPosition, Quaternion.identity, canvasTransform);
         DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
         damagePopUp.Setup(damageAmount, isCrit);
     }

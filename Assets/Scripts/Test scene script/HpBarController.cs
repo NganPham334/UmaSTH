@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements.Experimental;
 //[ExecuteInEditMode]
 public class HpBarController : MonoBehaviour
 {
@@ -30,5 +31,10 @@ public class HpBarController : MonoBehaviour
         maxHp = hp;
         currentHp = maxHp;
         targetHp = currentHp;
+    }
+
+    public float GetValue()
+    {
+        return hpBarSlider.value;
     }
 }
