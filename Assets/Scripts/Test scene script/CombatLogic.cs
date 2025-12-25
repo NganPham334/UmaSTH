@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 public class CombatLogic : MonoBehaviour
 {    
@@ -12,6 +13,7 @@ public class CombatLogic : MonoBehaviour
     [SerializeField] private Transform damagePopUpPrefab;
     [SerializeField] private RectTransform playerHpRect, TestHpRect;
     [SerializeField] private Transform canvasTransform;
+    [SerializeField] private Transform playerTransform, testTransform;
     
     private int playerSpeed, playerWit, playerMemory, playerLuck;
     private int testSpeed, testWit, testMemory, testLuck;
@@ -61,6 +63,10 @@ public class CombatLogic : MonoBehaviour
         float height = playerHpRect.rect.height;
         float xPosition = -playerHpRect.rect.width;
         float yPosition = (height * playerHpBar.GetComponent<HpBarController>().GetValue()) - (height / 2);
+        testTransform.DOMoveX(testTransform.position.x - 440f, 0.2f).SetEase(Ease.OutQuad).OnComplete(
+            () => testTransform.DOMoveX(testTransform.position.x + 440f, 0.2f).SetEase(Ease.OutQuad)
+        );
+
         if (Random.value >= (testHitChance))
         {
             Debug.Log("Test's attack missed!");
@@ -76,6 +82,7 @@ public class CombatLogic : MonoBehaviour
         playerHpBar.GetComponent<HpBarController>().TakeDamage(testWit);
         SpawnDamagePopUp(testWit, playerHpBar.transform.position + new Vector3(xPosition, yPosition, 0), false);
         Debug.Log($"Player takes {testWit} damage.");
+
     }
 
     public void TestTakeDamage()
@@ -83,6 +90,9 @@ public class CombatLogic : MonoBehaviour
         float height = TestHpRect.rect.height;
         float xPosition = TestHpRect.rect.width;
         float yPosition = (height * testHpBar.GetComponent<HpBarController>().GetValue()) - (height / 2);
+        playerTransform.DOMoveX(playerTransform.position.x + 440f, 0.2f).SetEase(Ease.OutQuad).OnComplete(
+            () => playerTransform.DOMoveX(playerTransform.position.x - 440f, 0.2f).SetEase(Ease.OutQuad)
+        );
         if (Random.value >= (playerHitChance))
         {
             Debug.Log("Player's attack missed!");

@@ -9,7 +9,7 @@ public class DamagePopUp : MonoBehaviour
     private Color textColor;
     private Vector3 moveVector;
 
-    private const float DISAPPEAR_TIMER_MAX = 2f;
+    private const float DISAPPEAR_TIMER_MAX = 1f;
 
     public void Awake()
     {
