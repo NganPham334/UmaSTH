@@ -56,6 +56,6 @@ public class DamagePopUp : MonoBehaviour
             textMesh.fontSize = 40;
             textMesh.SetText('-'+damageAmount.ToString());
         }
-        textMesh.faceColor = textColor;
+        textMesh.color = textColor;
     }
 }
