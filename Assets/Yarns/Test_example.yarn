@@ -1,16 +1,25 @@
 ﻿title: Turn_1
-tags: 
+tags: 2sp scene:navia_test
 ---
-Mom: Wake up! You're going to be late for the exam! #line:0543874 
-Hero: Ugh... five more minutes? #line:0210a7e 
-<<scene navia_test>>
+// "2sp" tag sets 2-sprite mode (Blay Left, Empty Right)
 
--> Get up immediately #line:01c62e2 
-    Hero: Fine, I'm up. #line:0d53e7a 
-    Mom: Good. Breakfast is on the table. #line:04c2f55 
--> Sleep in #line:0b6c972 
-    Hero: Zzz... #line:0f815a8 
-    Mom: I said WAKE UP! #line:06f0547 
+// Set main char expression
+Blay: I wonder who is here?
 
-Mom: Now go, before you miss the bus! #line:00ed421 
+// Set side char manually (updates preservation tracker to "navia")
+<<side navia_shocked>>
+Navia: I've been waiting for hours!
+
+// PRESERVATION TEST:
+// Navia speaks again. 
+// Tracker is "navia". Speaker is "Navia". Match!
+// Result: Sprite stays "navia_shocked". It does NOT revert to default "navia".
+Navia: And you didn't even call!
+
+// Set main char reaction
+Blay: I'm so sorry!
+
+// Hide side char / return to center
+<<side none>>
+Blay: She left...
 ===

@@ -21,6 +21,8 @@ namespace VisualNovel
         
         public Image backgroundImage;
         
+        public VNSpriteController spriteController;
+        
         /*
          * vn_type:
          * studying; add another param named "study_type" with value spd / mem / wit / luk
@@ -96,7 +98,10 @@ namespace VisualNovel
             
             if (!string.IsNullOrEmpty(nodeName) && dialogueRunner.Dialogue.NodeExists(nodeName))
             {
+                string tags = dialogueRunner.Dialogue.GetHeaderValue(nodeName, "tags");
+                if (tags != null) ParseHeaderTags(tags);
                 dialogueRunner.StartDialogue(nodeName);
+
             }
             else
             {
@@ -104,7 +109,26 @@ namespace VisualNovel
                 FinishScene();
             }
         }
-        
+
+        private void ParseHeaderTags(string tags)
+        {
+            foreach (string tag in tags.Split(" "))
+            {
+                if (tag.ToLower().StartsWith("scene:"))
+                {
+                    SetScene(tag.Substring("scene:".Length));
+                }
+
+                if (tag.ToLower() == "2sp")
+                {
+                    if (spriteController != null) 
+                    {
+                        spriteController.SetModeTwo();
+                    }
+                }
+            }
+        }
+
         private void FinishScene()
         {
             if (_vnType == "determined")
