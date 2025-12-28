@@ -10,6 +10,7 @@ public class HpBarController : MonoBehaviour
     private float targetHp;
     [SerializeField] private Gradient hpGradient;
     [SerializeField] private Image fill;
+    [SerializeField] private GameObject endScreen;
     void Update()
     {
         if (currentHp != targetHp)
@@ -24,6 +25,11 @@ public class HpBarController : MonoBehaviour
     {
         targetHp = currentHp - damage;
         Debug.Log($"HP reduced by {damage}. Current HP: {targetHp}.");
+        if (targetHp <= 0)
+        {
+            targetHp = 0;
+            endScreen.GetComponent<EndTestScreen>().ShowEndTestScreen();
+        }
     }
 
     public void SetMaxHp(float hp)

@@ -50,8 +50,8 @@ public class CombatLogic : MonoBehaviour
         testHitChance = (float)testLuck/playerLuck;
         testCritChance = (float)testLuck/1000;
 
-        playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 15);
-        testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 15);
+        playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 7);
+        testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 7);
 
         Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}, testHitChance: {testHitChance},testCritChance: {testCritChance}");
         Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}, playerHitChance: {playerHitChance},playerCritChance: {playerCritChance}");
@@ -82,7 +82,6 @@ public class CombatLogic : MonoBehaviour
         playerHpBar.GetComponent<HpBarController>().TakeDamage(testWit);
         SpawnDamagePopUp(testWit, playerHpBar.transform.position + new Vector3(xPosition, yPosition, 0), false);
         Debug.Log($"Player takes {testWit} damage.");
-
     }
 
     public void TestTakeDamage()
