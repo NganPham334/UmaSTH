@@ -12,7 +12,7 @@ Navia: I've been waiting for hours!
 // Tracker is "navia". Speaker is "Navia". Match!
 // Result: Sprite stays "navia_shocked". It does NOT revert to default "navia".
 Navia: And you didn't even call!
-
+<<scene keqing_test>>
 // Set main char reaction
 Blay: I'm so sorry!
 

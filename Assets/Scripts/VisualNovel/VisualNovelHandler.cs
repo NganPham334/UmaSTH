@@ -1,14 +1,15 @@
 using System;
+using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using Yarn.Unity;
 using System.Linq;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace VisualNovel
 {
-
     public class VisualNovelHandler : MonoBehaviour
     {
         private static VisualNovelHandler Instance { get; set; }
@@ -19,9 +20,21 @@ namespace VisualNovel
         [Header("Game Data")] 
         public CurrentRunData currentRunData;
         
+        [FormerlySerializedAs("_backgroundImage")] [Header("BG Image Panel object")]
         public Image backgroundImage;
         
+        [Header("Transition Timing")]
+        [Range(0.1f, 2.0f)]
+        public float fadeSpeed = 0.5f;   // How fast the alpha changes (Shorter = snappier)
+
+        [Range(0.0f, 2.0f)] 
+        public float blackHold = 0.5f;
+        
         public VNSpriteController spriteController;
+        
+        [Tooltip("Fader panel")]
+        public CanvasGroup blackScreenOverlay; 
+        private Coroutine _activeTransition;
         
         /*
          * vn_type:
@@ -116,7 +129,7 @@ namespace VisualNovel
             {
                 if (tag.ToLower().StartsWith("scene:"))
                 {
-                    SetScene(tag.Substring("scene:".Length));
+                    SetSceneImmediate(tag.Substring("scene:".Length));
                 }
 
                 if (tag.ToLower() == "2sp")
@@ -212,23 +225,118 @@ namespace VisualNovel
         
         // USAGE: <<scene "navia_test">> 
         // Loads from: Assets/Resources/Backgrounds/navia_test.png (jpg should work too i think)
-        [YarnCommand("scene")]
-        public static void SetScene(string spriteName)
+        private void SetSceneImmediate(string spriteName)
         {
-            if (Instance == null || Instance.backgroundImage == null) return;
-            
+            if (backgroundImage == null) return;
+
             Sprite newBg = Resources.Load<Sprite>($"Backgrounds/{spriteName}");
+            if (newBg == null) newBg = Resources.Load<Sprite>(spriteName);
 
             if (newBg != null)
             {
-                Instance.backgroundImage.sprite = newBg;
-                Instance.backgroundImage.preserveAspect = true; 
-                Instance.backgroundImage.color = new Color(1f, 1f, 1f, 1f);
+                backgroundImage.sprite = newBg;
+                backgroundImage.preserveAspect = true;
+                backgroundImage.color = new Color(255, 255, 255, 255);
+            }
+        }
+
+        [YarnCommand("scene")]
+        public static void SetScene(string spriteName)
+        {
+            if (Instance == null) return;
+            
+            Sprite newBg = Resources.Load<Sprite>($"Backgrounds/{spriteName}");
+            if (newBg == null) newBg = Resources.Load<Sprite>(spriteName); 
+
+            if (newBg != null)
+            {
+                if (Instance._activeTransition != null) Instance.StopCoroutine(Instance._activeTransition);
+                Instance._activeTransition = Instance.StartCoroutine(Instance.PlaySceneTransition(newBg));
             }
             else
             {
-                Debug.LogWarning($"[VNHandler] Could not find 'Resources/Backgrounds/{spriteName}'");
+                Debug.LogWarning($"[VNHandler] Could not find background '{spriteName}'");
             }
+        }
+
+        private IEnumerator PlaySceneTransition(Sprite newBg)
+        {
+            if (blackScreenOverlay == null)
+            {
+                if (backgroundImage != null)
+                {
+                    backgroundImage.color = new Color(1f, 1f, 1f, 1f);
+                    backgroundImage.sprite = newBg;
+                    backgroundImage.preserveAspect = true; 
+                }
+                yield break;
+            }
+            
+            ForceStretchToScreen(blackScreenOverlay.GetComponent<RectTransform>());
+
+            // so we can change the speeds relative to each other if needed
+            float fadeOutTime = fadeSpeed;
+            float fadeInTime = fadeSpeed; 
+            
+            blackScreenOverlay.blocksRaycasts = true; 
+            yield return StartCoroutine(FadeRoutine(blackScreenOverlay, 0f, 1f, fadeOutTime, true));
+            
+            if (backgroundImage != null)
+            {
+                backgroundImage.sprite = newBg;
+                backgroundImage.color = new Color(1f, 1f, 1f, 1f);
+                backgroundImage.preserveAspect = true; 
+            }
+            yield return new WaitForSeconds(blackHold);
+            
+            yield return StartCoroutine(FadeRoutine(blackScreenOverlay, 1f, 0f, fadeInTime, false));
+
+            _activeTransition = null;
+        }
+        
+        private IEnumerator FadeRoutine(CanvasGroup cg, float startAlpha, float endAlpha, float duration, bool isEaseIn)
+        {
+            float elapsed = 0f;
+            bool inputReleased = false;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                
+                float easedT = 0f;
+                if (isEaseIn)
+                {
+                    easedT = (t == 0f) ? 0f : Mathf.Pow(2f, 10f * t - 10f);
+                }
+                else
+                {
+                    easedT = (t == 1f) ? 1f : 1f - Mathf.Pow(2f, -10f * t);
+                }
+
+                cg.alpha = Mathf.Lerp(startAlpha, endAlpha, easedT);
+                
+                if (endAlpha == 0f && !inputReleased && t >= 0.7f)
+                {
+                    cg.blocksRaycasts = false;
+                    inputReleased = true;
+                }
+
+                yield return null;
+            }
+            cg.alpha = endAlpha;
+            if (endAlpha == 0f) cg.blocksRaycasts = false;
+        }
+        
+        private void ForceStretchToScreen(RectTransform rt)
+        {
+            if (rt == null) return;
+            rt.anchorMin = Vector2.zero; // Bottom Left
+            rt.anchorMax = Vector2.one;  // Top Right
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.offsetMin = Vector2.zero; // No margins
+            rt.offsetMax = Vector2.zero;
+            rt.localScale = Vector3.one;
         }
     }
 }
