@@ -1,9 +1,6 @@
 ﻿title: Turn_1
-tags: 2sp scene:navia_test
+tags: scene:navia_test
 ---
-// "2sp" tag sets 2-sprite mode (Blay Left, Empty Right)
-
-// Set main char expression
 Blay: I wonder who is here?
 
 // Set side char manually (updates preservation tracker to "navia")
