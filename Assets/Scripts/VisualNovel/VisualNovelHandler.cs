@@ -20,12 +20,13 @@ namespace VisualNovel
         [Header("Game Data")] 
         public CurrentRunData currentRunData;
         
-        [FormerlySerializedAs("_backgroundImage")] [Header("BG Image Panel object")]
+        [FormerlySerializedAs("_backgroundImage")] 
+        [Header("BG Image Panel object")]
         public Image backgroundImage;
         
         [Header("Transition Timing")]
         [Range(0.1f, 2.0f)]
-        public float fadeSpeed = 0.5f;   // How fast the alpha changes (Shorter = snappier)
+        public float fadeSpeed = 0.5f;
 
         [Range(0.0f, 2.0f)] 
         public float blackHold = 0.5f;
@@ -45,6 +46,7 @@ namespace VisualNovel
          * post_test; add another parameter "post_test_name" with the dialogue node's name as the value
          * determined
          * random
+         * intro
          */
         
         private string _vnType;
@@ -107,6 +109,10 @@ namespace VisualNovel
                         .Where(node => node.StartsWith("Random_")).ToList();
                     nodeName = events[Random.Range(0, events.Count())]; // for integers the max param is exclusive
                     break;
+                
+                case "intro":
+                    nodeName = "Introduction";
+                    break;
             }
             
             if (!string.IsNullOrEmpty(nodeName) && dialogueRunner.Dialogue.NodeExists(nodeName))
@@ -116,9 +122,14 @@ namespace VisualNovel
                 dialogueRunner.StartDialogue(nodeName);
 
             }
-            else
+            else if (!string.IsNullOrEmpty(nodeName))
             {
                 Debug.LogError($"Yarn Node '{nodeName}' of scene {_vnType} not found! Closing scene.");
+                FinishScene();
+            }
+            else
+            {
+                Debug.LogError("VN Type not found /!\\ this is bad, closing scene...");
                 FinishScene();
             }
         }
@@ -144,7 +155,7 @@ namespace VisualNovel
 
         private void FinishScene()
         {
-            if (_vnType == "determined")
+            if (_vnType == "determined" || _vnType == "intro")
             {
                 GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
                 return; // god knows why this is needed

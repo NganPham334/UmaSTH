@@ -35,7 +35,7 @@ public class PreTestScene : MonoBehaviour
 
         if (gsm != null)
         {
-            runData = gsm.CurrentRunData;
+            runData = gsm.CurrentRun;
 
             if (gsm.TryGetStateParameter("ExamData", out examData))
                 hasRealExam = true;
