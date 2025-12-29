@@ -190,9 +190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Great
-
-'
+  m_text: Umazing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -219,8 +217,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -626,7 +624,7 @@ GameObject:
   - component: {fileID: 9169301883128943202}
   - component: {fileID: 7110874101388306349}
   m_Layer: 5
-  m_Name: Mood display
+  m_Name: Mood box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -793,9 +791,9 @@ MonoBehaviour:
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 9830
+    ctime0: 6554
     ctime1: 26214
-    ctime2: 42598
+    ctime2: 45875
     ctime3: 65535
     ctime4: 0
     ctime5: 0
@@ -814,6 +812,7 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   fill: {fileID: 8028904726713436216}
+  moodBox: {fileID: 7110874101388306349}
   moodText: {fileID: 3460894915028386676}
 --- !u!1 &8718790539131040138
 GameObject:

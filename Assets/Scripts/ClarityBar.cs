@@ -9,7 +9,7 @@ public class ClarityBar : MonoBehaviour
     private float currentClarity;
     private float targetClarity;
     [SerializeField] private Gradient clarityGradient;
-    [SerializeField] private Image fill;
+    [SerializeField] private Image fill, moodBox;
     [SerializeField] private TextMeshProUGUI moodText;
 
     void Start()
@@ -17,6 +17,8 @@ public class ClarityBar : MonoBehaviour
         currentClarity = maxClarity;
         targetClarity = currentClarity;
         fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
+        SetMoodText("Depressed");
+        UpdateClarity(-90f);
     }
 
     public void UpdateClarity(float change)
@@ -38,5 +40,28 @@ public class ClarityBar : MonoBehaviour
     public void SetMoodText(string mood)
     {
         moodText.SetText(mood);
+        switch (mood)
+        {
+            case "Depressed":
+                moodBox.color = Color.purple;
+                moodText.fontSize = 20;
+                break;
+            case "Bad":
+                moodBox.color = Color.blue;
+                moodText.fontSize = 30;
+                break;
+            case "Normal":
+                moodBox.color = Color.yellow;
+                moodText.fontSize = 30;
+                break;
+            case "Good":
+                moodBox.color = Color.orange;
+                moodText.fontSize = 30;
+                break;
+            case "Umazing":
+                moodBox.color = Color.hotPink;
+                moodText.fontSize = 30;
+                break;
+        }
     }
 }
