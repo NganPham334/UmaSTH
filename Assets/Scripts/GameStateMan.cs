@@ -38,6 +38,8 @@ public class GameStateMan : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            _currentState = GameState.Launcher;
+            _stateParameters = new Dictionary<string, object>();
         }
         else
         {
