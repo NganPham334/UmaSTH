@@ -157,12 +157,14 @@ MonoBehaviour:
     SuccessFlagToSet: 
     nodeNamePass: 
     nodeNameFail: 
-    Speed: 0
-    Wit: 0
-    Memory: 0
-    Luck: 0
+    Speed: 2
+    Wit: 2
+    Memory: 2
+    Luck: 2
   playerHpBar: {fileID: 1265644296}
   testHpBar: {fileID: 200446480}
+  playerActionBar: {fileID: 230337891}
+  testActionBar: {fileID: 881967719}
   damagePopUpPrefab: {fileID: 8827678176042793597, guid: 289855a53949fbe4b8665e6ea659ff30, type: 3}
   playerHpRect: {fileID: 1265644297}
   TestHpRect: {fileID: 200446481}
@@ -1053,7 +1055,7 @@ GameObject:
   - component: {fileID: 553195482}
   - component: {fileID: 553195481}
   m_Layer: 5
-  m_Name: NextButton
+  m_Name: PassNextButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1122,7 +1124,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 553195482}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1255338}
+        m_TargetAssemblyTypeName: CombatLogic, Assembly-CSharp
+        m_MethodName: PassNextScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &553195482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1887,7 +1901,7 @@ GameObject:
   - component: {fileID: 1223572759}
   - component: {fileID: 1223572758}
   m_Layer: 5
-  m_Name: NextButton
+  m_Name: FailNextButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1956,7 +1970,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1223572759}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1255338}
+        m_TargetAssemblyTypeName: CombatLogic, Assembly-CSharp
+        m_MethodName: FailNextScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1223572759
 MonoBehaviour:
   m_ObjectHideFlags: 0

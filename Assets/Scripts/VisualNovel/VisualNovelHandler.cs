@@ -43,7 +43,7 @@ namespace VisualNovel
          * plus suffix pass / fail;  Exmaple: spd_fail, mem_pass
          * pastime
          * rest
-         * post_test; add another parameter "post_test_name" with the dialogue node's name as the value
+         * post_test; add another parameter "post_test_node" with the dialogue node's name as the value
          * determined
          * random
          * intro
@@ -113,6 +113,12 @@ namespace VisualNovel
                 case "intro":
                     nodeName = "Introduction";
                     break;
+                
+                default:
+                    Debug.Log(_vnType);
+                    Debug.LogError("VN Type not found /!\\ this is bad, closing scene...");
+                    FinishScene();
+                    return;
             }
             
             if (!string.IsNullOrEmpty(nodeName) && dialogueRunner.Dialogue.NodeExists(nodeName))
@@ -122,14 +128,9 @@ namespace VisualNovel
                 dialogueRunner.StartDialogue(nodeName);
 
             }
-            else if (!string.IsNullOrEmpty(nodeName))
+            else if (string.IsNullOrEmpty(nodeName))
             {
-                Debug.LogError($"Yarn Node '{nodeName}' of scene {_vnType} not found! Closing scene.");
-                FinishScene();
-            }
-            else
-            {
-                Debug.LogError("VN Type not found /!\\ this is bad, closing scene...");
+                Debug.LogError($"nodeName not present! Closing scene.");
                 FinishScene();
             }
         }

@@ -11,6 +11,7 @@ public class HpBarController : MonoBehaviour
     [SerializeField] private Gradient hpGradient;
     [SerializeField] private Image fill;
     [SerializeField] private GameObject endScreen;
+    private static bool ended =  false;
     void Update()
     {
         if (currentHp != targetHp)
@@ -25,9 +26,11 @@ public class HpBarController : MonoBehaviour
     {
         targetHp = currentHp - damage;
         Debug.Log($"HP reduced by {damage}. Current HP: {targetHp}.");
-        if (targetHp <= 0)
+        if (targetHp <= 0 && !ended)
         {
             targetHp = 0;
+            ended = true;
+            Debug.Log("Ended");
             endScreen.GetComponent<EndTestScreen>().ShowEndTestScreen();
         }
     }

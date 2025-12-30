@@ -49,7 +49,7 @@ MonoBehaviour:
     SuccessFlagToSet: 
     nodeNamePass: 
     nodeNameFail: 
-    Speed: 100
-    Wit: 100
-    Memory: 100
-    Luck: 100
+    Speed: 80
+    Wit: 72
+    Memory: 70
+    Luck: 1

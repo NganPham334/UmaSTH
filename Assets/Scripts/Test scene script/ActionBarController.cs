@@ -3,8 +3,6 @@ using UnityEngine.UI;
 //[ExecuteInEditMode]
 
 public class ActionBarController : MonoBehaviour
-
-
 {
     [SerializeField] private Slider actionBarSlider;
     [SerializeField] private float max= 100;
@@ -21,7 +19,7 @@ public class ActionBarController : MonoBehaviour
     {
         if (!isRecharging)
         {
-            current = Mathf.MoveTowards(current, max, speed/20 * Time.deltaTime);
+            current = Mathf.MoveTowards(current, max, speed/2 * Time.deltaTime);
         }
         if (isRecharging)
         {
@@ -41,5 +39,10 @@ public class ActionBarController : MonoBehaviour
         }
         actionBarSlider.value = current/max;
 
+    }
+    
+    public void setSpeed(float value)
+    {
+        speed = value;
     }
 }
