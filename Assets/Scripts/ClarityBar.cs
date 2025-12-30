@@ -18,8 +18,7 @@ public class ClarityBar : MonoBehaviour
         currentClarity = maxClarity;
         targetClarity = currentClarity;
         fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
-        SetMoodText("Depressed");
-        UpdateClarity(-90f);
+
     }
 
     public void UpdateClarity(float change)

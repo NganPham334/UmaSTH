@@ -33,7 +33,7 @@ public class CurrentRunData : ScriptableObject
         Wit = 70;
         Memory = 70;
         Luck = 50;
-        Clarity = 50;
+        Clarity = 100;
         Mood = 4;
         
         doneREvent = false;
@@ -116,6 +116,7 @@ public class CurrentRunData : ScriptableObject
             Debug.LogWarning($"StoryFlag '{flagName}' does not exist. Cannot set.");
         }
     }
+    
 
     public string ChangeMood(int change)
     {

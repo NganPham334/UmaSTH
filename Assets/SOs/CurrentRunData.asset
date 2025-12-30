@@ -16,10 +16,12 @@ MonoBehaviour:
   Wit: 70
   Memory: 70
   Luck: 50
-  Clarity: 50
+  Clarity: 100
   CurrentTurn: 1
   TotalTurns: 0
   CurrentDate: Junior Year, Week 1
+  Mood: 0
+  doneREvent: 0
   DefaultFlags:
   - Name: club_ucc
     IsSet: 0
