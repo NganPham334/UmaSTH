@@ -1,5 +1,5 @@
 ﻿title:OptionalTest_fail_year2
-tags:
+tags: scene:navia_test
 ---
 You failed the test.  #line:04e1b41 
 <<randMod 15>>

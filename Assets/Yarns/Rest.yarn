@@ -1,5 +1,5 @@
 ﻿title: Rest
-tags: 
+tags: scene:navia_test
 ---
 <<set $roll = random_range(0, 2)>>
 

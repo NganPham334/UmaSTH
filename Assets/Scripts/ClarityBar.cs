@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;   
+using UnityEngine.UI;
+using Yarn.Unity;
 
 public class ClarityBar : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class ClarityBar : MonoBehaviour
         clarityBarSlider.value = currentClarity / maxClarity;
         fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
     }
+ 
 
     public void SetMoodText(string mood)
     {
