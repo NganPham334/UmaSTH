@@ -17,7 +17,13 @@ public class StudyProgressionHandler : MonoBehaviour
     };
 
     [Header("Study Gains Relationship")]
-    public List<StatGain> StudyGains = new List<StatGain>();
+	public List<StatGain> StudyGains = new List<StatGain>()
+	{
+		new StatGain {PrimaryStat = StatType.spd, SecondaryStat = StatType.wit},
+		new StatGain {PrimaryStat = StatType.mem, SecondaryStat = StatType.spd},
+		new StatGain {PrimaryStat = StatType.wit, SecondaryStat = StatType.luk},
+		new StatGain {PrimaryStat = StatType.luk, SecondaryStat = StatType.mem}
+	};
 
     public (int p, int s) GetGainsForLevel(int level)
     {
@@ -105,6 +111,8 @@ public class StudyProgressionHandler : MonoBehaviour
 
     private void AddWeight(StatType type)
     {
+        // If Study Level is maxed (5), no Weight will be added to that 
+        if (runData.GetLevel(type) >= 5) return;
         switch (type)
         {
             case StatType.spd: runData.spdWeight++; break;
