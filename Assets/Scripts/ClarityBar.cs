@@ -6,27 +6,17 @@ using Yarn.Unity;
 public class ClarityBar : MonoBehaviour
 {
     [SerializeField] private Slider clarityBarSlider;
-    private readonly float maxClarity = 100f;
-    private float currentClarity;
-    private float targetClarity;
+    private static readonly float maxClarity = 100f;
+    private static float currentClarity = maxClarity;
+    private static float targetClarity = maxClarity;
+    private static string currentMood = "Normal", previousMood = "Normal";
     [SerializeField] private Gradient clarityGradient;
     [SerializeField] private Image fill, moodBox;
     [SerializeField] private TextMeshProUGUI moodText;
-
     void Start()
     {
-        currentClarity = maxClarity;
-        targetClarity = currentClarity;
-        fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
-
+        SetMoodText(currentMood);
     }
-
-    public void UpdateClarity(float change)
-    {
-        targetClarity = Mathf.Clamp(currentClarity + change, 0, maxClarity);
-    }
-    
-
     void Update()
     {
         if (currentClarity != targetClarity)
@@ -36,8 +26,21 @@ public class ClarityBar : MonoBehaviour
         clarityBarSlider.value = currentClarity / maxClarity;
         fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
     }
- 
+    public void UpdateClarity(float change)
+    {
+        targetClarity = Mathf.Clamp(currentClarity + change, 0, maxClarity);
+    }
 
+    public void UpdateMood(string mood)
+    {
+        currentMood = mood;
+        if (currentMood != previousMood)
+        {
+            SetMoodText(currentMood);
+            previousMood = currentMood;
+        }
+    }
+    
     public void SetMoodText(string mood)
     {
         moodText.SetText(mood);
@@ -52,7 +55,7 @@ public class ClarityBar : MonoBehaviour
                 moodText.fontSize = 30;
                 break;
             case "Normal":
-                moodBox.color = Color.yellow;
+                moodBox.color = Color.yellowGreen;
                 moodText.fontSize = 30;
                 break;
             case "Good":
