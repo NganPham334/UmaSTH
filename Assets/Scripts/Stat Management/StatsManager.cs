@@ -8,9 +8,8 @@ public class StatsManager : MonoBehaviour
 	
 	[Header("Reference")]
 	public CurrentRunData runData;
-    public StudyProgressionHandler progressionHandler;
-    public StatsProcessor statProcessor;
-	public StatType statType;
+	public StudyProgressionHandler progressionHandler;
+    public StatsProcessor statsProcessor;
 
 	public void Awake()
 	{
@@ -19,6 +18,10 @@ public class StatsManager : MonoBehaviour
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
+
+			// Justin Case, not actually needed
+			if (progressionHandler == null) progressionHandler = GetComponent<StudyProgressionHandler>();
+        	if (statsProcessor == null) statsProcessor = GetComponent<StatsProcessor>();
 		}
 		else Destroy(gameObject);
 	}
@@ -28,7 +31,7 @@ public class StatsManager : MonoBehaviour
 		if (runData == null) return primaryStatType;
 
 		// 1. Check for Failure (Clarity System)
-        bool success = statProcessor.RollForSuccess(runData.Clarity);
+        bool success = statsProcessor.RollForSuccess(runData.Clarity);
         
         if (!success)
         {
@@ -41,7 +44,7 @@ public class StatsManager : MonoBehaviour
         var baseGains = progressionHandler.GetGainsForLevel(currentLevel);
 
         // 3. Bonus Gain (Mood System)
-        var (finalPrimary, finalSecondary) = statProcessor.CalculateFinalGain(baseGains.p, baseGains.s, runData.Mood);
+        var (finalPrimary, finalSecondary) = statsProcessor.CalculateFinalGain(baseGains.p, baseGains.s, runData.Mood);
 
         // 4. Find Relationship and Apply
         StatGain relationship = progressionHandler.StudyGains.Find(g => g.PrimaryStat == primaryStatType);
