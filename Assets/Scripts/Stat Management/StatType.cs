@@ -6,7 +6,7 @@ public enum StatType
 	luk // NOTE: Value 0, 1, 2, 3 respectively
 }
 
-[Serializable]
+[System.Serializable]
 public struct StatGain
 {
 	public StatType PrimaryStat; // Chosen stat

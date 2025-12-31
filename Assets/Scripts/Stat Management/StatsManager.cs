@@ -6,8 +6,11 @@ public class StatsManager : MonoBehaviour
 {
 	public static StatsManager Instance { get; private set; }
 	
-	[Header("Current Run Data")]
-	public CurrentRunData runData; // Reference to data storage ScriptableObject
+	[Header("Reference")]
+	public CurrentRunData runData;
+    public StudyProgressionHandler progressionHandler;
+    public StatsProcessor statProcessor;
+	public StatType StatType;
 
 	public void Awake()
 	{
@@ -17,37 +20,44 @@ public class StatsManager : MonoBehaviour
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
-		else
-		{
-			Destroy(gameObject);
-		}
+		else Destroy(gameObject);
 	}
-	
-	// REMOVED: Dictionary and Study Gain relationship (moved to StudyProgressionHandler.cs)
 
-	public StatType IncrementStat(StatType primaryStatType)
+	public StatType ExecuteStudyAction(StatType primaryStatType)
 	{
-		if (runData == null) return primaryStatType;
+		if (runData == null) return;
 
-		// When study, only Primary Stat gain Study Weight
-		AddWeight(primaryStatType);
+		// 1. Check for Failure (Clarity System)
+        bool success = statProcessor.RollForSuccess(runData.Clarity);
+        
+        if (!success)
+        {
+            HandleStudyFailure(primaryStatType);
+            return;
+        }
 
-		// Primary and Secondary Stat Gain calculation based on Study Level
-		int currentLevel = runData.GetLevel(primaryStatType);
-    	var gains = levelRewards[currentLevel];
+        // 2. Get Base Gains
+        int currentLevel = progressionHandler.GetLevel(primaryStatType);
+        var baseGains = progressionHandler.GetGainsForLevel(currentLevel);
 
-		// Find the relationship/rule
-		StatGain gainRule = StudyGains.Find(g => g.PrimaryStat == primaryStatType);
-		
-		ApplyStatGain(gainRule.PrimaryStat, gainRule.PrimaryGain);
-		ApplyStatGain(gainRule.SecondaryStat, gainRule.SecondaryGain);
-		
-		return gainRule.SecondaryStat;
+        // 3. Bonus Gain (Mood System)
+        int finalPrimary = statProcessor.CalculateFinalGain(baseGains.p, runData.Mood);
+        int finalSecondary = statProcessor.CalculateFinalGain(baseGains.s, runData.Mood);
+
+        // 4. Find Relationship and Apply
+        StatGain relationship = progressionHandler.StudyGains.Find(g => g.PrimaryStat == primaryStatType);
+        
+        ApplyStatGain(relationship.PrimaryStat, finalPrimary);
+        ApplyStatGain(relationship.SecondaryStat, finalSecondary);
+
+        // 5. Update Weight for next time
+        progressionHandler.AddWeight(primaryStatType);
+
+        // 6. Transition to VN
+        VisualNovelTransition(primaryStatType, true);
 	}
-
-	// REMOVED: AddWeight method (moved to StudyProgressionHandler)
 	
-	private void ApplyStatGain(StatType statType, int amount)
+	private void ApplyStatGain(StatType type, int amount)
 	{
 		int currentValue = runData.GetStatValue(statType);
 		const int MaxValue = 1000;
@@ -55,9 +65,27 @@ public class StatsManager : MonoBehaviour
 		currentValue += amount;
 		currentValue = Mathf.Min(currentValue, MaxValue);
 		
-		runData.SetStatValue(statType, currentValue);
+		runData.SetStatValue(type, currentValue);
 	}
+
+	private void HandleStudyFailure(StatType type)
+    {
+        Debug.Log($"Study Failed for {type}!");
+        VisualNovelTransition(type, false);
+    }
 	
+	private void VisualNovelTransition(StatType type, bool passed)
+	// Created purely for convenience, I'm lazy to type out the whole thing
+    {
+        string suffix = passed ? "_pass" : "_fail";
+        var vnParams = new Dictionary<string, object>
+        {
+            { "vn_type", "studying" },
+            { "study_type", $"{type}{suffix}" }
+        };
+        GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, vnParams);
+    }
+
 	// Getter function for StudyScreenController
 	public int GetStatValue(StatType type)
 	{

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class StudyProgressionHandler : MonoBehaviour
 {
     public CurrentRunData runData;
+    public StatType StatType;
 
     // The Reward Table (Level 1: 10/2, Level 2: 14/4, etc.)
     private Dictionary<int, (int primary, int secondary)> levelRewards = new Dictionary<int, (int, int)>
