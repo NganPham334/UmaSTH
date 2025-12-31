@@ -6,13 +6,18 @@ using Yarn.Unity;
 public class ClarityBar : MonoBehaviour
 {
     [SerializeField] private Slider clarityBarSlider;
-    private static readonly float maxClarity = 100f;
+    private static float maxClarity = 100f;
     private static float currentClarity = maxClarity;
     private static float targetClarity = maxClarity;
     private static string currentMood = "Normal", previousMood = "Normal";
+    public static ClarityBar instance;
     [SerializeField] private Gradient clarityGradient;
     [SerializeField] private Image fill, moodBox;
     [SerializeField] private TextMeshProUGUI moodText;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         SetMoodText(currentMood);
@@ -26,17 +31,17 @@ public class ClarityBar : MonoBehaviour
         clarityBarSlider.value = currentClarity / maxClarity;
         fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
     }
-    public void UpdateClarity(float change)
+    public static void UpdateClarity(float change)
     {
         targetClarity = Mathf.Clamp(currentClarity + change, 0, maxClarity);
     }
 
-    public void UpdateMood(string mood)
+    public static void UpdateMood(string mood)
     {
         currentMood = mood;
         if (currentMood != previousMood)
         {
-            SetMoodText(currentMood);
+            instance.SetMoodText(currentMood);
             previousMood = currentMood;
         }
     }
