@@ -30,6 +30,9 @@ public class CurrentRunData : ScriptableObject
     [Header("Study Levels & Weights")]
     public int spdLevel = 1, witLevel = 1, memLevel = 1, lukLevel = 1;
     public int spdWeight = 1, witWeight = 1, memWeight = 1, lukWeight = 1;
+
+    [Header("Upgrade Points")]
+    public int baseUpgradePoints;
     
     // Run once on a new run
     public void InitializeRun()

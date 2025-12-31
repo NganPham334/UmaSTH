@@ -39,21 +39,35 @@ public class StudyProgressionHandler : MonoBehaviour
         AddWeight(type);
     }
 
-    public List<string> TriggerUpgradeEvent(int points)
+    public List<StatType> TriggerUpgradeEvent(int points)
     {
-        List<string> results = new List<string>();
+        List<StatType> results = new List<StatType>();
 
         for (int i = 0; i < points; i++)
         {
+            Debug.Log($"Starting Upgrade Event with {points} points!");
+            // 1. So xo kien thiet for Stat level up
             StatType winner = RollLottery();
             
             // If winner is -1, all stats are maxed or weights are 0
             if (winner == (StatType)(-1)) break;
 
+            // 2. Increment level in CurrentRunData
             LevelUp(winner);
-            results.Add(winner.ToString().ToUpper());
+            Debug.Log($"Point {i+1}: {winner} leveled up!");
+
+            // 3. Add winners (upgraded stat) to list
+            results.Add(winner);
+
+            // TODO
+            // 4. Call Pop-up UI
+            //whateverUIManager.Instance.UpgradePopUp(winner);
+            // Something like that
+
+            Debug.Log($"Upgrade Event: {winner} is now level {runData.GetStatLevel(winner)}");
         }
 
+        // 5. Reset all Weight to 1 (to 0 if maxed) in preparation for next Upgrade Event
         ResetWeights();
         return results;
     }
