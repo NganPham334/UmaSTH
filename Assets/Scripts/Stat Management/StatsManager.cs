@@ -10,7 +10,7 @@ public class StatsManager : MonoBehaviour
 	public CurrentRunData runData;
     public StudyProgressionHandler progressionHandler;
     public StatsProcessor statProcessor;
-	public StatType StatType;
+	public StatType statType;
 
 	public void Awake()
 	{
@@ -25,7 +25,7 @@ public class StatsManager : MonoBehaviour
 
 	public StatType ExecuteStudyAction(StatType primaryStatType)
 	{
-		if (runData == null) return;
+		if (runData == null) return primaryStatType;
 
 		// 1. Check for Failure (Clarity System)
         bool success = statProcessor.RollForSuccess(runData.Clarity);
@@ -33,16 +33,15 @@ public class StatsManager : MonoBehaviour
         if (!success)
         {
             HandleStudyFailure(primaryStatType);
-            return;
+            return primaryStatType;
         }
 
         // 2. Get Base Gains
-        int currentLevel = progressionHandler.GetLevel(primaryStatType);
+        int currentLevel = runData.GetStatLevel(primaryStatType);
         var baseGains = progressionHandler.GetGainsForLevel(currentLevel);
 
         // 3. Bonus Gain (Mood System)
-        int finalPrimary = statProcessor.CalculateFinalGain(baseGains.p, runData.Mood);
-        int finalSecondary = statProcessor.CalculateFinalGain(baseGains.s, runData.Mood);
+        var (finalPrimary, finalSecondary) = statProcessor.CalculateFinalGain(baseGains.p, baseGains.s, runData.Mood);
 
         // 4. Find Relationship and Apply
         StatGain relationship = progressionHandler.StudyGains.Find(g => g.PrimaryStat == primaryStatType);
@@ -51,15 +50,18 @@ public class StatsManager : MonoBehaviour
         ApplyStatGain(relationship.SecondaryStat, finalSecondary);
 
         // 5. Update Weight for next time
-        progressionHandler.AddWeight(primaryStatType);
+        progressionHandler.ProcessStudyWeight(primaryStatType);
 
         // 6. Transition to VN
         VisualNovelTransition(primaryStatType, true);
+
+		// 7. Display
+		return relationship.SecondaryStat;
 	}
 	
 	private void ApplyStatGain(StatType type, int amount)
 	{
-		int currentValue = runData.GetStatValue(statType);
+		int currentValue = runData.GetStatValue(type);
 		const int MaxValue = 1000;
 		
 		currentValue += amount;

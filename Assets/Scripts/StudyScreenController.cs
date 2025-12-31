@@ -16,7 +16,7 @@ public class StudyScreenController : MonoBehaviour
 		if (StatsManager.Instance != null)
 		{
 			// Now take the StatType of Secondary Stat
-			StatType secondaryStat = StatsManager.Instance.IncrementStat(primaryStat);
+			StatType secondaryStat = StatsManager.Instance.ExecuteStudyAction(primaryStat);
 			UpdateStatDisplay(primaryStat); // Update text on screen for Primary Stat
 			UpdateStatDisplay(secondaryStat); // Update text on screen for Secondary Stat
 

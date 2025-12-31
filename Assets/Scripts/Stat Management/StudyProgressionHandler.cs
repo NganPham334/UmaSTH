@@ -33,14 +33,11 @@ public class StudyProgressionHandler : MonoBehaviour
         return (10, 2); // Fallback
     }
 
-    // This logic must be inside a method
     public void ProcessStudyWeight(StatType type)
     {
-        // Only add weight if the stat hasn't hit max level (5)
-        if (runData.GetStatLevel(type) < 5)
-        {
-            AddWeight(type);
-        }
+        // If Study Level is maxed (5), no Weight will be added to that 
+        if (runData.GetStatLevel(type) >= 5) return;
+        AddWeight(type);
     }
 
     public List<string> TriggerUpgradeEvent(int points)
@@ -112,8 +109,6 @@ public class StudyProgressionHandler : MonoBehaviour
 
     private void AddWeight(StatType type)
     {
-        // If Study Level is maxed (5), no Weight will be added to that 
-        if (runData.GetLevel(type) >= 5) return;
         switch (type)
         {
             case StatType.spd: runData.spdWeight++; break;

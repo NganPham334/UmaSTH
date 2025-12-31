@@ -18,7 +18,7 @@ public class StatsProcessor : MonoBehaviour
     }
 
     // Mood System
-    public (int pGain, int sGain) ApplyMoodModifiers(int baseP, int baseS, int moodLevel)
+    public (int pGain, int sGain) CalculateFinalGain(int baseP, int baseS, int moodLevel)
     {
         float pBonus = 0f;
         float sBonus = 0f;
