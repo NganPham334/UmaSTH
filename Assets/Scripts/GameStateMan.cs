@@ -121,8 +121,8 @@ public class GameStateMan : MonoBehaviour
 
         if (turn > 1 && (turn - 1) % 4 == 0)
         {
-            List<StatType> results = StatsManager.Instance.progressionHandler.TriggerUpgradeEvent(CurrentRunData.baseUpgradePoints);
-            CurrentRunData.baseUpgradePoints += 1;
+            List<StatType> results = StatsManager.Instance.progressionHandler.TriggerUpgradeEvent(CurrentRun.baseUpgradePoints);
+            CurrentRun.baseUpgradePoints += 1;
             // TODO: UpgradeUIManager.Instance.ShowSummary(results);
             return;
         }
