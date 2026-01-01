@@ -2,9 +2,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class StatBox : MonoBehaviour
 {
+    public static List<StatBox> allBoxes = new();
     [SerializeField] private CurrentRunData currentRunData;
     [SerializeField] private ExamSchedule examSchedule;
     private string statName;
@@ -16,17 +18,21 @@ public class StatBox : MonoBehaviour
     [SerializeField] private StatBoxType statBoxType;
     [SerializeField] private StatBoxSide statBoxSide;
     [SerializeField] private TextMeshProUGUI statNameText, statValueText;
-    private static StatBox instance;
-    
-    private void Awake()
+
+    private void OnEnable()
     {
-        instance = this;
+        allBoxes.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        allBoxes.Remove(this);
     }
 
     void Start()
     {
         SetStatName();
-        UpdatePlayerStat();
+        UpdateLocalPlayerStat();
         UpdateTestStat(examSchedule.GetExamForTurn(currentRunData.CurrentTurn));
     }
 
@@ -35,16 +41,16 @@ public class StatBox : MonoBehaviour
         switch (statBoxType)
         {
             case StatBoxType.Speed:
-                instance.statName = "Speed";
+                statName = "Speed";
                 break;
             case StatBoxType.Wit:
-                instance.statName = "Wit";
+                statName = "Wit";
                 break;
             case StatBoxType.Memory:
-                instance.statName = "Memory";
+                statName = "Memory";
                 break;
             case StatBoxType.Luck:
-                instance.statName = "Luck";
+                statName = "Luck";
                 break;
         }
         statNameText.SetText(statName);
@@ -58,16 +64,16 @@ public class StatBox : MonoBehaviour
             switch (statBoxType)
             {
                 case StatBoxType.Speed:
-                    instance.statValue = speed;
+                    statValue = speed;
                     break;
                 case StatBoxType.Wit:
-                    instance.statValue = wit;
+                    statValue = wit;
                     break;
                 case StatBoxType.Memory:
-                    instance.statValue = memory;
+                    statValue = memory;
                     break;
                 case StatBoxType.Luck:
-                    instance.statValue = luck;
+                    statValue = luck;
                     break;
             }
         }
@@ -76,30 +82,38 @@ public class StatBox : MonoBehaviour
             switch (statBoxType)
             {
                 case StatBoxType.Speed:
-                    instance.statValue = testSpeed;
+                    statValue = testSpeed;
                     break;
                 case StatBoxType.Wit:
-                    instance.statValue = testWit;
+                    statValue = testWit;
                     break;
                 case StatBoxType.Memory:
-                    instance.statValue = testMemory;
+                    statValue = testMemory;
                     break;
                 case StatBoxType.Luck:
-                    instance.statValue = testLuck;
+                    statValue = testLuck;
                     break;
             }
         }
         statValueText.SetText(statValue.ToString());
     }
 
-    public static void UpdatePlayerStat()
+    public void UpdateLocalPlayerStat()
     {
-        speed = instance.currentRunData.GetStatValue(StatType.spd);
-        wit = instance.currentRunData.GetStatValue(StatType.wit);
-        memory = instance.currentRunData.GetStatValue(StatType.mem);
-        luck = instance.currentRunData.GetStatValue(StatType.luk);
+        speed = currentRunData.GetStatValue(StatType.spd);
+        wit = currentRunData.GetStatValue(StatType.wit);
+        memory = currentRunData.GetStatValue(StatType.mem);
+        luck = currentRunData.GetStatValue(StatType.luk);
 
-        instance.SetStatValue();
+        SetStatValue();
+    }
+
+    public static void UpdateAllStats()
+    {
+        foreach (StatBox box in allBoxes)
+        {
+            box.UpdateLocalPlayerStat();
+        }
     }
 
     public void UpdateTestStat(ScheduledExam exam)
@@ -109,6 +123,6 @@ public class StatBox : MonoBehaviour
         testMemory = exam.GetStatValue(StatType.mem);
         testLuck = exam.GetStatValue(StatType.luk);
 
-        instance.SetStatValue();
+       SetStatValue();
     }
 }

@@ -75,7 +75,7 @@ public class CurrentRunData : ScriptableObject
 				Luck = value;
 				break;
 		}
-        StatBox.UpdatePlayerStat();
+        StatBox.UpdateAllStats();
 	}
 
     public void AdvanceTurn()
