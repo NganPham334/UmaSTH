@@ -48,16 +48,15 @@ public class CurrentRunData : ScriptableObject
 	// Map the enum and the int storage
 	public int GetStatValue(StatType type)
 	{
-		switch (type)
-		{
-			case StatType.spd: return Speed;
-			case StatType.wit: return Wit;
-			case StatType.mem: return Memory;
-			case StatType.luk: return Luck;
-			default: return 0;
-			// NOTE: In the finished prototype, default case won't be needed
-		}
-	}
+        return type switch
+        {
+            StatType.spd => Speed,
+            StatType.wit => Wit,
+            StatType.mem => Memory,
+            StatType.luk => Luck,
+            _ => 0,
+        };
+    }
 	
 	public void SetStatValue(StatType type, int value)
 	{
@@ -76,6 +75,7 @@ public class CurrentRunData : ScriptableObject
 				Luck = value;
 				break;
 		}
+        StatBox.UpdatePlayerStat();
 	}
 
     public void AdvanceTurn()
