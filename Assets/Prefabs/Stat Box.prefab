@@ -228,7 +228,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc3b54b73e818cf49b068f52af9eea84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  currentRunData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
+  examSchedule: {fileID: 11400000, guid: af0786ec63477058ba8713e2c43b6506, type: 2}
   statBoxType: 0
+  statBoxSide: 0
   statNameText: {fileID: 2024590225977932370}
   statValueText: {fileID: 3168553068711412452}
 --- !u!1 &4524427465799527696
