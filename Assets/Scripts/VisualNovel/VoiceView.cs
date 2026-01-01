@@ -14,7 +14,7 @@ public class VoicePresenter : DialoguePresenterBase
         if (!string.IsNullOrEmpty(lineID))
         {
             AudioClip clip = Resources.Load<AudioClip>($"Audio/line_{lineID}");
-            Debug.Log($"Finding clip: line_{lineID}");
+            // Debug.Log($"Finding clip: line_{lineID}");
             
             if (clip != null && voicePlayer != null)
             {
@@ -23,7 +23,7 @@ public class VoicePresenter : DialoguePresenterBase
             }
             else
             {
-                Debug.LogWarning($"line_{lineID} {clip == null}, {voicePlayer == null}");
+                // Debug.LogWarning($"line_{lineID} {clip == null}, {voicePlayer == null}");
             }
         }
         

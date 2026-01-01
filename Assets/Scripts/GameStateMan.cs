@@ -7,14 +7,11 @@ using Yarn.Unity;
 public class GameStateMan : MonoBehaviour
 {
     public static GameStateMan Instance { get; private set; }
-
-    // pretty sure if claude has a reason for why this should be empty during prototype
-    // you should comment it here so other people can understand
-    // maybe document it also
-    [Header("Run Data (leave empty during prototype)")]
+    
+    [Header("Run Data")]
     public CurrentRunData CurrentRun;
 
-    [Header("Exam Schedule (leave empty during prototype)")]
+    [Header("Exam Schedule")]
     public ExamSchedule ExamSchedule;
     public YarnProject mainScript;
 
@@ -32,8 +29,6 @@ public class GameStateMan : MonoBehaviour
     }
 
     private GameState _currentState;
-    public GameState CurrentStateType => _currentState;
-    public CurrentRunData CurrentRunData { get; internal set; }
 
     private Dictionary<string, object> _stateParameters;
     
@@ -43,60 +38,19 @@ public class GameStateMan : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
-            // FIX: Initializa data
-            if (CurrentRun != null) {
-                CurrentRun.InitializeRun();
-                Debug.Log("Run Data Initialized: Speed is " + CurrentRun.Speed);
-            }
-
             _currentState = GameState.Launcher;
             _stateParameters = new Dictionary<string, object>();
-
-
-            // -----------------------------------------------------
-            // TEST MODE: if no RunData assigned in Inspector
-            // -----------------------------------------------------
-            if (CurrentRun == null)
-            {
-                Debug.LogWarning("GameStateMan: CurrentRunData NOT assigned → Using MOCK data.");
-
-                CurrentRunData = ScriptableObject.CreateInstance<CurrentRunData>();
-                CurrentRunData.Speed = 120;
-                CurrentRunData.Wit = 80;
-                CurrentRunData.Memory = 50;
-                CurrentRunData.Luck = 40;
-                CurrentRunData.CurrentTurn = 1;
-            }
-            else
-            {
-                CurrentRunData = CurrentRun;
-                CurrentRunData.InitializeRun();
-            }
-
-
-            // -----------------------------------------------------
-            // TEST MODE: if no ExamSchedule assigned in Inspector
-            // -----------------------------------------------------
-            if (ExamSchedule == null)
-            {
-                Debug.LogWarning("GameStateMan: ExamSchedule NOT assigned → Using MOCK exam schedule.");
-
-                ExamSchedule = ScriptableObject.CreateInstance<ExamSchedule>();
-                ExamSchedule.exams = new List<ScheduledExam>()
-                {
-                    new ScheduledExam {
-                        ExamName = "Mock Exam",
-                        Turn = 1,
-                        
-                    }
-                };
-            }
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    public void StartGame()
+    {
+        CurrentRun.InitializeRun();
+        RequestState(GameState.VisualNovel, new() {{"vn_type", "intro"}});
     }
     
     
@@ -135,9 +89,7 @@ public class GameStateMan : MonoBehaviour
     {
         RequestState(newState, null);
     }
-
-
-
+    
     public bool TryGetStateParameter<T>(string key, out T result)
     {
         if (_stateParameters.TryGetValue(key, out object value))
@@ -152,22 +104,20 @@ public class GameStateMan : MonoBehaviour
         result = default;
         return false;
     }
-
-
-
+    
     public void ReportActionComplete()
     {
-        if (CurrentRunData.CurrentTurn % 2 == 0 && !CurrentRunData.doneREvent)
+        if (CurrentRun.CurrentTurn % 2 == 0 && !CurrentRun.doneREvent)
         {
-            CurrentRunData.doneREvent = true;
+            CurrentRun.doneREvent = true;
             RequestState(GameState.VisualNovel, new() { { "vn_type", "random" } });
             return;
         }
 
-        CurrentRunData.doneREvent = false;
+        CurrentRun.doneREvent = false;
         
-        CurrentRunData.AdvanceTurn();
-        int turn = CurrentRunData.CurrentTurn;
+        CurrentRun.AdvanceTurn();
+        int turn = CurrentRun.CurrentTurn;
 
         if (turn > 1 && (turn - 1) % 4 == 0)
         {

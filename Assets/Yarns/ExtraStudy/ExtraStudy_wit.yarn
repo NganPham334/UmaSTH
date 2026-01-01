@@ -1,0 +1,15 @@
+﻿title:ExtraStudy_wit
+tags: scene:navia_test
+
+---
+The classroom is empty. #line:06e2b95 
+Only textbooks and a cold cup of coffee remain on the desk. #line:0a4ba6a 
+
+Blay:I could stop here…Or push just a little further. #line:0730a0b 
+-> Study for extra wit.  #line:0baaff9 
+    <<stat wit+5 clr-5>>
+    Blay:My body feels even more exhausted.But the sense of progress is real. #line:0ae174d 
+-> Take a break instead. #line:0a4b3c2 
+    <<stat clr+5>>
+    Blay:My body needs a light rest.At least… everything is still under control. #line:06d5ba5 
+===

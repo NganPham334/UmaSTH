@@ -1,0 +1,31 @@
+﻿title: Turn_52
+tags: scene:navia_test
+---
+End of the semester.  #line:0e44bbe 
+The campus slowly empties.  #line:0f282fe 
+Red banners hang along the walkways.  #line:09b0628 
+
+Lunar New Year at last…   #line:0316e05 
+A rare break after months of tension.  #line:0cf20a9 
+How should I spend this time? #line:08d94d6 
+
+Blay:“Lunar New Year at last…A rare break after months of tension.How should I spend this time?  #line:0aff057 
+->Stay home and rest properly.   #line:00f372d 
+    <<stat clr+20>> 
+    You sleep in more than usual.  #line:0d32063 
+    No deadlines. No alarms.  #line:03b06ed 
+    Maybe resting at the right time is a smart choice.  #line:0d8f70c 
+->Rest, but review what really matters.  #line:0ec7785 
+    <<randMod 10>> 
+    You revisit the parts you once overlooked.  #line:076b950 
+    No pressure, but still making progress.  #line:0d19465 
+    At least… you’re not falling behind.  #line:00f9945 
+->Use the break to prepare for the long road ahead.  #line:03cc963 
+    <<stat mood+2>>
+    You spend time thinking deeply.  #line:0f8f480 
+    About how you study, how you work, how you face pressure. #line:0670308 
+    You feel more prepared than before  #line:077762b 
+
+The break comes to an end.  #line:0aec2d1 
+AA is still there… waiting for you to return.  #line:0ed9d34 
+===

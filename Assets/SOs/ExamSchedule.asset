@@ -17,8 +17,8 @@ MonoBehaviour:
     Turn: 24
     FailureFlagToSet: 
     SuccessFlagToSet: 
-    nodeNamePass: 
-    nodeNameFail: 
+    nodeNamePass: PostTest_pass_test1
+    nodeNameFail: PostTest_fail_test1
     Speed: 300
     Wit: 300
     Memory: 300
@@ -27,8 +27,8 @@ MonoBehaviour:
     Turn: 48
     FailureFlagToSet: 
     SuccessFlagToSet: 
-    nodeNamePass: 
-    nodeNameFail: 
+    nodeNamePass: PostTest_pass_test2
+    nodeNameFail: PostTest_fail_test2
     Speed: 500
     Wit: 500
     Memory: 500
@@ -37,8 +37,8 @@ MonoBehaviour:
     Turn: 72
     FailureFlagToSet: 
     SuccessFlagToSet: 
-    nodeNamePass: 
-    nodeNameFail: 
+    nodeNamePass: PostTest_pass_test3
+    nodeNameFail: PostTest_fail_test3
     Speed: 800
     Wit: 800
     Memory: 800
@@ -49,7 +49,7 @@ MonoBehaviour:
     SuccessFlagToSet: 
     nodeNamePass: 
     nodeNameFail: 
-    Speed: 100
-    Wit: 100
-    Memory: 100
-    Luck: 100
+    Speed: 80
+    Wit: 72
+    Memory: 70
+    Luck: 1

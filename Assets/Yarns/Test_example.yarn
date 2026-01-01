@@ -1,0 +1,22 @@
+﻿title: Turn_2
+tags: scene:navia_test
+---
+Blay: I wonder who is here? #line:0f14e00 
+
+// Set side char manually (updates preservation tracker to "navia")
+<<side navia_shocked>>
+Navia: I've been waiting for hours! #line:0b7d1ce 
+
+// PRESERVATION TEST:
+// Navia speaks again. 
+// Tracker is "navia". Speaker is "Navia". Match!
+// Result: Sprite stays "navia_shocked". It does NOT revert to default "navia".
+Navia: And you didn't even call! #line:015b1e5 
+<<scene keqing_test>>
+// Set main char reaction
+Blay: I'm so sorry! #line:058c556 
+
+// Hide side char / return to center
+<<side none>>
+Blay: She left... #line:0d82483 
+===

@@ -41,7 +41,7 @@ public class CurrentRunData : ScriptableObject
         Wit = 70;
         Memory = 70;
         Luck = 50;
-        Clarity = 50;
+        Clarity = 100;
         Mood = 4;
         
         doneREvent = false;
@@ -58,16 +58,15 @@ public class CurrentRunData : ScriptableObject
 	
 	public int GetStatValue(StatType type)
 	{
-		switch (type)
-		{
-			case StatType.spd: return Speed;
-			case StatType.wit: return Wit;
-			case StatType.mem: return Memory;
-			case StatType.luk: return Luck;
-			default: return 0;
-			// NOTE: In the finished prototype, default case won't be needed
-		}
-	}
+        return type switch
+        {
+            StatType.spd => Speed,
+            StatType.wit => Wit,
+            StatType.mem => Memory,
+            StatType.luk => Luck,
+            _ => 0,
+        };
+    }
 	
 	public void SetStatValue(StatType type, int value)
 	{
@@ -86,6 +85,7 @@ public class CurrentRunData : ScriptableObject
 				Luck = value;
 				break;
 		}
+        StatBox.UpdateAllStats();
 	}
 
     // Helper method for the Lottery logic in StatsManager
@@ -143,6 +143,7 @@ public class CurrentRunData : ScriptableObject
             Debug.LogWarning($"StoryFlag '{flagName}' does not exist. Cannot set.");
         }
     }
+    
 
     public string ChangeMood(int change)
     {

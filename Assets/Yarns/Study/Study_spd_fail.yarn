@@ -1,0 +1,18 @@
+﻿title:Study_spd_fail
+tags: scene:navia_test
+---
+Blay:Today’s just not my day.Maybe I should stop here. #line:041f299 
+->Stop studying for now. #line:001e740 
+    <<stat spd-5 >>
+->Keep pushing through. #line:0e70335 
+    <<set  $roll = random_range(0, 2)>>
+    <<if $roll == 0>>
+        <<stat spd-5 mood-1 >>
+        Blay:Ugh, I can't focus at all...  #line:02b62d0 
+    <<elseif $roll == 1>>
+        <<stat spd-5>>
+        Blay:Nothing seems to be going my way today... #line:09a2661 
+    <<else>>
+        Nothing happens. #line:02f8381 
+    <<endif>>
+===
