@@ -44,15 +44,20 @@ public class PreTestScene : MonoBehaviour
         }
 
         // ================= TEST MODE =================
+        // Nếu không có dữ liệu thật, tự tạo dữ liệu giả để test
         if (!hasRealExam)
         {
-            Debug.LogWarning("PreTestScene: TEST MODE");
+            Debug.LogWarning("PreTestScene: TEST MODE ENABLED (Running with fake data)");
 
-            runData = ScriptableObject.CreateInstance<CurrentRunData>();
-            runData.Speed = 120;
-            runData.Wit = 80;
-            runData.Memory = 55;
-            runData.Luck = 35;
+            // Tạo instance mới nếu runData chưa có
+            if (runData == null)
+            {
+                runData = ScriptableObject.CreateInstance<CurrentRunData>();
+                runData.Speed = 120;
+                runData.Wit = 80;
+                runData.Memory = 55;
+                runData.Luck = 35;
+            }
 
             examData = new ScheduledExam
             {
@@ -72,57 +77,90 @@ public class PreTestScene : MonoBehaviour
 
     private void SetupUI()
     {
-        // -------- PLAYER STATS --------
-        PlayerSpeed.text  = runData.Speed.ToString();
-        PlayerMemory.text = runData.Memory.ToString();
-        PlayerWit.text    = runData.Wit.ToString();
-        PlayerLuck.text   = runData.Luck.ToString();
+        // Kiểm tra an toàn: Nếu runData bị null thì dừng ngay, tránh crash
+        if (runData == null)
+        {
+            Debug.LogError("PreTestScene: RunData is NULL! Cannot setup UI.");
+            return;
+        }
+
+        // -------- PLAYER STATS (Sử dụng dấu ? để tránh lỗi NullReference) --------
+        if (PlayerSpeed != null)  PlayerSpeed.text  = runData.Speed.ToString();
+        if (PlayerMemory != null) PlayerMemory.text = runData.Memory.ToString();
+        if (PlayerWit != null)    PlayerWit.text    = runData.Wit.ToString();
+        if (PlayerLuck != null)   PlayerLuck.text   = runData.Luck.ToString();
 
         // -------- EXAM INFO --------
-        ExamName.text = examData != null ? examData.ExamName : "UNKNOWN EXAM";
+        if (ExamName != null)
+        {
+            ExamName.text = examData != null ? examData.ExamName : "UNKNOWN EXAM";
+        }
 
         // -------- EXAM STATS --------
         if (examData != null)
         {
-            TestSpeed.text  = examData.GetStatValue(StatType.spd).ToString();
-            TestWit.text    = examData.GetStatValue(StatType.wit).ToString();
-            TestMemory.text = examData.GetStatValue(StatType.mem).ToString();
-            TestLuck.text   = examData.GetStatValue(StatType.luk).ToString();
+            if (TestSpeed != null)  TestSpeed.text  = examData.GetStatValue(StatType.spd).ToString();
+            if (TestWit != null)    TestWit.text    = examData.GetStatValue(StatType.wit).ToString();
+            if (TestMemory != null) TestMemory.text = examData.GetStatValue(StatType.mem).ToString();
+            if (TestLuck != null)   TestLuck.text   = examData.GetStatValue(StatType.luk).ToString();
         }
         else
         {
-            TestSpeed.text  = "-";
-            TestWit.text    = "-";
-            TestMemory.text = "-";
-            TestLuck.text   = "-";
+            if (TestSpeed != null)  TestSpeed.text  = "-";
+            if (TestWit != null)    TestWit.text    = "-";
+            if (TestMemory != null) TestMemory.text = "-";
+            if (TestLuck != null)   TestLuck.text   = "-";
         }
     }
 
     private void SetupButtons()
     {
-        TestButton.onClick.RemoveAllListeners();
-        ReturnButton.onClick.RemoveAllListeners();
-
-        TestButton.onClick.AddListener(() =>
+        // Kiểm tra TestButton trước khi gán sự kiện
+        if (TestButton != null)
         {
-            if (GameStateMan.Instance != null)
+            TestButton.onClick.RemoveAllListeners();
+            TestButton.onClick.AddListener(() =>
             {
-                GameStateMan.Instance.RequestState(
-                    GameStateMan.GameState.Exam,
-                    new Dictionary<string, object>
-                    {
-                        { "ExamData", examData }
-                    }
-                );
-            }
-        });
-
-        ReturnButton.onClick.AddListener(() =>
+                if (GameStateMan.Instance != null)
+                {
+                    GameStateMan.Instance.RequestState(
+                        GameStateMan.GameState.Exam,
+                        new Dictionary<string, object>
+                        {
+                            { "ExamData", examData }
+                        }
+                    );
+                }
+                else
+                {
+                    Debug.Log("Test Button Clicked (No GameStateMan found)");
+                }
+            });
+        }
+        else
         {
-            if (GameStateMan.Instance != null)
+            Debug.LogWarning("PreTestScene: 'TestButton' chưa được gán trong Inspector!");
+        }
+
+        // Kiểm tra ReturnButton trước khi gán sự kiện
+        if (ReturnButton != null)
+        {
+            ReturnButton.onClick.RemoveAllListeners();
+            ReturnButton.onClick.AddListener(() =>
             {
-                GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
-            }
-        });
+                if (GameStateMan.Instance != null)
+                {
+                    GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+                }
+                else
+                {
+                    Debug.Log("Return Button Clicked (No GameStateMan found)");
+                }
+            });
+        }
+        else
+        {
+            Debug.LogWarning("PreTestScene: 'ReturnButton' chưa được gán trong Inspector!");
+        }
     }
 }
