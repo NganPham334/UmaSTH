@@ -19,7 +19,7 @@ public class ActionBarController : MonoBehaviour
     {
         if (!isRecharging)
         {
-            current = Mathf.MoveTowards(current, max, speed/2 * Time.deltaTime);
+            current = Mathf.MoveTowards(current, max, speed/5 * Time.deltaTime);
         }
         if (isRecharging)
         {
