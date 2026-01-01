@@ -133,6 +133,10 @@ namespace VisualNovel
                 Debug.LogError($"nodeName not present! Closing scene.");
                 FinishScene();
             }
+            else
+            {
+                Debug.Log("uh hsuh so theres a nodeName but it doesnt exist");
+            }
         }
 
         private void ParseHeaderTags(string tags)

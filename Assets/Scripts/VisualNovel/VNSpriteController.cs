@@ -69,7 +69,7 @@ namespace VisualNovel
         // Required Boilerplate
         public override YarnTask OnDialogueStartedAsync() => YarnTask.CompletedTask;
         public override YarnTask OnDialogueCompleteAsync() => YarnTask.CompletedTask;
-        public override YarnTask<DialogueOption?> RunOptionsAsync(DialogueOption[] o, LineCancellationToken t) => YarnTask<DialogueOption?>.FromResult(null);
+        public override YarnTask<DialogueOption> RunOptionsAsync(DialogueOption[] o, LineCancellationToken t) => YarnTask<DialogueOption>.FromResult(null);
 
         private void SetMode(string mode)
         {
