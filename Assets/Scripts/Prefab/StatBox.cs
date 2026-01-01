@@ -32,8 +32,10 @@ public class StatBox : MonoBehaviour
     void Start()
     {
         SetStatName();
-        UpdateLocalPlayerStat();
-        UpdateTestStat(examSchedule.GetExamForTurn(currentRunData.CurrentTurn));
+        if (statBoxSide == StatBoxSide.Player)
+            UpdateLocalPlayerStat();
+        if (statBoxSide == StatBoxSide.Test)
+            UpdateTestStat(examSchedule.GetExamForTurn(currentRunData.CurrentTurn));
     }
 
     private void SetStatName()
