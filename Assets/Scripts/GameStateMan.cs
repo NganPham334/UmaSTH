@@ -119,6 +119,14 @@ public class GameStateMan : MonoBehaviour
         CurrentRun.AdvanceTurn();
         int turn = CurrentRun.CurrentTurn;
 
+        if (turn > 1 && (turn - 1) % 4 == 0)
+        {
+            List<StatType> results = StatsManager.Instance.progressionHandler.TriggerUpgradeEvent(CurrentRunData.baseUpgradePoints);
+            CurrentRunData.baseUpgradePoints += 1;
+            // TODO: UpgradeUIManager.Instance.ShowSummary(results);
+            return;
+        }
+
         _stateParameters.Clear();
 
         // If exam exists → go to PreTest

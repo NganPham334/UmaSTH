@@ -171,6 +171,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatsManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7173185385119565381, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: statsProcessor
+      value: 
+      objectReference: {fileID: 1927893451}
+    - target: {fileID: 7173185385119565381, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: progressionHandler
+      value: 
+      objectReference: {fileID: 723960413}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

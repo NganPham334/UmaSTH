@@ -16,7 +16,7 @@ public class StudyScreenController : MonoBehaviour
 		if (StatsManager.Instance != null)
 		{
 			// Now take the StatType of Secondary Stat
-			StatType secondaryStat = StatsManager.Instance.IncrementStat(primaryStat);
+			StatType secondaryStat = StatsManager.Instance.ExecuteStudyAction(primaryStat);
 			UpdateStatDisplay(primaryStat); // Update text on screen for Primary Stat
 			UpdateStatDisplay(secondaryStat); // Update text on screen for Secondary Stat
 
@@ -24,13 +24,18 @@ public class StudyScreenController : MonoBehaviour
 			{
 				GameStateMan.Instance.ReportActionComplete();
 			}
+
+			GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() {
+				{"vn_type", "studying"},
+				{"study_type", $"{primaryStat}_fail"}
+				});
 		}
 		else
 		{
 			Debug.LogError("StatsManager.Instance is null. Check StatsManager in Script Execution Order");
 		}
 
-		GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() {{"vn_type", "studying"}});
+
 	}
 	
 	public void UpdateStatDisplay(StatType statType)

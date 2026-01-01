@@ -29,7 +29,9 @@ Transform:
   m_LocalPosition: {x: 991.26135, y: 543.8294, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2905701535572713499}
+  - {fileID: 4456812020496898297}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7173185385119565381
@@ -41,24 +43,108 @@ MonoBehaviour:
   m_GameObject: {fileID: 5240880184921187482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ce6a28b5a34ae48b9b208641887d74, type: 3}
+  m_Script: {fileID: 11500000, guid: 7962f89ac2a7aef56aac76b1b501327e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsManager
   runData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
+  progressionHandler: {fileID: 0}
+  statsProcessor: {fileID: 0}
+--- !u!1 &7020613199155248975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2905701535572713499}
+  - component: {fileID: 3671769199932533718}
+  m_Layer: 0
+  m_Name: StatsProcessor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2905701535572713499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020613199155248975}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 37.174988, y: 10.078247, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2969364019672214972}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3671769199932533718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020613199155248975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b92847396e0f7b3a95cc6e148fa231e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatsProcessor
+--- !u!1 &8384495030233005970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4456812020496898297}
+  - component: {fileID: 2145274809276448912}
+  m_Layer: 0
+  m_Name: StudyProgressionHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4456812020496898297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8384495030233005970}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 37.174988, y: 10.078247, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2969364019672214972}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2145274809276448912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8384495030233005970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f9d26caf49e31e386e75c66e7b2834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StudyProgressionHandler
+  runData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
+  StatType: 0
   StudyGains:
   - PrimaryStat: 0
     SecondaryStat: 1
-    PrimaryGain: 10
-    SecondaryGain: 2
   - PrimaryStat: 2
     SecondaryStat: 0
-    PrimaryGain: 10
-    SecondaryGain: 2
   - PrimaryStat: 1
     SecondaryStat: 3
-    PrimaryGain: 10
-    SecondaryGain: 2
   - PrimaryStat: 3
     SecondaryStat: 2
-    PrimaryGain: 10
-    SecondaryGain: 2
