@@ -31,32 +31,11 @@ public class StatBox : MonoBehaviour
 
     void Start()
     {
-        SetStatName();
+        statNameText.SetText(statBoxType.ToString());
         if (statBoxSide == StatBoxSide.Player)
             UpdateLocalPlayerStat();
         if (statBoxSide == StatBoxSide.Test)
             UpdateTestStat(examSchedule.GetExamForTurn(currentRunData.CurrentTurn));
-    }
-
-    private void SetStatName()
-    {
-        switch (statBoxType)
-        {
-            case StatBoxType.Speed:
-                statName = "Speed";
-                break;
-            case StatBoxType.Wit:
-                statName = "Wit";
-                break;
-            case StatBoxType.Memory:
-                statName = "Memory";
-                break;
-            case StatBoxType.Luck:
-                statName = "Luck";
-                break;
-        }
-        statNameText.SetText(statName);
-
     }
 
     private void SetStatValue()
