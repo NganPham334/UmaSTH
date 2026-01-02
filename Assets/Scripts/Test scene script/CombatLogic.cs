@@ -145,5 +145,10 @@ public class CombatLogic : MonoBehaviour
         GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() 
             {{"vn_type", "post_test"}, {"post_test_node", exam.nodeNamePass}});
     }
+
+    public void OnDestroy()
+    {
+        Time.timeScale = 1.0f;
+    }
 }
 

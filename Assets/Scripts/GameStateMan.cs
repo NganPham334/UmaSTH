@@ -147,6 +147,7 @@ public class GameStateMan : MonoBehaviour
         if (HasEventForCurrentTurn(turn))
         {
             RequestState(GameState.VisualNovel, new() {{"vn_type", "determined"}});
+            return;
         }
 
         RequestState(GameState.GameScene);

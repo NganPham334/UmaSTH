@@ -84,6 +84,7 @@ namespace VisualNovel
             {
                 dialogueRunner.onDialogueComplete.RemoveListener(FinishScene);
             }
+            Time.timeScale = 1.0f;
         }
 
         void Start()
@@ -118,25 +119,26 @@ namespace VisualNovel
                     Debug.Log(_vnType);
                     Debug.LogError("VN Type not found /!\\ this is bad, closing scene...");
                     FinishScene();
-                    return;
+                    break;
+            }
+
+            if (string.IsNullOrEmpty(nodeName))
+            {
+                Debug.LogWarning($"[VNHandler] nodeName not present!");
+                FinishScene();
+                return;
+            }
+
+            if (!dialogueRunner.Dialogue.NodeExists(nodeName))
+            {
+                Debug.LogWarning($"[VNHandler] Node not found: {nodeName}");
+                FinishScene();
+                return;
             }
             
-            if (!string.IsNullOrEmpty(nodeName) && dialogueRunner.Dialogue.NodeExists(nodeName))
-            {
-                string tags = dialogueRunner.Dialogue.GetHeaderValue(nodeName, "tags");
-                if (tags != null) ParseHeaderTags(tags);
-                dialogueRunner.StartDialogue(nodeName);
-
-            }
-            else if (string.IsNullOrEmpty(nodeName))
-            {
-                Debug.LogError($"nodeName not present! Closing scene.");
-                FinishScene();
-            }
-            else
-            {
-                Debug.Log("uh hsuh so theres a nodeName but it doesnt exist");
-            }
+            string tags = dialogueRunner.Dialogue.GetHeaderValue(nodeName, "tags");
+            if (tags != null) ParseHeaderTags(tags);
+            dialogueRunner.StartDialogue(nodeName);
         }
 
         private void ParseHeaderTags(string tags)

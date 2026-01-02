@@ -1,6 +1,8 @@
 ﻿title: Turn_2
 tags: scene:navia_test
 ---
+THIS IS A TEST YARN NODE
+THIS IS RUNNING AS A PRE-DETERMINED EVENT OF TURN 2
 Blay: I wonder who is here? #line:0f14e00 
 
 // Set side char manually (updates preservation tracker to "navia")
