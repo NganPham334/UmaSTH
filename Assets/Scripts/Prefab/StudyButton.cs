@@ -1,8 +1,10 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class StudyButton : MonoBehaviour
 {
+    public static List<StudyButton> allStudyButtons = new();
     [SerializeField] private TextMeshProUGUI buttonText, levelText;
     public enum ButtonType {Speed, Wit, Memory, Luck};
     [SerializeField] private ButtonType buttonType;
@@ -11,6 +13,15 @@ public class StudyButton : MonoBehaviour
     void Start()
     {
         UpdateText();
+    }
+
+    void OnEnable()
+    {
+        allStudyButtons.Add(this);
+    }
+    void OnDisable()
+    {
+        allStudyButtons.Remove(this);
     }
     public void SetUp(ButtonType type)
     {
@@ -28,5 +39,13 @@ public class StudyButton : MonoBehaviour
         });
         levelText.SetText($"Lv. {level}");
         buttonText.SetText($"{buttonType}");
+    }
+
+    public static void UpdateAllButtons()
+    {
+        foreach (StudyButton button in allStudyButtons)
+        {
+            button.UpdateText();
+        }
     }
 }
