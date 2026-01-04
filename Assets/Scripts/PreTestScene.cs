@@ -20,9 +20,6 @@ public class PreTestScene : MonoBehaviour
 
     private void Start()
     {
-        // Cập nhật chỉ số khi vào màn hình
-        StatBox.UpdateAllStats();
-
         if (currentRunData != null)
         {
             Debug.Log($"Scene PreTest Loaded. Current Turn: {currentRunData.CurrentTurn}");
