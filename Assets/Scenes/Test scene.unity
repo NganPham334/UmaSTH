@@ -569,7 +569,7 @@ MonoBehaviour:
   max: 100
   current: 0
   speed: 1000
-  CombatLogicObject: {fileID: 1255337}
+  CombatLogic: {fileID: 1255338}
   actionBarType: 0
 --- !u!114 &230337894
 MonoBehaviour:
@@ -1539,7 +1539,7 @@ MonoBehaviour:
   max: 100
   current: 0
   speed: 600
-  CombatLogicObject: {fileID: 1255337}
+  CombatLogic: {fileID: 1255338}
   actionBarType: 1
 --- !u!114 &881967722
 MonoBehaviour:

@@ -10,7 +10,7 @@ public class CombatLogic : MonoBehaviour
     [SerializeField] private ScheduledExam exam;
     [SerializeField] private GameObject playerHpBar;
     [SerializeField] private GameObject testHpBar;
-    [SerializeField] private GameObject playerActionBar, testActionBar;
+    [SerializeField] private ActionBarController playerActionBar, testActionBar;
     [SerializeField] private Transform damagePopUpPrefab;
     [SerializeField] private RectTransform playerHpRect, TestHpRect;
     [SerializeField] private Transform canvasTransform;
@@ -53,8 +53,8 @@ public class CombatLogic : MonoBehaviour
 
         playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 7);
         testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 7);
-        playerActionBar.GetComponent<ActionBarController>().setSpeed(playerSpeed);
-        testActionBar.GetComponent<ActionBarController>().setSpeed(testSpeed);
+        playerActionBar.setSpeed(playerSpeed);
+        testActionBar.setSpeed(testSpeed);
 
         Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}, testHitChance: {testHitChance},testCritChance: {testCritChance}");
         Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}, playerHitChance: {playerHitChance},playerCritChance: {playerCritChance}");

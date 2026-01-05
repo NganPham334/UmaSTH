@@ -10,7 +10,7 @@ public class HpBarController : MonoBehaviour
     private float targetHp;
     [SerializeField] private Gradient hpGradient;
     [SerializeField] private Image fill;
-    [SerializeField] private GameObject endScreen;
+    [SerializeField] private EndTestScreen endScreen;
     private static bool ended =  false;
     void Update()
     {
@@ -31,7 +31,7 @@ public class HpBarController : MonoBehaviour
             targetHp = 0;
             ended = true;
             Debug.Log("Ended");
-            endScreen.GetComponent<EndTestScreen>().ShowEndTestScreen();
+            endScreen.ShowEndTestScreen();
         }
     }
 

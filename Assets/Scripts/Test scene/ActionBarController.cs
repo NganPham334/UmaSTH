@@ -9,7 +9,7 @@ public class ActionBarController : MonoBehaviour
     [SerializeField] private float current= 0;
     [SerializeField] private float speed;
     private bool isRecharging = false;
-    [SerializeField] private GameObject CombatLogicObject;
+    [SerializeField] private CombatLogic CombatLogic;
     private enum ActionBarType{Player,Test};
     [SerializeField] private ActionBarType actionBarType;
 
@@ -29,9 +29,9 @@ public class ActionBarController : MonoBehaviour
         {
             isRecharging = true;
             if (actionBarType == ActionBarType.Player)
-                CombatLogicObject.GetComponent<CombatLogic>().TestTakeDamage();
+                CombatLogic.TestTakeDamage();
             if (actionBarType == ActionBarType.Test)
-                CombatLogicObject.GetComponent<CombatLogic>().PlayerTakeDamage();
+                CombatLogic.PlayerTakeDamage();
         }
         if (current <= 0)
         {
