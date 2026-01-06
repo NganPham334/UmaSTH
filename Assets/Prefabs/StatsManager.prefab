@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5240880184921187482}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 991.26135, y: 543.8294, z: 0}
+  m_LocalPosition: {x: 940.07434, y: 505.54382, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsManager
   runData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
-  progressionHandler: {fileID: 0}
-  statsProcessor: {fileID: 0}
+  progressionHandler: {fileID: 2145274809276448912}
+  statsProcessor: {fileID: 3671769199932533718}
 --- !u!1 &7020613199155248975
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StudyProgressionHandler
   runData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
-  StatType: 0
   StudyGains:
   - PrimaryStat: 0
     SecondaryStat: 1
