@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e80e6ea4984538ab353d141672c9dd, type: 3}
   m_Name: CurrentRunData
   m_EditorClassIdentifier: Assembly-CSharp::CurrentRunData
-  Speed: 100
-  Wit: 74
+  Speed: 112
+  Wit: 76
   Memory: 90
   Luck: 1
   Clarity: 95
@@ -30,7 +30,7 @@ MonoBehaviour:
   witLevel: 1
   memLevel: 1
   lukLevel: 1
-  spdWeight: 1
+  spdWeight: 2
   witWeight: 1
   memWeight: 1
   lukWeight: 1
