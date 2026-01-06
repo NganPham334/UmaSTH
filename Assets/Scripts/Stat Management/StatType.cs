@@ -9,6 +9,6 @@ public enum StatType
 [System.Serializable]
 public struct StatGain
 {
-	public StatType PrimaryStat; // Chosen stat
-	public StatType SecondaryStat; // Collateral damage
+	public StatType primaryStat; // Chosen stat
+	public StatType secondaryStat; // Collateral damage
 }

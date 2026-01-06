@@ -17,12 +17,12 @@ public class StudyProgressionHandler : MonoBehaviour
     };
 
     [Header("Study Gains Relationship")]
-	public List<StatGain> StudyGains = new List<StatGain>()
+	public List<StatGain> studyGains = new List<StatGain>()
 	{
-		new StatGain {PrimaryStat = StatType.spd, SecondaryStat = StatType.wit},
-		new StatGain {PrimaryStat = StatType.mem, SecondaryStat = StatType.spd},
-		new StatGain {PrimaryStat = StatType.wit, SecondaryStat = StatType.luk},
-		new StatGain {PrimaryStat = StatType.luk, SecondaryStat = StatType.mem}
+		new StatGain {primaryStat = StatType.spd, secondaryStat = StatType.wit},
+		new StatGain {primaryStat = StatType.mem, secondaryStat = StatType.spd},
+		new StatGain {primaryStat = StatType.wit, secondaryStat = StatType.luk},
+		new StatGain {primaryStat = StatType.luk, secondaryStat = StatType.mem}
 	};
 
     public (int p, int s) GetGainsForLevel(int level)
@@ -74,10 +74,10 @@ public class StudyProgressionHandler : MonoBehaviour
 
     private StatType RollLottery()
     {
-        int TotalWeight = runData.spdWeight + runData.witWeight + runData.memWeight + runData.lukWeight;
-        if (TotalWeight <= 0) return (StatType)(-1);
+        int totalWeight = runData.spdWeight + runData.witWeight + runData.memWeight + runData.lukWeight;
+        if (totalWeight <= 0) return (StatType)(-1);
 
-        int roll = UnityEngine.Random.Range(0, TotalWeight);
+        int roll = UnityEngine.Random.Range(0, totalWeight);
         int current = 0;
 
         foreach (StatType type in Enum.GetValues(typeof(StatType)))
@@ -113,7 +113,7 @@ public class StudyProgressionHandler : MonoBehaviour
 
     private void ResetWeights()
     {
-        // If max level, weight locks to 0. Otherwise resets to 1
+        // If max level, weight locks to 0. Otherwise, resets to 1
         runData.spdWeight = runData.spdLevel >= 5 ? 0 : 1;
         runData.witWeight = runData.witLevel >= 5 ? 0 : 1;
         runData.memWeight = runData.memLevel >= 5 ? 0 : 1;

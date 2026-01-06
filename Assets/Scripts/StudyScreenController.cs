@@ -24,11 +24,8 @@ public class StudyScreenController : MonoBehaviour
 			{
 				GameStateMan.Instance.ReportActionComplete();
 			}
-
-			GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() {
-				{"vn_type", "studying"},
-				{"study_type", $"{primaryStat}_fail"}
-				});
+			
+			Debug.Log($"Value Changed for {primaryStat}");
 		}
 		else
 		{
@@ -38,7 +35,7 @@ public class StudyScreenController : MonoBehaviour
 
 	}
 	
-	public void UpdateStatDisplay(StatType statType)
+	private void UpdateStatDisplay(StatType statType)
 	{
 		if (StatsManager.Instance == null) return;
 		

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 
 public class StatsManager : MonoBehaviour
@@ -47,10 +46,10 @@ public class StatsManager : MonoBehaviour
         var (finalPrimary, finalSecondary) = statsProcessor.CalculateFinalGain(baseGains.p, baseGains.s, runData.Mood);
 
         // 4. Find Relationship and Apply
-        StatGain relationship = progressionHandler.StudyGains.Find(g => g.PrimaryStat == primaryStatType);
+        StatGain relationship = progressionHandler.studyGains.Find(g => g.primaryStat == primaryStatType);
         
-        ApplyStatGain(relationship.PrimaryStat, finalPrimary);
-        ApplyStatGain(relationship.SecondaryStat, finalSecondary);
+        ApplyStatGain(relationship.primaryStat, finalPrimary);
+        ApplyStatGain(relationship.secondaryStat, finalSecondary);
 
         // 5. Update Weight for next time
         progressionHandler.ProcessStudyWeight(primaryStatType);
@@ -59,16 +58,16 @@ public class StatsManager : MonoBehaviour
         VisualNovelTransition(primaryStatType, true);
 
 		// 7. Display
-		return relationship.SecondaryStat;
+		return relationship.secondaryStat;
 	}
 	
 	private void ApplyStatGain(StatType type, int amount)
 	{
 		int currentValue = runData.GetStatValue(type);
-		const int MaxValue = 1000;
+		const int maxValue = 1000;
 		
 		currentValue += amount;
-		currentValue = Mathf.Min(currentValue, MaxValue);
+		currentValue = Mathf.Min(currentValue, maxValue);
 		
 		runData.SetStatValue(type, currentValue);
 	}
