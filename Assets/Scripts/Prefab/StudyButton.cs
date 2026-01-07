@@ -1,9 +1,11 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+using Debug = UnityEngine.Debug;
+public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public static List<StudyButton> allStudyButtons = new();
     [SerializeField] private TextMeshProUGUI buttonText, levelText;
@@ -11,7 +13,6 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private ButtonType buttonType;
     [SerializeField] private CurrentRunData currentRunData;
     [SerializeField] private GameObject mainStatGainPopup, secondaryStatGainPopup;
-    [SerializeField] private StatsManager StatsManager;
     [SerializeField] private Image lvImage;
     [SerializeField] private Color color1, color2, color3, color4, color5;
     [SerializeField] private StudyLvBar studyLvBar;
@@ -79,9 +80,27 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             Debug.LogWarning("Stat gain popups are not assigned.");
         }
-        // Update the popup texts
-        // mainStatGainPopup.GetComponentInChildren<TextMeshProUGUI>().SetText($"+{}");
-        // secondaryStatGainPopup.GetComponentInChildren<TextMeshProUGUI>().SetText($"+{}");
+        
+        StatType primaryType = (buttonType) switch
+        {
+            ButtonType.Speed => StatType.spd,
+            ButtonType.Wit => StatType.wit,
+            ButtonType.Memory => StatType.mem,
+            ButtonType.Luck => StatType.luk,
+            _ => StatType.spd
+        };
+        // Get number from calculator
+        var gains = StatsManager.Instance.GetExpectedGains(primaryType);
+        // update text
+        if (mainStatGainPopup != null && secondaryStatGainPopup != null)
+        {
+            mainStatGainPopup.GetComponentInChildren<TextMeshProUGUI>().SetText($"+{gains.pGain}");
+            secondaryStatGainPopup.GetComponentInChildren<TextMeshProUGUI>().SetText($"+{gains.sGain}");
+            
+            mainStatGainPopup.SetActive(true);  
+            secondaryStatGainPopup.SetActive(true);
+        }
+
         if (studyLvBar != null)
         {
             studyLvBar.UpdateLevelText(currentRunData.GetStatLevel((buttonType) switch
@@ -103,13 +122,41 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         transform.localPosition += new Vector3(30f, 0f, 0f);
         // Hide main and secondary stat gain popups
         if (mainStatGainPopup != null && secondaryStatGainPopup != null)
-        {
-        mainStatGainPopup.SetActive(false);
-        secondaryStatGainPopup.SetActive(false);
+        { 
+            mainStatGainPopup.SetActive(false);
+            secondaryStatGainPopup.SetActive(false);
         }
         if (studyLvBar != null)
         {
             studyLvBar.Deactivate();
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Mouse is clicking on: " + buttonType);
+        StatType primaryStat = (buttonType) switch
+        {
+            ButtonType.Speed => StatType.spd,
+            ButtonType.Wit => StatType.wit,
+            ButtonType.Memory => StatType.mem,
+            ButtonType.Luck => StatType.luk,
+            _ => StatType.spd
+        };
+        if (StatsManager.Instance != null)
+        {
+            StatsManager.Instance.ExecuteStudyAction(primaryStat);
+
+            // 3. Report completion to move the game forward
+            if (GameStateMan.Instance != null)
+            {
+                GameStateMan.Instance.ReportActionComplete();
+            }
+            Debug.Log($"Study Action executed for: {primaryStat}");
+        }
+        else
+        {
+            Debug.LogError("StatsManager Instance not found!");
         }
     }
 }
