@@ -1,0 +1,29 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Home.uss?fileID=7433441132597879392&amp;guid=04bc5325ed3859a4ea18309b0e5d671b&amp;type=3#Home" />
+    <ui:VisualElement name="GameRoot" style="flex-grow: 1; width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Textures/BG/BG_ClassRoom2.jpg?fileID=2800000&amp;guid=ddfc1f493aeb4014a853c223447097ff&amp;type=3#BG_ClassRoom2&quot;); position: absolute; justify-content: space-between; padding-top: 16px; padding-right: 16px; padding-bottom: 16px; padding-left: 16px;">
+        <ui:VisualElement name="top-bar" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="top-left" style="flex-grow: 1; flex-direction: row; justify-content: space-between; height: 80px;">
+                <ui:VisualElement style="flex-grow: 1; flex-direction: column;">
+                    <ui:Label text="Label" name="LVL" />
+                    <ui:Label text="Label" name="player-name" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="top-right" style="flex-grow: 1;">
+                <ui:Button text="Button" name="mail" />
+                <ui:Button text="Button" name="friends" />
+                <ui:Button text="Button" name="bg" />
+                <ui:Button text="Button" name="settings" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="bottom-bar" style="flex-grow: 1; flex-direction: row; justify-content: flex-end; height: 100px; align-content: center;">
+            <ui:VisualElement name="bottom-right" style="flex-grow: 1; flex-direction: row; align-content: center;">
+                <ui:Button text="Button" name="characters" />
+                <ui:Button text="Button" name="gacha" />
+                <ui:Button text="Button" name="shop" />
+                <ui:Button text="Button" name="start" />
+                <ui:Label text="Label" />
+                <ui:Label text="Label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

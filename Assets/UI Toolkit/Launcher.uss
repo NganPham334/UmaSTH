@@ -1,0 +1,12 @@
+/* Base style for the prompt */
+.prompt-text {
+    transition-property: opacity;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-in-out;
+    opacity: 1;
+}
+
+/* The state we will toggle */
+.prompt-faded {
+    opacity: 0.1;
+}

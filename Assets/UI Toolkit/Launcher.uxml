@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/LauncherStyles.uss?fileID=7433441132597879392&amp;guid=d7a2f9689458b784586b92b7e4d38d10&amp;type=3#LauncherStyles" />
+    <ui:VisualElement name="ScreenRoot" style="flex-grow: 1; width: 1920px; background-image: url(&quot;project://database/Assets/CG/anime-anime-girls-uma-musume-pretty-derby-horse-girls-animal-ears-hd-wallpaper-f8c918980f0eeab18f11715f9d067051.jpg?fileID=2800000&amp;guid=5a52ec3da70d18447868be295579fac2&amp;type=3#anime-anime-girls-uma-musume-pretty-derby-horse-girls-animal-ears-hd-wallpaper-f8c918980f0eeab18f11715f9d067051&quot;); background-size: 1920px 1080px; position: absolute; height: 1080px;">
+        <ui:Label text="Game Version: ALPHA" name="GameVer" class="flicker-animation" style="font-size: 32px; right: 0%; bottom: 0%;" />
+        <ui:Label text="Click to Start" name="StartPrompt" style="position: absolute; top: auto; left: 0%; bottom: 10%; right: 0%; -unity-text-align: upper-center; font-size: 64px;" />
+    </ui:VisualElement>
+</ui:UXML>
