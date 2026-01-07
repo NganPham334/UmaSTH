@@ -190,8 +190,6 @@ namespace VisualNovel
                 int amount = int.Parse(match.Groups[3].Value);
                 
                 var runData = Instance.currentRunData;
-                
-                Debug.Log(statName + " " + mod * amount);
                 switch (statName)
                 {
                     case "spd":
