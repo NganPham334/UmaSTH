@@ -1,13 +1,8 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 public class StudyScreenController : MonoBehaviour
 {	
-	public TextMeshProUGUI spdText;
-	public TextMeshProUGUI witText;
-	public TextMeshProUGUI memText;
-	public TextMeshProUGUI lukText;
+	// REMOVED: All TextMeshProUGUI reference
 	
 	public void OnStudyButtonPressed(int statIndex)
 	{
@@ -15,11 +10,11 @@ public class StudyScreenController : MonoBehaviour
 		
 		if (StatsManager.Instance != null)
 		{
-			// Now take the StatType of Secondary Stat
-			StatType secondaryStat = StatsManager.Instance.ExecuteStudyAction(primaryStat);
-			UpdateStatDisplay(primaryStat); // Update text on screen for Primary Stat
-			UpdateStatDisplay(secondaryStat); // Update text on screen for Secondary Stat
-
+			StatsManager.Instance.ExecuteStudyAction(primaryStat);
+			// REMOVED: UpdateStatDisplay method call
+			// ExecuteStudyAction will call ApplyStatGain, so I don't need to call the method here again
+			// ApplyStatGain in StatsManager calls SetStatValue -> trigger StatBox.UpdateAllStats()
+			
 			if (GameStateMan.Instance != null)
 			{
 				GameStateMan.Instance.ReportActionComplete();
@@ -31,50 +26,11 @@ public class StudyScreenController : MonoBehaviour
 		{
 			Debug.LogError("StatsManager.Instance is null. Check StatsManager in Script Execution Order");
 		}
-
-
 	}
 	
-	private void UpdateStatDisplay(StatType statType)
-	{
-		if (StatsManager.Instance == null) return;
-		
-		int currentValue = StatsManager.Instance.GetStatValue(statType);
-		
-		switch (statType)
-		{
-			case StatType.spd:
-				if (spdText != null)
-					spdText.text = currentValue.ToString();
-				break;
-			case StatType.wit:
-				if (witText != null)
-					witText.text = currentValue.ToString();
-				break;
-			case StatType.mem:
-				if (memText != null)
-					memText.text = currentValue.ToString();
-				break;
-			case StatType.luk:
-				if (lukText != null)
-					lukText.text = currentValue.ToString();
-				break;
-		}
-	}
-		
-	// Optional: Call UpdateStatDisplay when scene load to set initial value
-	private void Start()
-	{
-		// FIX: Change Script Execution Order to -100
-		// so that StatsManager.Awake() run before StudyScreenController.Start()
-		// If StatsManager.Instance is not null here, this will successfully call GetStatValue()
-		foreach (StatType type in System.Enum.GetValues(typeof(StatType)))
-		{
-			UpdateStatDisplay(type);
-		}
-	}
+	// REMOVED: UpdateStatDisplay(StatType statType)
+	// REMOVED: Start() (StatBox.cs handle its own initialization)
 	
-	// CHANGE: Use GameStateMan.cs global manager for scene change
 	public void OnRestButtonPressed()
 	{
 		Debug.Log("Rest button pressed");
@@ -92,5 +48,4 @@ public class StudyScreenController : MonoBehaviour
 			GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
 		}
 	}
-    
 }

@@ -348,7 +348,7 @@ PrefabInstance:
     - target: {fileID: 1982157342177238356, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1189690611}
+      objectReference: {fileID: 0}
     - target: {fileID: 1982157342177238356, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -860,7 +860,7 @@ PrefabInstance:
     - target: {fileID: 1982157342177238356, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1189690611}
+      objectReference: {fileID: 0}
     - target: {fileID: 1982157342177238356, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1727,17 +1727,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 989554245033214452, guid: fb9bac630d5d6ae4a8ef90db0a28bf77, type: 3}
   m_PrefabInstance: {fileID: 1696443113}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &924927847 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1509529844701402459, guid: fb9bac630d5d6ae4a8ef90db0a28bf77, type: 3}
-  m_PrefabInstance: {fileID: 313145576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &970644716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,7 +1810,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1189690611}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StudyScreenController, Assembly-CSharp
         m_MethodName: OnRestButtonPressed
         m_Mode: 1
@@ -2100,7 +2089,6 @@ GameObject:
   - component: {fileID: 1189690609}
   - component: {fileID: 1189690608}
   - component: {fileID: 1189690607}
-  - component: {fileID: 1189690611}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2197,22 +2185,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1189690611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189690606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f66ceb2b95b40247868110f54c302d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StudyScreenController
-  spdText: {fileID: 1718518531}
-  witText: {fileID: 924927847}
-  memText: {fileID: 1811555156}
-  lukText: {fileID: 1966841995}
 --- !u!1001 &1210067693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2236,7 +2208,7 @@ PrefabInstance:
     - target: {fileID: 1982157342177238356, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1189690611}
+      objectReference: {fileID: 0}
     - target: {fileID: 1982157342177238356, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2467,6 +2439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   levelText: {fileID: 0}
+  studyNameText: {fileID: 0}
   rectTransform: {fileID: 0}
 --- !u!1001 &1357716861
 PrefabInstance:
@@ -2827,17 +2800,6 @@ PrefabInstance:
       addedObject: {fileID: 177884093}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb9bac630d5d6ae4a8ef90db0a28bf77, type: 3}
---- !u!114 &1718518531 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1509529844701402459, guid: fb9bac630d5d6ae4a8ef90db0a28bf77, type: 3}
-  m_PrefabInstance: {fileID: 627126063}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1764672425
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,7 +2883,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1189690611}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StudyScreenController, Assembly-CSharp
         m_MethodName: OnReturnButtonPressed
         m_Mode: 1
@@ -3109,17 +3071,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790319030}
   m_CullTransparentMesh: 1
---- !u!114 &1811555156 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1509529844701402459, guid: fb9bac630d5d6ae4a8ef90db0a28bf77, type: 3}
-  m_PrefabInstance: {fileID: 1357716861}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1824916704
 GameObject:
   m_ObjectHideFlags: 0
@@ -3196,17 +3147,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824916704}
   m_CullTransparentMesh: 1
---- !u!114 &1966841995 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1509529844701402459, guid: fb9bac630d5d6ae4a8ef90db0a28bf77, type: 3}
-  m_PrefabInstance: {fileID: 1696443113}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1971176377
 GameObject:
   m_ObjectHideFlags: 0
@@ -3366,7 +3306,7 @@ PrefabInstance:
     - target: {fileID: 1982157342177238356, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1189690611}
+      objectReference: {fileID: 0}
     - target: {fileID: 1982157342177238356, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
