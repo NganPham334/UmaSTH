@@ -14,6 +14,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private StatsManager StatsManager;
     [SerializeField] private Image lvImage;
     [SerializeField] private Color color1, color2, color3, color4, color5;
+    [SerializeField] private StudyLvBar studyLvBar;
 
     void Start()
     {
@@ -81,6 +82,18 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // Update the popup texts
         // mainStatGainPopup.GetComponentInChildren<TextMeshProUGUI>().SetText($"+{}");
         // secondaryStatGainPopup.GetComponentInChildren<TextMeshProUGUI>().SetText($"+{}");
+        if (studyLvBar != null)
+        {
+            studyLvBar.UpdateLevelText(currentRunData.GetStatLevel((buttonType) switch
+            {
+                ButtonType.Speed => StatType.spd,
+                ButtonType.Wit => StatType.wit,
+                ButtonType.Memory => StatType.mem,
+                ButtonType.Luck => StatType.luk,
+                _ => StatType.spd
+            }), buttonType.ToString());
+            studyLvBar.Activate();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -93,6 +106,10 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
         mainStatGainPopup.SetActive(false);
         secondaryStatGainPopup.SetActive(false);
+        }
+        if (studyLvBar != null)
+        {
+            studyLvBar.Deactivate();
         }
     }
 }
