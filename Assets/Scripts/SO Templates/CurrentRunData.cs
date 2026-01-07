@@ -28,7 +28,8 @@ public class CurrentRunData : ScriptableObject
 
     // Study Weight and Level
     [Header("Study Levels & Weights")]
-    public int spdLevel = 1, witLevel = 1, memLevel = 1, lukLevel = 1;
+    public int spdLevel = 1;
+    public int witLevel = 1, memLevel = 1, lukLevel = 1;
     public int spdWeight = 1, witWeight = 1, memWeight = 1, lukWeight = 1;
 
     [Header("Upgrade Points")]
