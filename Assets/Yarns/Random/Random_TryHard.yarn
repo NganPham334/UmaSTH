@@ -9,4 +9,5 @@ When you finally stop, you collapse into your chair—exhausted, but proud. #lin
 Like you’ve beaten your own limits. #line:001cc1e 
 <<stat spd+10 wit+5 mem+5>>
 Blay:Wait… why does this suddenly make so much sense? Did I just unlock a skill? #line:0969e99 
+<<stop>>
 ===

@@ -23,4 +23,5 @@ Your wallet, however, is screaming. #line:0e06292
 ->I’ll eat light—cheap and healthy. #line:08f0e7a 
     <<stat clr+10>>
     Blay:That was a good choice. I feel energized now. #line:0c5f4a2
+    <<stop>>
 ===

@@ -13,4 +13,5 @@ It sounds fun… but you’re tired. #line:0a4c552
 ->I think I’ll stay home tonight… I’m really exhausted. #line:016270c 
     <<stat clr+20 mood-1 >>
     Blay:Skipping one outing doesn’t mean losing a friend.Sometimes, staying in is the better choice. #line:0427e4e 
+    <<stop>>
 ===
