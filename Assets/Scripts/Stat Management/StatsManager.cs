@@ -44,18 +44,14 @@ public class StatsManager : MonoBehaviour
         ApplyStatGain(primaryStatType, expectedValue.pGain);
         ApplyStatGain(expectedValue.sType, expectedValue.sGain);
 
-        // 5. Update Weight for next time
+        // 3. Update Weight for next time
         progressionHandler.ProcessStudyWeight(primaryStatType);
 
-        // 6. Transition to VN
-        //VisualNovelTransition(primaryStatType, true);
-        // Temporary commented out for testing purpose
-
-		// 7. Display
+		// 4. Display
 		return expectedValue.sType;
 	}
 	
-	// NEW: Calculator for Preview UI
+	// Calculator for Preview UI
 	// returns: (Primary Gain, Secondary Gain, Which Secondary Stat is it?)
 	public (int pGain, int sGain, StatType sType) GetExpectedGains(StatType primaryStatType)
 	{
@@ -93,6 +89,8 @@ public class StatsManager : MonoBehaviour
         VisualNovelTransition(type, false);
     }
 	
+	// Since we don't have a Visual Novel dialogue for study success
+	// this method can be obsolete
 	private void VisualNovelTransition(StatType type, bool passed)
 	// Created purely for convenience, I'm lazy to type out the whole thing
     {
@@ -104,12 +102,4 @@ public class StatsManager : MonoBehaviour
         };
         GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, vnParams);
     }
-
-	// Getter function for StudyScreenController
-	public int GetStatValue(StatType type)
-	{
-		if (runData == null) return 0;
-		return runData.GetStatValue(type); // Move reading value to CurrentRunData object
-	}
-	
 }
