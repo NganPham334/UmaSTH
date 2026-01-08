@@ -5,6 +5,7 @@ using System.Diagnostics;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using DG.Tweening;
 public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public static List<StudyButton> allStudyButtons = new();
@@ -16,10 +17,13 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private Image lvImage;
     [SerializeField] private Color color1, color2, color3, color4, color5;
     [SerializeField] private StudyLvBar studyLvBar;
+    [SerializeField] private RectTransform rectTransform;
+    private float originalX;
 
     void Start()
     {
         UpdateText();
+        originalX = rectTransform.anchoredPosition.x;
     }
 
     void OnEnable()
@@ -68,8 +72,8 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("Mouse is hovering over: " + buttonType);
-        transform.localScale = Vector3.one * 1.03f;
-        transform.localPosition += new Vector3(-30f, 0f, 0f);
+        rectTransform.DOAnchorPosX(originalX-30, 0.1f).SetLink(gameObject);
+        rectTransform.DOScale(1.05f, 0.1f).SetLink(gameObject);
         // Show main and secondary stat gain popup
         if (mainStatGainPopup != null && secondaryStatGainPopup != null)
         {
@@ -118,8 +122,8 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("Mouse left: " + buttonType);
-        transform.localScale = Vector3.one;
-        transform.localPosition += new Vector3(30f, 0f, 0f);
+        rectTransform.DOAnchorPosX(originalX, 0.1f).SetLink(gameObject);
+        rectTransform.DOScale(1f, 0.1f).SetLink(gameObject);
         // Hide main and secondary stat gain popups
         if (mainStatGainPopup != null && secondaryStatGainPopup != null)
         { 

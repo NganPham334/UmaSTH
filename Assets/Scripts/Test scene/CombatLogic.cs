@@ -65,9 +65,9 @@ public class CombatLogic : MonoBehaviour
         float height = playerHpRect.rect.height;
         float xPosition = -playerHpRect.rect.width;
         float yPosition = (height * playerHpBar.GetComponent<HpBarController>().GetValue()) - (height / 2);
-        testTransform.DOMoveX(testTransform.position.x - 640f, 0.2f).SetEase(Ease.OutQuad).OnComplete(
-            () => testTransform.DOMoveX(testTransform.position.x + 640f, 0.2f).SetEase(Ease.OutQuad)
-        );
+        testTransform.DOMoveX(- 640f, 0.2f).SetRelative().SetEase(Ease.OutQuad).OnComplete(
+            () => testTransform.DOMoveX(640f, 0.2f).SetRelative().SetEase(Ease.OutQuad)
+            );
 
         if (Random.value >= (testHitChance))
         {
@@ -92,8 +92,8 @@ public class CombatLogic : MonoBehaviour
         float height = TestHpRect.rect.height;
         float xPosition = TestHpRect.rect.width;
         float yPosition = (height * testHpBar.GetComponent<HpBarController>().GetValue()) - (height / 2);
-        playerTransform.DOMoveX(playerTransform.position.x + 640f, 0.2f).SetEase(Ease.OutQuad).OnComplete(
-            () => playerTransform.DOMoveX(playerTransform.position.x - 640f, 0.2f).SetEase(Ease.OutQuad)
+        playerTransform.DOMoveX(640f, 0.2f).SetRelative().SetEase(Ease.OutQuad).OnComplete(
+            () => playerTransform.DOMoveX(-640f, 0.2f).SetRelative().SetEase(Ease.OutQuad)
         );
         if (Random.value >= (playerHitChance))
         {

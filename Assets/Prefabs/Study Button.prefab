@@ -210,6 +210,7 @@ MonoBehaviour:
   color4: {r: 1, g: 0.20188677, b: 0.20188677, a: 1}
   color5: {r: 0.64524865, g: 0.04171584, b: 0.81886786, a: 1}
   studyLvBar: {fileID: 0}
+  rectTransform: {fileID: 3481749699549425972}
 --- !u!114 &966709345402977774
 MonoBehaviour:
   m_ObjectHideFlags: 0
