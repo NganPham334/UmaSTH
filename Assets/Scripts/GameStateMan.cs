@@ -107,10 +107,10 @@ public class GameStateMan : MonoBehaviour
     
     public void ReportActionComplete()
     {
-        if (CurrentRun.CurrentTurn % 2 == 0 && !CurrentRun.doneREvent)
+        if (Random.Range(0.0F, 1.0F) > 0.8 && !CurrentRun.doneREvent)
         {
-            CurrentRun.doneREvent = true;
             RequestState(GameState.VisualNovel, new() { { "vn_type", "random" } });
+            CurrentRun.doneREvent = true;
             return;
         }
 
@@ -124,7 +124,7 @@ public class GameStateMan : MonoBehaviour
             List<StatType> results = StatsManager.Instance.progressionHandler.TriggerUpgradeEvent(CurrentRun.baseUpgradePoints);
             CurrentRun.baseUpgradePoints += 1;
             // TODO: UpgradeUIManager.Instance.ShowSummary(results);
-            return;
+            // return; same tbh
         }
 
         _stateParameters.Clear();

@@ -78,8 +78,6 @@ namespace VisualNovel
         void OnDestroy()
         {
             if (Instance == this) Instance = null;
-            
-            // Clean up event listener to prevent memory leaks
             if (dialogueRunner != null)
             {
                 dialogueRunner.onDialogueComplete.RemoveListener(FinishScene);
@@ -136,6 +134,7 @@ namespace VisualNovel
                 return;
             }
             
+            Debug.Log($"[VNHandler] Node: {nodeName}, vnType: {_vnType}");
             string tags = dialogueRunner.Dialogue.GetHeaderValue(nodeName, "tags");
             if (tags != null) ParseHeaderTags(tags);
             dialogueRunner.StartDialogue(nodeName);
@@ -202,7 +201,7 @@ namespace VisualNovel
                         runData.Wit = Math.Max(0, Math.Min(1000, runData.Wit + mod * amount));
                         break;
                     case "clr":
-                        runData.Clarity = Math.Max(0, Math.Min(1000, runData.Clarity + mod * amount));
+                        runData.Clarity = Math.Max(0, Math.Min(100, runData.Clarity + mod * amount));
                         break;
                     case "luk":
                         runData.Luck = Math.Max(0, Math.Min(1000, runData.Luck + mod * amount));
