@@ -14,6 +14,7 @@ public class ClarityBar : MonoBehaviour
     [SerializeField] private Gradient clarityGradient;
     [SerializeField] private Image fill, moodBox;
     [SerializeField] private TextMeshProUGUI moodText;
+    [SerializeField] private CurrentRunData currentRunData;
     private void Awake()
     {
         instance = this;
@@ -21,6 +22,9 @@ public class ClarityBar : MonoBehaviour
     void Start()
     {
         SetMoodText(currentMood);
+        currentClarity = targetClarity = currentRunData.Clarity;
+        clarityBarSlider.value = currentClarity / maxClarity;
+        fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
     }
     void Update()
     {

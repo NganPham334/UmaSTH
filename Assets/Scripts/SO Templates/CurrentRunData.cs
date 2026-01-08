@@ -70,7 +70,8 @@ public class CurrentRunData : ScriptableObject
     }
 	
 	public void SetStatValue(StatType type, int value)
-	{
+    {
+        value = Math.Clamp(value, 0, 1000);
 		switch (type)
 		{
 			case StatType.spd: 
@@ -85,6 +86,11 @@ public class CurrentRunData : ScriptableObject
 			case StatType.luk:
 				Luck = value;
 				break;
+            case StatType.clr:
+                value = Math.Clamp(value, 0, 100);
+                ClarityBar.UpdateClarity(value - Clarity);
+                Clarity = value;
+                break;
 		}
         StatBox.UpdateAllStats();
 	}

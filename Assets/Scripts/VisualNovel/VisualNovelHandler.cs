@@ -188,6 +188,7 @@ namespace VisualNovel
                 int mod = match.Groups[2].Value == "+" ? 1 : -1;
                 int amount = int.Parse(match.Groups[3].Value);
                 
+                Debug.Log($"{statName} change: {amount * mod}");
                 var runData = Instance.currentRunData;
                 switch (statName)
                 {
@@ -201,7 +202,7 @@ namespace VisualNovel
                         runData.Wit = Math.Max(0, Math.Min(1000, runData.Wit + mod * amount));
                         break;
                     case "clr":
-                        runData.Clarity = Math.Max(0, Math.Min(100, runData.Clarity + mod * amount));
+                        runData.SetStatValue(StatType.clr, runData.Clarity + mod * amount);
                         break;
                     case "luk":
                         runData.Luck = Math.Max(0, Math.Min(1000, runData.Luck + mod * amount));
