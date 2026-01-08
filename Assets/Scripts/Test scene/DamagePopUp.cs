@@ -41,7 +41,7 @@ public class DamagePopUp : MonoBehaviour
 
     }
 
-    public void Setup(int damageAmount, bool isCrit)
+    public void SetupDamage(int damageAmount, bool isCrit)
     {
         if (isCrit)
         {
@@ -56,6 +56,14 @@ public class DamagePopUp : MonoBehaviour
             textMesh.fontSize = 40;
             textMesh.SetText('-'+damageAmount.ToString());
         }
+        textMesh.color = textColor;
+    }
+
+    public void SetupMiss()
+    {
+        textColor = Color.white;
+        textMesh.fontSize = 40;
+        textMesh.SetText("Missed!");
         textMesh.color = textColor;
     }
 }

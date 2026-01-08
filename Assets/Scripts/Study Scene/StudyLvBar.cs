@@ -22,12 +22,12 @@ public class StudyLvBar : MonoBehaviour
     public void Activate()
     {
         gameObject.SetActive(true);
-        rectTransform.DOAnchorPosX(200, 0.5f).SetEase(Ease.OutQuad);
+        rectTransform.DOAnchorPosX(200, 0.5f).SetEase(Ease.OutQuad).SetLink(gameObject);
     }
 
     public void Deactivate()
     {
         gameObject.SetActive(false);
-        rectTransform.DOAnchorPosX(-200, 0.5f).SetEase(Ease.OutQuad);
+        rectTransform.DOAnchorPosX(-200, 0.5f).SetEase(Ease.OutQuad).SetLink(gameObject);
     }
 }

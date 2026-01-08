@@ -19,8 +19,8 @@ public class CombatLogic : MonoBehaviour
     private int playerSpeed, playerWit, playerMemory, playerLuck;
     private int testSpeed, testWit, testMemory, testLuck;
     private int currentTurn;
-    private float playerHitChance, testHitChance;
-    private float playerCritChance, testCritChance;
+    private double playerHitChance, testHitChance;
+    private double playerCritChance, testCritChance;
     private String mood;
 
 
@@ -33,14 +33,11 @@ public class CombatLogic : MonoBehaviour
         mood = currentRunData.GetMood();
         Debug.Log($"Current Mood: {mood}");
 
-        playerSpeed = (int)((float)currentRunData.GetStatValue(StatType.spd) * GetMoodMultiplier());
-        playerWit = (int)((float)currentRunData.GetStatValue(StatType.wit) * GetMoodMultiplier());
-        playerMemory = (int)((float)currentRunData.GetStatValue(StatType.mem) * GetMoodMultiplier());
-        playerLuck = (int)((float)currentRunData.GetStatValue(StatType.luk) * GetMoodMultiplier());
+        playerSpeed = (int)((double)currentRunData.GetStatValue(StatType.spd) * GetMoodMultiplier());
+        playerWit = (int)((double)currentRunData.GetStatValue(StatType.wit) * GetMoodMultiplier());
+        playerMemory = (int)((double)currentRunData.GetStatValue(StatType.mem) * GetMoodMultiplier());
+        playerLuck = (int)((double)currentRunData.GetStatValue(StatType.luk) * GetMoodMultiplier());
 
-        playerHitChance = (float)playerLuck/testLuck;
-        playerCritChance = (float)playerLuck/1000;
-        
         exam = examSchedule.GetExamForTurn(currentTurn);
 
         testSpeed = exam.GetStatValue(StatType.spd);
@@ -48,8 +45,10 @@ public class CombatLogic : MonoBehaviour
         testMemory = exam.GetStatValue(StatType.mem);
         testLuck = exam.GetStatValue(StatType.luk);
 
-        testHitChance = (float)testLuck/playerLuck;
-        testCritChance = (float)testLuck/1000;
+        playerHitChance = (double)playerLuck/testLuck;
+        playerCritChance = (double)playerLuck/1000;
+        testHitChance = (double)testLuck/playerLuck;
+        testCritChance = (double)testLuck/1000;
 
         playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 7);
         testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 7);
@@ -73,6 +72,7 @@ public class CombatLogic : MonoBehaviour
         if (Random.value >= (testHitChance))
         {
             Debug.Log("Test's attack missed!");
+            SpawnMissPopUp(playerHpBar.transform.position + new Vector3(xPosition, yPosition, 0));
             return;
         }
         if (Random.value <= (testCritChance))
@@ -98,6 +98,7 @@ public class CombatLogic : MonoBehaviour
         if (Random.value >= (playerHitChance))
         {
             Debug.Log("Player's attack missed!");
+            SpawnMissPopUp(testHpBar.transform.position + new Vector3(xPosition, yPosition, 0));
             return;
         }
         if (Random.value <= (playerCritChance))
@@ -112,7 +113,7 @@ public class CombatLogic : MonoBehaviour
         SpawnDamagePopUp(playerWit, testHpBar.transform.position + new Vector3(xPosition, yPosition, 0), false);
     }
 
-    public float GetMoodMultiplier()
+    public double GetMoodMultiplier()
     {
     // Return a different multiplier based on Mood
         return mood switch
@@ -130,10 +131,16 @@ public class CombatLogic : MonoBehaviour
     {
         Transform damagePopUpTransform = Instantiate(damagePopUpPrefab, spawnPosition, Quaternion.identity, canvasTransform);
         DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
-        damagePopUp.Setup(damageAmount, isCrit);
+        damagePopUp.SetupDamage(damageAmount, isCrit);
     }
-    
-    
+
+    public void SpawnMissPopUp(Vector3 spawnPosition)
+    {
+        Transform damagePopUpTransform = Instantiate(damagePopUpPrefab, spawnPosition, Quaternion.identity, canvasTransform);
+        DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
+        damagePopUp.SetupMiss();
+    }
+
     public void FailNextScene()
     {
         GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() 
