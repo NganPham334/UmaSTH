@@ -159,7 +159,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 currentRunData.baseUpgradePoints += 1;
                 
                 UpgradeEventUI.SetActive(true);
-                UpgradeEventUI.GetComponent<UpgradeEventUI>().DisplayUpgradeStudy(results);
+                StartCoroutine(UpgradeEventUI.GetComponent<UpgradeEventUI>().DisplayUpgradeStudy(results));
                 // TODO: UpgradeUIManager.Instance.ShowSummary(results);
                 return;
             }
