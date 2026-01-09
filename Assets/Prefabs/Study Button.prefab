@@ -206,7 +206,7 @@ MonoBehaviour:
   lvImage: {fileID: 5983467164370322731}
   color1: {r: 0.22171387, g: 0.9245283, b: 0.13082935, a: 1}
   color2: {r: 0.35336557, g: 0.3226415, b: 1, a: 1}
-  color3: {r: 1, g: 0.55873317, b: 0.19433957, a: 0}
+  color3: {r: 1, g: 0.55873317, b: 0.19433957, a: 1}
   color4: {r: 1, g: 0.20188677, b: 0.20188677, a: 1}
   color5: {r: 0.64524865, g: 0.04171584, b: 0.81886786, a: 1}
   studyLvBar: {fileID: 0}
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9924528, g: 0.47231725, b: 0.17040226, a: 1}
+  m_Color: {r: 1, g: 0.37499994, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
