@@ -25,6 +25,7 @@ public class ClarityBar : MonoBehaviour
         currentClarity = targetClarity = currentRunData.Clarity;
         clarityBarSlider.value = currentClarity / maxClarity;
         fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
+        SetMoodText(currentRunData.GetMood());
     }
     void Update()
     {

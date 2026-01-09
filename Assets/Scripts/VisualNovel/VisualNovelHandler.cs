@@ -193,19 +193,19 @@ namespace VisualNovel
                 switch (statName)
                 {
                     case "spd":
-                        runData.Speed = Math.Max(0, Math.Min(1000, runData.Speed + mod * amount));
+                        runData.SetStatValue(StatType.spd, runData.Speed + mod * amount);
                         break;
                     case "mem":
-                        runData.Memory = Math.Max(0, Math.Min(1000, runData.Memory + mod * amount));
+                        runData.SetStatValue(StatType.mem, runData.Memory + mod * amount);
                         break;
                     case "wit":
-                        runData.Wit = Math.Max(0, Math.Min(1000, runData.Wit + mod * amount));
+                        runData.SetStatValue(StatType.wit, runData.Wit + mod * amount);
                         break;
                     case "clr":
                         runData.SetStatValue(StatType.clr, runData.Clarity + mod * amount);
                         break;
                     case "luk":
-                        runData.Luck = Math.Max(0, Math.Min(1000, runData.Luck + mod * amount));
+                        runData.SetStatValue(StatType.luk, runData.Luck + mod * amount);
                         break;
                     case "mood":
                         runData.ChangeMood(mod * amount);
