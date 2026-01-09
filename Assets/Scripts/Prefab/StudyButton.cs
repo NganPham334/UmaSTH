@@ -18,6 +18,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private Color color1, color2, color3, color4, color5;
     [SerializeField] private StudyLvBar studyLvBar;
     [SerializeField] private RectTransform rectTransform;
+    [SerializeField] private GameObject UpgradeEventUI;
     private float originalX;
 
     void Start()
@@ -150,6 +151,18 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (StatsManager.Instance != null)
         {
             StatsManager.Instance.ExecuteStudyAction(primaryStat);
+
+            int turn = currentRunData.CurrentTurn;
+            if (turn > 1 && turn % 4 == 0)
+            {
+                List<StatType> results = StatsManager.Instance.progressionHandler.TriggerUpgradeEvent(currentRunData.baseUpgradePoints);
+                currentRunData.baseUpgradePoints += 1;
+                
+                UpgradeEventUI.SetActive(true);
+                UpgradeEventUI.GetComponent<UpgradeEventUI>().DisplayUpgradeStudy(results);
+                // TODO: UpgradeUIManager.Instance.ShowSummary(results);
+                return;
+            }
 
             // 3. Report completion to move the game forward
             if (GameStateMan.Instance != null)
