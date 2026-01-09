@@ -154,7 +154,8 @@ public class CurrentRunData : ScriptableObject
 
     public string ChangeMood(int change)
     {
-	    Mood = Math.Min(4, Math.Max(0, Mood + change));
+	    Mood = Math.Clamp(Mood + change, 0, 4);
+        ClarityBar.UpdateMood(GetMood());
         return GetMood();
     }
 
