@@ -29,6 +29,11 @@ public class StatsManager : MonoBehaviour
 	{
 		if (runData == null) return primaryStatType;
 
+		// 0. Comsume Clarity (Whether fail or success)
+		int clrCost = statsProcessor.GetClarityCost(primaryStatType);
+		runData.Clarity = Mathf.Max(0, runData.Clarity - clrCost);
+		runData.SetStatValue(StatType.clr, runData.Clarity);
+
 		// 1. Check for Failure (Clarity System)
         bool success = statsProcessor.RollForSuccess(runData.Clarity);
         
