@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2145274809276448912, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: UpgradeEventUI
+      value: 
+      objectReference: {fileID: 2141182916}
     - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 940.07434

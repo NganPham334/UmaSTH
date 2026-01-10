@@ -19,7 +19,7 @@ public class UpgradeEventUI : MonoBehaviour
         MemoryButton.localScale = Vector3.zero;
         LuckButton.localScale = Vector3.zero;
     }
-    public IEnumerator DisplayUpgradeStudy(List<StatType> UpgradedStudies)
+    public IEnumerator DisplayUpgradeEvent(List<StatType> UpgradedStudies)
     {
         foreach (StatType stat in UpgradedStudies)
         {
