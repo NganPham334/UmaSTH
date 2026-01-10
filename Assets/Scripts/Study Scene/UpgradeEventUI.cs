@@ -8,8 +8,8 @@ public class UpgradeEventUI : MonoBehaviour
 {
     private static WaitForSeconds _waitForSeconds0_4 = new(0.4f);
     [SerializeField] private RectTransform SpeedButton, WitButton, MemoryButton, LuckButton;
-    [SerializeField] private RectTransform SpeedTextRect, WitTextRect, MemoryTextRect, LuckTextRect;
-    [SerializeField] private TextMeshProUGUI SpeedText, WitText, MemoryText, LuckText;
+    [SerializeField] private RectTransform SpeedUpgradedTextRect, WitUpgradedTextRect, MemoryUpgradedTextRect, LuckUpgradedTextRect;
+    [SerializeField] private TextMeshProUGUI SpeedUpgradedText, WitUpgradedText, MemoryUpgradedText, LuckUpgradedText;
     readonly Dictionary<StatType, int> count = new();
 
     void Start()
@@ -55,20 +55,20 @@ public class UpgradeEventUI : MonoBehaviour
                 switch (stat)
                 {
                     case StatType.spd:
-                        SpeedText.SetText($"Upgraded! x{count[stat]}");
-                        SpeedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
+                        SpeedUpgradedText.SetText($"Upgraded! x{count[stat]}");
+                        SpeedUpgradedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
                         break;
                     case StatType.wit:
-                        WitText.SetText($"Upgraded! x{count[stat]}");
-                        WitTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
+                        WitUpgradedText.SetText($"Upgraded! x{count[stat]}");
+                        WitUpgradedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
                         break;
                     case StatType.mem:
-                        MemoryText.SetText($"Upgraded! x{count[stat]}");
-                        MemoryTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
+                        MemoryUpgradedText.SetText($"Upgraded! x{count[stat]}");
+                        MemoryUpgradedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
                         break;
                     case StatType.luk:
-                        LuckText.SetText($"Upgraded! x{count[stat]}");
-                        LuckTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
+                        LuckUpgradedText.SetText($"Upgraded! x{count[stat]}");
+                        LuckUpgradedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
                         break;
                 }
             }
