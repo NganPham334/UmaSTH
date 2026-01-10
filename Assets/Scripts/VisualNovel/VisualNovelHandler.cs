@@ -103,6 +103,14 @@ namespace VisualNovel
                     nodeName = "Study_" + nodeName;
                     break;
                 
+                case "rest" :
+                    nodeName = "Rest";
+                    break;
+                
+                case "pastime":
+                    nodeName = "Pastime";
+                    break;
+                
                 case "random":
                     var events = dialogueRunner.Dialogue.NodeNames
                         .Where(node => node.StartsWith("Random_")).ToList();
