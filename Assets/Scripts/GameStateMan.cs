@@ -120,6 +120,11 @@ public class GameStateMan : MonoBehaviour
         int turn = CurrentRun.CurrentTurn;
 
         _stateParameters.Clear();
+        if (turn > 1 && turn % 4 == 1)
+        {
+            // Go to Upgrade Event
+            return;
+        }
 
         // If exam exists → go to PreTest
         if (ExamSchedule.IsExamScheduledForTurn(turn))

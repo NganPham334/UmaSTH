@@ -145,14 +145,6 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             StatsManager.Instance.ExecuteStudyAction(MyStatType);
 
-            int turn = currentRunData.CurrentTurn;
-            if (turn > 1 && turn % 4 == 0)
-            {
-                StatsManager.Instance.progressionHandler.TriggerUpgradeEvent(currentRunData.baseUpgradePoints);
-                currentRunData.baseUpgradePoints += 1;
-                return;
-            }
-
             // 3. Report completion to move the game forward
             if (GameStateMan.Instance != null)
             {

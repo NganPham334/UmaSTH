@@ -40,7 +40,7 @@ public class StudyProgressionHandler : MonoBehaviour
 
     public List<StatType> TriggerUpgradeEvent(int points)
     {
-        List<StatType> results = new List<StatType>();
+        List<StatType> results = new();
 
         for (int i = 0; i < points; i++)
         {
@@ -65,9 +65,6 @@ public class StudyProgressionHandler : MonoBehaviour
 
             Debug.Log($"Upgrade Event: {winner} is now level {runData.GetStatLevel(winner)}");
         }
-
-        UpgradeEventUI.Instance.gameObject.SetActive(true);
-        StartCoroutine(UpgradeEventUI.Instance.GetComponent<UpgradeEventUI>().DisplayUpgradeEvent(results));
 
         // 5. Reset all Weight to 1 (to 0 if maxed) in preparation for next Upgrade Event
         ResetWeights();

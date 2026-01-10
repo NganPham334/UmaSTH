@@ -768,6 +768,63 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3481749699549425972, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
   m_PrefabInstance: {fileID: 419799357}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &592207775
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 942.4185
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 501.23782
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969364019672214972, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240880184921187482, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
+      propertyPath: m_Name
+      value: StatsManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e0d9965db793def8ab5c8654af7e8e7, type: 3}
 --- !u!1001 &678283771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -998,6 +1055,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3481749699549425972, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
   m_PrefabInstance: {fileID: 735769130}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &735769134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4762415398073841369, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
+  m_PrefabInstance: {fileID: 735769130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aefcb3e34e60ca44a3a35108fb6051f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &777578944 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4762415398073841369, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
+  m_PrefabInstance: {fileID: 678283771}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aefcb3e34e60ca44a3a35108fb6051f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &820151674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1115,6 +1194,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3481749699549425972, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
   m_PrefabInstance: {fileID: 820151674}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &820151678 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4762415398073841369, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
+  m_PrefabInstance: {fileID: 820151674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aefcb3e34e60ca44a3a35108fb6051f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &903688406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,14 +1876,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7c5da0ec1bc40419325985d607a282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeEventUI
-  SpeedButton: {fileID: 678283772}
-  WitButton: {fileID: 735769131}
-  MemoryButton: {fileID: 419799358}
-  LuckButton: {fileID: 820151675}
-  SpeedUpgradedText: {fileID: 0}
-  WitUpgradedText: {fileID: 0}
-  MemoryUpgradedText: {fileID: 0}
-  LuckUpgradedText: {fileID: 0}
+  SpeedButton: {fileID: 777578944}
+  WitButton: {fileID: 735769134}
+  MemoryButton: {fileID: 2140458605}
+  LuckButton: {fileID: 820151678}
+  SpeedUpgradedText: {fileID: 1105139243}
+  WitUpgradedText: {fileID: 40618202}
+  MemoryUpgradedText: {fileID: 207832790}
+  LuckUpgradedText: {fileID: 1141892021}
+  currentRunData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
 --- !u!114 &2054580189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,10 +1923,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054580186}
   m_CullTransparentMesh: 1
+--- !u!114 &2140458605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4762415398073841369, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
+  m_PrefabInstance: {fileID: 419799357}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aefcb3e34e60ca44a3a35108fb6051f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 300922670}
   - {fileID: 903688410}
+  - {fileID: 592207775}
   - {fileID: 1269675406}

@@ -10,6 +10,7 @@ public class UpgradeEventUI : MonoBehaviour
     [SerializeField] private StudyButton SpeedButton, WitButton, MemoryButton, LuckButton;
     [SerializeField] private UpgradedText SpeedUpgradedText, WitUpgradedText, MemoryUpgradedText, LuckUpgradedText;
     readonly Dictionary<StatType, int> count = new();
+    [SerializeField]private CurrentRunData currentRunData;
     public static UpgradeEventUI Instance{get; private set;}
     private void Awake()
     {
@@ -23,6 +24,10 @@ public class UpgradeEventUI : MonoBehaviour
         WitButton.Shrink();
         MemoryButton.Shrink();
         LuckButton.Shrink();
+        List<StatType> results = StatsManager.Instance.progressionHandler.TriggerUpgradeEvent(currentRunData.baseUpgradePoints);
+        StudyButton.UpdateAllButtons();
+        Debug.Log($"Upgrade list: {results.ToString()}");
+        StartCoroutine(DisplayUpgradeEvent(results));
     }
     public IEnumerator DisplayUpgradeEvent(List<StatType> UpgradedStudies)
     {
@@ -79,6 +84,6 @@ public class UpgradeEventUI : MonoBehaviour
     public void Next()
     {
         count.Clear();
-        GameStateMan.Instance.ReportActionComplete();
+        GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
     }
 }
