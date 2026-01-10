@@ -81,7 +81,6 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Mouse is hovering over: " + buttonType);
         rectTransform.DOAnchorPosX(originalX-30, 0.1f).SetLink(gameObject);
         rectTransform.DOScale(1.05f, 0.1f).SetLink(gameObject);
 
@@ -118,7 +117,6 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Mouse left: " + buttonType);
         rectTransform.DOAnchorPosX(originalX, 0.1f).SetLink(gameObject);
         rectTransform.DOScale(1f, 0.1f).SetLink(gameObject);
         // Hide main and secondary stat gain popups

@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class EndTestScreen : MonoBehaviour
 {
+    void Start()
+    {
+        gameObject.SetActive(false);
+    }
     public void ShowEndTestScreen()
     {
         gameObject.SetActive(true);

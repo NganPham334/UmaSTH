@@ -29,6 +29,14 @@ public class CombatLogic : MonoBehaviour
     void Start()
     {
         currentTurn = currentRunData.CurrentTurn;
+        exam = examSchedule.GetExamForTurn(currentTurn);
+        Debug.Log($"Starting Exam: {exam} on Turn {currentTurn}");
+        if (exam == null)
+        {
+            Debug.Log("No exam found for the current turn!");
+            Time.timeScale = 1.0f;
+            return;
+        }
 
         mood = currentRunData.GetMood();
         Debug.Log($"Current Mood: {mood}");
@@ -37,8 +45,6 @@ public class CombatLogic : MonoBehaviour
         playerWit = (int)((double)currentRunData.GetStatValue(StatType.wit) * GetMoodMultiplier());
         playerMemory = (int)((double)currentRunData.GetStatValue(StatType.mem) * GetMoodMultiplier());
         playerLuck = (int)((double)currentRunData.GetStatValue(StatType.luk) * GetMoodMultiplier());
-
-        exam = examSchedule.GetExamForTurn(currentTurn);
 
         testSpeed = exam.GetStatValue(StatType.spd);
         testWit = exam.GetStatValue(StatType.wit);
@@ -52,8 +58,8 @@ public class CombatLogic : MonoBehaviour
 
         playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 7);
         testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 7);
-        playerActionBar.setSpeed(playerSpeed);
-        testActionBar.setSpeed(testSpeed);
+        playerActionBar.SetSpeed(playerSpeed);
+        testActionBar.SetSpeed(testSpeed);
 
         Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}, testHitChance: {testHitChance},testCritChance: {testCritChance}");
         Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}, playerHitChance: {playerHitChance},playerCritChance: {playerCritChance}");

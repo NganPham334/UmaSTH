@@ -41,7 +41,7 @@ public class ActionBarController : MonoBehaviour
 
     }
     
-    public void setSpeed(float value)
+    public void SetSpeed(float value)
     {
         speed = value;
     }

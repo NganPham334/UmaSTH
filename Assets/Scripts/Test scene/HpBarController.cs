@@ -11,7 +11,12 @@ public class HpBarController : MonoBehaviour
     [SerializeField] private Gradient hpGradient;
     [SerializeField] private Image fill;
     [SerializeField] private EndTestScreen endScreen;
-    private static bool ended =  false;
+    private static bool ended;
+
+    void Start()
+    {
+        ended = false;
+    }
     void Update()
     {
         if (currentHp != targetHp)
