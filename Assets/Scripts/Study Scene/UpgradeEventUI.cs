@@ -11,9 +11,16 @@ public class UpgradeEventUI : MonoBehaviour
     [SerializeField] private RectTransform SpeedUpgradedTextRect, WitUpgradedTextRect, MemoryUpgradedTextRect, LuckUpgradedTextRect;
     [SerializeField] private TextMeshProUGUI SpeedUpgradedText, WitUpgradedText, MemoryUpgradedText, LuckUpgradedText;
     readonly Dictionary<StatType, int> count = new();
+    public static UpgradeEventUI Instance{get; private set;}
+    private void Awake()
+    {
+        Instance = this;
+        Debug.Log("UpgradeEventUI Instance assigned.");
+    }
 
     void Start()
     {
+        gameObject.SetActive(false);
         SpeedButton.localScale = Vector3.zero;
         WitButton.localScale = Vector3.zero;
         MemoryButton.localScale = Vector3.zero;

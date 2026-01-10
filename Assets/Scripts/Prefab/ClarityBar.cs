@@ -10,14 +10,14 @@ public class ClarityBar : MonoBehaviour
     private static float currentClarity = maxClarity;
     private static float targetClarity = maxClarity;
     private static string currentMood = "Normal", previousMood = "Normal";
-    public static ClarityBar instance;
+    public static ClarityBar Instance{get; private set;}
     [SerializeField] private Gradient clarityGradient;
     [SerializeField] private Image fill, moodBox;
     [SerializeField] private TextMeshProUGUI moodText;
     [SerializeField] private CurrentRunData currentRunData;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     void Start()
     {
@@ -46,7 +46,7 @@ public class ClarityBar : MonoBehaviour
         currentMood = mood;
         if (currentMood != previousMood)
         {
-            instance.SetMoodText(currentMood);
+            Instance.SetMoodText(currentMood);
             previousMood = currentMood;
         }
     }

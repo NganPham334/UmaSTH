@@ -5,8 +5,6 @@ using System.Collections.Generic;
 public class StudyProgressionHandler : MonoBehaviour
 {
     public CurrentRunData runData;
-    public GameObject UpgradeEventUI;
-
     // The Reward Table (Level 1: 10/2, Level 2: 14/4, etc.)
     private Dictionary<int, (int primary, int secondary)> levelRewards = new Dictionary<int, (int, int)>
     {
@@ -67,9 +65,9 @@ public class StudyProgressionHandler : MonoBehaviour
 
             Debug.Log($"Upgrade Event: {winner} is now level {runData.GetStatLevel(winner)}");
         }
- 
-        UpgradeEventUI.SetActive(true);
-        StartCoroutine(UpgradeEventUI.GetComponent<UpgradeEventUI>().DisplayUpgradeEvent(results));
+
+        UpgradeEventUI.Instance.gameObject.SetActive(true);
+        StartCoroutine(UpgradeEventUI.Instance.GetComponent<UpgradeEventUI>().DisplayUpgradeEvent(results));
 
         // 5. Reset all Weight to 1 (to 0 if maxed) in preparation for next Upgrade Event
         ResetWeights();
