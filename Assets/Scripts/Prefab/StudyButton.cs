@@ -20,6 +20,16 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private RectTransform rectTransform;
     private float originalX;
 
+    // Helper method for switch case
+    private StatType MyStatType => buttonType switch
+    {
+        ButtonType.Speed => StatType.spd,
+        ButtonType.Wit => StatType.wit,
+        ButtonType.Memory => StatType.mem,
+        ButtonType.Luck => StatType.luk,
+        _ => StatType.spd
+    };
+
     void Start()
     {
         UpdateText();
@@ -74,27 +84,21 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         Debug.Log("Mouse is hovering over: " + buttonType);
         rectTransform.DOAnchorPosX(originalX-30, 0.1f).SetLink(gameObject);
         rectTransform.DOScale(1.05f, 0.1f).SetLink(gameObject);
-        // Show main and secondary stat gain popup
-        if (mainStatGainPopup != null && secondaryStatGainPopup != null)
-        {
-            mainStatGainPopup.SetActive(true);  
-            secondaryStatGainPopup.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("Stat gain popups are not assigned.");
-        }
+
+        // NOTE: Possibly redundant
+        // // Show main and secondary stat gain popup
+        // if (mainStatGainPopup != null && secondaryStatGainPopup != null)
+        // {
+        //     mainStatGainPopup.SetActive(true);  
+        //     secondaryStatGainPopup.SetActive(true);
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("Stat gain popups are not assigned.");
+        // }
         
-        StatType primaryType = (buttonType) switch
-        {
-            ButtonType.Speed => StatType.spd,
-            ButtonType.Wit => StatType.wit,
-            ButtonType.Memory => StatType.mem,
-            ButtonType.Luck => StatType.luk,
-            _ => StatType.spd
-        };
         // Get number from calculator
-        var gains = StatsManager.Instance.GetExpectedGains(primaryType);
+        var gains = StatsManager.Instance.GetExpectedGains(MyStatType);
         // update text
         if (mainStatGainPopup != null && secondaryStatGainPopup != null)
         {
@@ -107,14 +111,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (studyLvBar != null)
         {
-            studyLvBar.UpdateLevelText(currentRunData.GetStatLevel((buttonType) switch
-            {
-                ButtonType.Speed => StatType.spd,
-                ButtonType.Wit => StatType.wit,
-                ButtonType.Memory => StatType.mem,
-                ButtonType.Luck => StatType.luk,
-                _ => StatType.spd
-            }), buttonType.ToString());
+            studyLvBar.UpdateLevelText(currentRunData.GetStatLevel(MyStatType), buttonType.ToString());
             studyLvBar.Activate();
         }
     }
@@ -139,24 +136,15 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Mouse is clicking on: " + buttonType);
-        StatType primaryStat = (buttonType) switch
-        {
-            ButtonType.Speed => StatType.spd,
-            ButtonType.Wit => StatType.wit,
-            ButtonType.Memory => StatType.mem,
-            ButtonType.Luck => StatType.luk,
-            _ => StatType.spd
-        };
         if (StatsManager.Instance != null)
         {
-            StatsManager.Instance.ExecuteStudyAction(primaryStat);
+            StatsManager.Instance.ExecuteStudyAction(MyStatType);
 
             int turn = currentRunData.CurrentTurn;
             if (turn > 1 && turn % 4 == 0)
             {
                 StatsManager.Instance.progressionHandler.TriggerUpgradeEvent(currentRunData.baseUpgradePoints);
                 currentRunData.baseUpgradePoints += 1;
-                // TODO: UpgradeUIManager.Instance.ShowSummary(results);
                 return;
             }
 
@@ -165,7 +153,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 GameStateMan.Instance.ReportActionComplete();
             }
-            Debug.Log($"Study Action executed for: {primaryStat}");
+            Debug.Log($"Study Action executed for: {MyStatType}");
         }
         else
         {
