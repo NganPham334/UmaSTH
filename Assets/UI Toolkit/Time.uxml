@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="ThingiesContainer" style="flex-grow: 0; flex-direction: row; align-items: flex-start; height: 120px; width: 400px; position: absolute; top: 130px; left: 18px;">
-        <ui:VisualElement name="MainContainer" style="flex-grow: 0; width: 200px; height: 110px; min-height: 0; min-width: 0; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; overflow: hidden;">
+    <ui:VisualElement name="ThingiesContainer" style="flex-grow: 0; flex-direction: row; align-items: flex-start; height: 110px; width: 454px; position: absolute; top: 129px; left: 5px;">
+        <ui:VisualElement name="MainContainer" style="flex-grow: 0; width: 173px; height: 110px; min-height: 0; min-width: 0; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; overflow: hidden;">
             <ui:VisualElement name="HeaderPanel" style="flex-grow: 0; background-color: rgb(46, 74, 158); height: 35px; align-items: center; align-content: flex-start; justify-content: center;">
                 <ui:Label text="Turns remaining" name="dsadsadsa" style="color: rgb(255, 255, 255); font-size: 22px; align-self: auto; align-content: flex-start;" />
             </ui:VisualElement>
@@ -9,8 +9,8 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="EventInfoPanel" style="flex-grow: 1; margin-left: 20px; justify-content: space-between; width: 120px; height: 100%;">
-            <ui:Label text="Finals" style="padding-top: 4px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; border-left-color: rgb(211, 211, 211); border-right-color: rgb(211, 211, 211); border-top-color: rgb(211, 211, 211); border-bottom-color: rgb(211, 211, 211); background-color: rgba(211, 211, 211, 0.73); font-size: 26px; align-self: auto; align-content: auto; padding-left: 8px; position: absolute; top: 3px; left: -15px; width: 177px;" />
-            <ui:Label text="3BC" name="time-label" style="padding-top: 4px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; border-left-color: rgb(211, 211, 211); border-right-color: rgb(211, 211, 211); border-top-color: rgb(211, 211, 211); border-bottom-color: rgb(211, 211, 211); background-color: rgba(211, 211, 211, 0.73); font-size: 26px; align-self: auto; align-content: auto; padding-left: 8px; position: absolute; width: 176px; top: 56px; left: -15px; right: auto; bottom: auto;" />
+            <ui:Label text="Finals" style="padding-top: 4px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; border-left-color: rgb(211, 211, 211); border-right-color: rgb(211, 211, 211); border-top-color: rgb(211, 211, 211); border-bottom-color: rgb(211, 211, 211); background-color: rgba(211, 211, 211, 0.73); font-size: 24px; align-self: auto; align-content: auto; padding-left: 8px; position: absolute; top: 3px; left: -15px; width: 223px;" />
+            <ui:Label text="1st Year Late Aug" name="time-label" style="padding-top: 4px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; border-left-color: rgb(211, 211, 211); border-right-color: rgb(211, 211, 211); border-top-color: rgb(211, 211, 211); border-bottom-color: rgb(211, 211, 211); background-color: rgba(211, 211, 211, 0.73); font-size: 24px; align-self: auto; align-content: auto; padding-left: 8px; position: absolute; width: 223px; top: 58px; left: -15px; right: auto; bottom: auto;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
