@@ -7,9 +7,8 @@ using TMPro;
 public class UpgradeEventUI : MonoBehaviour
 {
     private static WaitForSeconds _waitForSeconds0_4 = new(0.4f);
-    [SerializeField] private RectTransform SpeedButton, WitButton, MemoryButton, LuckButton;
-    [SerializeField] private RectTransform SpeedUpgradedTextRect, WitUpgradedTextRect, MemoryUpgradedTextRect, LuckUpgradedTextRect;
-    [SerializeField] private TextMeshProUGUI SpeedUpgradedText, WitUpgradedText, MemoryUpgradedText, LuckUpgradedText;
+    [SerializeField] private StudyButton SpeedButton, WitButton, MemoryButton, LuckButton;
+    [SerializeField] private UpgradedText SpeedUpgradedText, WitUpgradedText, MemoryUpgradedText, LuckUpgradedText;
     readonly Dictionary<StatType, int> count = new();
     public static UpgradeEventUI Instance{get; private set;}
     private void Awake()
@@ -20,11 +19,10 @@ public class UpgradeEventUI : MonoBehaviour
 
     void Start()
     {
-        gameObject.SetActive(false);
-        SpeedButton.localScale = Vector3.zero;
-        WitButton.localScale = Vector3.zero;
-        MemoryButton.localScale = Vector3.zero;
-        LuckButton.localScale = Vector3.zero;
+        SpeedButton.Shrink();
+        WitButton.Shrink();
+        MemoryButton.Shrink();
+        LuckButton.Shrink();
     }
     public IEnumerator DisplayUpgradeEvent(List<StatType> UpgradedStudies)
     {
@@ -44,16 +42,16 @@ public class UpgradeEventUI : MonoBehaviour
                 switch (stat)
                 {
                     case StatType.spd:
-                        SpeedButton.DOScale(1f, 0.2f).SetLink(gameObject);
+                        SpeedButton.PopUp();
                         break;
                     case StatType.wit:
-                        WitButton.DOScale(1f, 0.2f).SetLink(gameObject);
+                        WitButton.PopUp();
                         break;
                     case StatType.mem:
-                        MemoryButton.DOScale(1f, 0.2f).SetLink(gameObject);
+                        MemoryButton.PopUp();
                         break;
                     case StatType.luk:
-                        LuckButton.DOScale(1f, 0.2f).SetLink(gameObject);
+                        LuckButton.PopUp();
                         break;
                 }
             } 
@@ -62,20 +60,16 @@ public class UpgradeEventUI : MonoBehaviour
                 switch (stat)
                 {
                     case StatType.spd:
-                        SpeedUpgradedText.SetText($"Upgraded! x{count[stat]}");
-                        SpeedUpgradedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
+                        SpeedUpgradedText.UpdateUpgradedText(count[stat]);
                         break;
                     case StatType.wit:
-                        WitUpgradedText.SetText($"Upgraded! x{count[stat]}");
-                        WitUpgradedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
+                        WitUpgradedText.UpdateUpgradedText(count[stat]);
                         break;
                     case StatType.mem:
-                        MemoryUpgradedText.SetText($"Upgraded! x{count[stat]}");
-                        MemoryUpgradedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
+                        MemoryUpgradedText.UpdateUpgradedText(count[stat]);
                         break;
                     case StatType.luk:
-                        LuckUpgradedText.SetText($"Upgraded! x{count[stat]}");
-                        LuckUpgradedTextRect.DOPunchScale(Vector3.one * 0.2f, 0.2f, 10, 1).SetLink(gameObject);
+                        LuckUpgradedText.UpdateUpgradedText(count[stat]);
                         break;
                 }
             }
@@ -84,7 +78,6 @@ public class UpgradeEventUI : MonoBehaviour
 
     public void Next()
     {
-        gameObject.SetActive(false);
         count.Clear();
         GameStateMan.Instance.ReportActionComplete();
     }

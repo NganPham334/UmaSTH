@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using DG.Tweening;
+
+[RequireComponent(typeof(RectTransform))]
 public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public static List<StudyButton> allStudyButtons = new();
@@ -17,7 +19,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private Image lvImage;
     [SerializeField] private Color color1, color2, color3, color4, color5;
     [SerializeField] private StudyLvBar studyLvBar;
-    [SerializeField] private RectTransform rectTransform;
+    private RectTransform rectTransform;
     private float originalX;
 
     // Helper method for switch case
@@ -29,6 +31,11 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         ButtonType.Luck => StatType.luk,
         _ => StatType.spd
     };
+
+    void Awake()
+    {
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     void Start()
     {
@@ -157,5 +164,15 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             Debug.LogError("StatsManager Instance not found!");
         }
+    }
+
+    public void Shrink()
+    {
+        rectTransform.localScale = Vector3.zero;
+    }
+
+    public void PopUp()
+    {
+        rectTransform.DOScale(1f, 0.2f).SetLink(gameObject);
     }
 }
