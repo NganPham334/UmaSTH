@@ -43,13 +43,3 @@ MonoBehaviour:
     Wit: 800
     Memory: 800
     Luck: 500
-  - ExamName: Testing
-    Turn: 1
-    FailureFlagToSet: 
-    SuccessFlagToSet: 
-    nodeNamePass: 
-    nodeNameFail: 
-    Speed: 80
-    Wit: 72
-    Memory: 70
-    Luck: 1

@@ -23,4 +23,9 @@ public class GameScene_Button : MonoBehaviour
         GameStateMan.Instance.RequestState(GameStateMan.GameState.VisualNovel, new() {{"vn_type", "rest"}});
         
     }
+
+    public void OnHomeButtonPressed()
+    {
+        GameStateMan.Instance.RequestState(GameStateMan.GameState.MainMenu);
+    }
 }
