@@ -149,4 +149,18 @@ public class GameStateMan : MonoBehaviour
         string sceneName = _currentState.GetSceneName();
         SceneManager.LoadScene(sceneName);
     }
+    public void LoadSavedGame()
+{
+    if (PlayerPrefs.HasKey("SavedGameData"))
+    {
+        string jsonData = PlayerPrefs.GetString("SavedGameData");
+        JsonUtility.FromJsonOverwrite(jsonData, CurrentRun);
+        Debug.Log("Game loaded successfully!");
+    }
+    else
+    {
+        Debug.LogWarning("No saved game found!");
+    }
 }
+}
+
