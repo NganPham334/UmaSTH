@@ -126,21 +126,6 @@ public class GameStateMan : MonoBehaviour
             return;
         }
 
-        // If exam exists → go to PreTest
-        if (ExamSchedule.IsExamScheduledForTurn(turn))
-        {
-            var exam = ExamSchedule.GetExamForTurn(turn);
-
-            var param = new Dictionary<string, object>
-            {
-                { "ExamData", exam },
-                { "OptionalTest", false }
-            };
-
-            RequestState(GameState.PreTest, param);
-            return;
-        }
-
         if (HasEventForCurrentTurn(turn))
         {
             RequestState(GameState.VisualNovel, new() {{"vn_type", "determined"}});
