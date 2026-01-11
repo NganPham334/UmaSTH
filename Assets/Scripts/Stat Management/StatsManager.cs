@@ -20,13 +20,21 @@ public class StatsManager : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			DontDestroyOnLoad(gameObject);
 
 			// Justin Case, not actually needed
 			if (progressionHandler == null) progressionHandler = GetComponent<StudyProgressionHandler>();
         	if (statsProcessor == null) statsProcessor = GetComponent<StatsProcessor>();
 		}
 		else Destroy(gameObject);
+	}
+
+	// Ensure the old reference is gone
+	private void OnDestroy()
+	{
+		if (Instance == this)
+		{
+			Instance = null;
+		}
 	}
 
 	public void ExecuteStudyAction(StatType primaryStatType)
