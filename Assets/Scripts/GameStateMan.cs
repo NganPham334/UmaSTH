@@ -15,6 +15,9 @@ public class GameStateMan : MonoBehaviour
     public ExamSchedule ExamSchedule;
     public YarnProject mainScript;
 
+    // This is NOT thread safe as the name might suggest
+    private bool _transitionLock = false;
+
     public enum GameState
     {
         MainMenu,
@@ -76,12 +79,26 @@ public class GameStateMan : MonoBehaviour
 
     public void RequestState(GameState newState, Dictionary<string, object> parameters)
     {
+        if (_transitionLock)
+        {
+            return;
+        }
+
+        _transitionLock = true;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
         _stateParameters.Clear();
 
         if (parameters != null)
             _stateParameters = new Dictionary<string, object>(parameters);
 
         ChangeState(newState);
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        _transitionLock = false;
     }
 
     public void RequestState(GameState newState)
@@ -106,6 +123,11 @@ public class GameStateMan : MonoBehaviour
     
     public void ReportActionComplete(string flag = null)
     {
+        if (_transitionLock)
+        {
+            return;
+        }
+        
         int turn = CurrentRun.CurrentTurn;
         if (turn > 1 && turn % 4 == 1 && flag == "from_study" && flag != "from_upgrade_event")
         {
