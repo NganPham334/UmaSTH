@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PreTestUI.unity
     guid: 98852c9e0e7a3b647baa17e37bbf93cc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Resting Scene.unity
     guid: 3a5472b41c459e840bfef5c68c948a31
   - enabled: 1
@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Visual Novel Screen.unity
     guid: cd373450a504a584dbb42278b38317cd
+  - enabled: 1
+    path: Assets/Scenes/Upgrade Scene.unity
+    guid: d43a8ce737ab70a4f828a3c6095d526f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

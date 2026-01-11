@@ -13,8 +13,8 @@ public static class GameStateExtensions
                 return "LauncherScreen";
             case GameStateMan.GameState.VisualNovel:
                 return "Visual Novel Screen";
-            case GameStateMan.GameState.RunEnd:
-                return "Run End Scene";
+            case GameStateMan.GameState.UpgradeEvent:
+                return "Upgrade Scene";
             case GameStateMan.GameState.Training:
                 return "Study Screen";
             case GameStateMan.GameState.GameScene:

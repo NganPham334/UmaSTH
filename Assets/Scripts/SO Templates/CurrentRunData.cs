@@ -7,9 +7,6 @@ public class CurrentRunData : ScriptableObject
 {
     //[HideInInspector] 
     public int Speed, Wit, Memory, Luck, Clarity, CurrentTurn, TotalTurns, Mood;
-    [HideInInspector]
-    public bool doneREvent = false; 
-    
     [System.Serializable]
     public class Flag
     {
@@ -44,8 +41,6 @@ public class CurrentRunData : ScriptableObject
         Luck = 50;
         Clarity = 100;
         Mood = 4;
-        
-        doneREvent = false;
 
         // Reset Levels and Weights
         spdLevel = witLevel = memLevel = lukLevel = 1;

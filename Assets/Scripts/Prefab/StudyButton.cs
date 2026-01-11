@@ -148,7 +148,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             // 3. Report completion to move the game forward
             if (GameStateMan.Instance != null)
             {
-                GameStateMan.Instance.ReportActionComplete();
+                GameStateMan.Instance.ReportActionComplete("from_study");
             }
             Debug.Log($"Study Action executed for: {MyStatType}");
         }

@@ -84,6 +84,6 @@ public class UpgradeEventUI : MonoBehaviour
     public void Next()
     {
         count.Clear();
-        GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+        GameStateMan.Instance.ReportActionComplete("from_upgrade_event");
     }
 }

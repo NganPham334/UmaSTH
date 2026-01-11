@@ -175,7 +175,7 @@ namespace VisualNovel
                 return; // god knows why this is needed
             }
             
-            GameStateMan.Instance.ReportActionComplete();
+            GameStateMan.Instance.ReportActionComplete(_vnType == "random" ? "from_random" : null);
         }
         
         [YarnCommand("stat")]

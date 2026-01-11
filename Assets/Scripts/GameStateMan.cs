@@ -24,8 +24,7 @@ public class GameStateMan : MonoBehaviour
         VisualNovel,
         PreTest,
         Exam,
-        RunEnd
-        // TODO: determine if this should be a separate scene
+        UpgradeEvent
     }
 
     private GameState _currentState;
@@ -105,27 +104,25 @@ public class GameStateMan : MonoBehaviour
         return false;
     }
     
-    public void ReportActionComplete()
+    public void ReportActionComplete(string flag = null)
     {
-        if (Random.Range(0.0F, 1.0F) > 0.8 && !CurrentRun.doneREvent)
+        int turn = CurrentRun.CurrentTurn;
+        if (turn > 1 && turn % 4 == 1 && flag == "from_study" && flag != "from_upgrade_event")
+        {
+            RequestState(GameState.UpgradeEvent);
+            return;
+        }
+        
+        if (Random.Range(0.0F, 1.0F) > 0.8 && flag != "from_random")
         {
             RequestState(GameState.VisualNovel, new() { { "vn_type", "random" } });
-            CurrentRun.doneREvent = true;
             return;
         }
-
-        CurrentRun.doneREvent = false;
         
         CurrentRun.AdvanceTurn();
-        int turn = CurrentRun.CurrentTurn;
-
+        turn = CurrentRun.CurrentTurn;
         _stateParameters.Clear();
-        if (turn > 1 && turn % 4 == 1)
-        {
-            // Go to Upgrade Event
-            return;
-        }
-
+        
         if (HasEventForCurrentTurn(turn))
         {
             RequestState(GameState.VisualNovel, new() {{"vn_type", "determined"}});
