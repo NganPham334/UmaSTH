@@ -34,29 +34,26 @@ public class ControllerOfTime : MonoBehaviour
             _dateLabel.text = FormatTime();
         }
     }
-
-    // coding this much math without using gpt should entitle me to some kind of awards
+    
     private string FormatTime()
     {
+        int t = runData.CurrentTurn - 1;
+        int yearNum = (t / 24) + 1;
+    
         string prod = "";
-        int curTurn = runData.CurrentTurn;
-        double year = (double) curTurn / 24;
-        
-        switch (System.Math.Ceiling(year))
+        switch (yearNum)
         {
             case 1: prod += "1st Year "; break;
             case 2: prod += "2nd Year "; break;
             case 3: prod += "3rd Year "; break;
         }
 
-        double month = (year - System.Math.Floor(year)) * 12;
-        double halfMonth = month - System.Math.Floor(month);
+        bool isEarly = t % 2 == 0;
+        prod += isEarly ? "Early " : "Late ";
         
-        if (halfMonth > 0) prod += "Early ";
-        else prod += "Late ";
-        // Debug.Log($"{curTurn} {month} {(int) System.Math.Ceiling(month - 0.1)}");, not deleting this, slightly foreshadowing
-        prod += CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName((int) System.Math.Ceiling(month - 0.1));
+        int monthIndex = ((t % 24) / 2) + 1;
 
+        prod += System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(monthIndex);
         return prod;
     }
 }
