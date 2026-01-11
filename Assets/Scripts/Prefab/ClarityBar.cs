@@ -29,6 +29,8 @@ public class ClarityBar : MonoBehaviour
     }
     void Update()
     {
+        // Set the target to match actual data
+        targetClarity = currentRunData.Clarity;
         if (currentClarity != targetClarity)
         {
             currentClarity = Mathf.Lerp(currentClarity, targetClarity, 5 * Time.deltaTime);

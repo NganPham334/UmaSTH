@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class StatsManager : MonoBehaviour
@@ -9,6 +10,9 @@ public class StatsManager : MonoBehaviour
 	public CurrentRunData runData;
 	public StudyProgressionHandler progressionHandler;
     public StatsProcessor statsProcessor;
+    
+    // An Event, this tell StudyButton.cs that the wait is over and it can continue
+    public static System.Action OnStudyActionFinished;
 
 	public void Awake()
 	{
@@ -25,35 +29,48 @@ public class StatsManager : MonoBehaviour
 		else Destroy(gameObject);
 	}
 
-	public StatType ExecuteStudyAction(StatType primaryStatType)
+	public void ExecuteStudyAction(StatType primaryStatType)
 	{
-		if (runData == null) return primaryStatType;
+		StartCoroutine(StudyRoutine(primaryStatType));
+	}
 
-		// 0. Comsume Clarity (Whether fail or success)
+	private IEnumerator StudyRoutine(StatType primaryStatType)
+	{
+		if (runData == null) yield break;
+
+		// 0. Consume Clarity (Whether fail or success)
 		int clrCost = statsProcessor.GetClarityCost(primaryStatType);
 		runData.Clarity = Mathf.Max(0, runData.Clarity - clrCost);
 		runData.SetStatValue(StatType.clr, runData.Clarity);
 
-		// 1. Check for Failure (Clarity System)
+		// 1. Explicitly tell the UI to move
+		if (ClarityBar.Instance != null)
+		{
+			ClarityBar.UpdateClarity(-clrCost);
+		}
+
+		// 2. Delay
+		// Give the Clarity Bar 1s to finish DOTween animation
+		yield return new WaitForSeconds(1.0f);
+		
+		// 3. Check for Failure (Clarity check)
         bool success = statsProcessor.RollForSuccess(runData.Clarity);
-        
         if (!success)
         {
             HandleStudyFailure(primaryStatType);
-            return primaryStatType;
+            yield break;
         }
 
-		// 2. Moved the calculation to its separate function
+		// 4. Moved the calculation to its separate function
 		var expectedValue = GetExpectedGains(primaryStatType);
-        
         ApplyStatGain(primaryStatType, expectedValue.pGain);
         ApplyStatGain(expectedValue.sType, expectedValue.sGain);
 
-        // 3. Update Weight for next time
+        // 5. Update Weight for Upgrade Event
         progressionHandler.ProcessStudyWeight(primaryStatType);
 
-		// 4. Display
-		return expectedValue.sType;
+		// 6. Notify StudyButton that all tasks are finished
+		OnStudyActionFinished?.Invoke();
 	}
 	
 	// Calculator for Preview UI

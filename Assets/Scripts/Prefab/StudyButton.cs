@@ -143,18 +143,22 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         Debug.Log("Mouse is clicking on: " + buttonType);
         if (StatsManager.Instance != null)
         {
+            // 1. Subscribe to the finish event
+            StatsManager.OnStudyActionFinished += HandleStudySequenceFinished;
+              
+            // 2. Execute Study
             StatsManager.Instance.ExecuteStudyAction(MyStatType);
-
-            // 3. Report completion to move the game forward
-            if (GameStateMan.Instance != null)
-            {
-                GameStateMan.Instance.ReportActionComplete("from_study");
-            }
-            Debug.Log($"Study Action executed for: {MyStatType}");
         }
-        else
+    }
+
+    private void HandleStudySequenceFinished()
+    {
+        // Unsubscribe and don't hit that like button
+        StatsManager.OnStudyActionFinished -= HandleStudySequenceFinished;
+        
+        if (GameStateMan.Instance != null)
         {
-            Debug.LogError("StatsManager Instance not found!");
+            GameStateMan.Instance.ReportActionComplete("from_study");
         }
     }
 
