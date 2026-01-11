@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class StatBox : MonoBehaviour
 {
@@ -81,13 +82,25 @@ public class StatBox : MonoBehaviour
 
     public void UpdateLocalPlayerStat()
     {
-        speed = currentRunData.GetStatValue(StatType.spd);
-        wit = currentRunData.GetStatValue(StatType.wit);
-        memory = currentRunData.GetStatValue(StatType.mem);
-        luck = currentRunData.GetStatValue(StatType.luk);
-
-        SetStatValue();
+        int targetValue = currentRunData.GetStatValue(GetStatType());
+        DOTween.Kill(this.gameObject);
+        DOTween.To(() => statValue, x =>
+            {
+                statValue = x;
+                statValueText.SetText(x.ToString());
+            }, targetValue, 0.8f)
+            .SetEase(Ease.OutQuad)
+            .SetTarget(this.gameObject);
     }
+    
+    private StatType GetStatType() => statBoxType switch
+    {
+        StatBoxType.Speed => StatType.spd,
+        StatBoxType.Wit => StatType.wit,
+        StatBoxType.Memory => StatType.mem,
+        StatBoxType.Luck => StatType.luk,
+        _ => StatType.spd
+    };
 
     public static void UpdateAllStats()
     {

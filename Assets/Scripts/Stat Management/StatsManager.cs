@@ -49,35 +49,33 @@ public class StatsManager : MonoBehaviour
 		// 0. Consume Clarity (Whether fail or success)
 		int clrCost = statsProcessor.GetClarityCost(primaryStatType);
 		runData.Clarity = Mathf.Max(0, runData.Clarity - clrCost);
-		runData.SetStatValue(StatType.clr, runData.Clarity);
-
-		// 1. Explicitly tell the UI to move
 		if (ClarityBar.Instance != null)
 		{
 			ClarityBar.UpdateClarity(-clrCost);
 		}
-
-		// 2. Delay
-		// Give the Clarity Bar 1s to finish DOTween animation
+		
+		// In preparation for StatsBox Tweening, the calculation
+		// have to be done beforehand
+		// 1. Calculate and apply stats
+		var expectedValue = GetExpectedGains(primaryStatType);
+        ApplyStatGain(primaryStatType, expectedValue.pGain);
+        ApplyStatGain(expectedValue.sType, expectedValue.sGain);
+        
+        // 2. Update Weight for Upgrade Event
+        progressionHandler.ProcessStudyWeight(primaryStatType);
+        
+		// 3. Delay: 1s to finish DOTween animation
 		yield return new WaitForSeconds(1.0f);
 		
-		// 3. Check for Failure (Clarity check)
+		// 4. Check for Failure (Clarity check)
         bool success = statsProcessor.RollForSuccess(runData.Clarity);
         if (!success)
         {
             HandleStudyFailure(primaryStatType);
             yield break;
         }
-
-		// 4. Moved the calculation to its separate function
-		var expectedValue = GetExpectedGains(primaryStatType);
-        ApplyStatGain(primaryStatType, expectedValue.pGain);
-        ApplyStatGain(expectedValue.sType, expectedValue.sGain);
-
-        // 5. Update Weight for Upgrade Event
-        progressionHandler.ProcessStudyWeight(primaryStatType);
-
-		// 6. Notify StudyButton that all tasks are finished
+        
+		// 5. Notify StudyButton that all tasks are finished
 		OnStudyActionFinished?.Invoke();
 	}
 	
