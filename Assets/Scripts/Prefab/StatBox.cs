@@ -34,7 +34,12 @@ public class StatBox : MonoBehaviour
     {
         statNameText.SetText(statBoxType.ToString());
         if (statBoxSide == StatBoxSide.Player)
-            UpdateLocalPlayerStat();
+        {
+            // Set the internal value immediately, the first Update check
+            // will likely find statValue = currentValue anyway
+            statValue = currentRunData.GetStatValue(GetStatType());
+            statValueText.SetText(statValue.ToString());
+        }
         if (statBoxSide == StatBoxSide.Test)
             UpdateTestStat(examSchedule.GetExamForTurn(currentRunData.CurrentTurn));
     }
@@ -83,6 +88,13 @@ public class StatBox : MonoBehaviour
     public void UpdateLocalPlayerStat()
     {
         int targetValue = currentRunData.GetStatValue(GetStatType());
+        // 1. If the value is the same, return
+        if (statValue == targetValue)
+        {
+            statValueText.SetText(statValue.ToString());
+            return;
+        }
+        // 2. If there is difference, play animation
         DOTween.Kill(this.gameObject);
         DOTween.To(() => statValue, x =>
             {
