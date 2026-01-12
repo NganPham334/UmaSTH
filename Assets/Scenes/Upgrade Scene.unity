@@ -1884,7 +1884,6 @@ MonoBehaviour:
   WitUpgradedText: {fileID: 40618202}
   MemoryUpgradedText: {fileID: 207832790}
   LuckUpgradedText: {fileID: 1141892021}
-  currentRunData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
 --- !u!114 &2054580189
 MonoBehaviour:
   m_ObjectHideFlags: 0
