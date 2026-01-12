@@ -38,8 +38,9 @@ public class StudyProgressionHandler : MonoBehaviour
         AddWeight(type);
     }
 
-    public List<StatType> TriggerUpgradeEvent(int points)
+    public List<StatType> TriggerUpgradeEvent()
     {
+        int points = runData.baseUpgradePoints;
         List<StatType> results = new();
 
         for (int i = 0; i < points; i++)
@@ -65,9 +66,10 @@ public class StudyProgressionHandler : MonoBehaviour
 
             Debug.Log($"Upgrade Event: {winner} is now level {runData.GetStatLevel(winner)}");
         }
-
+        
         // 5. Reset all Weight to 1 (to 0 if maxed) in preparation for next Upgrade Event
         ResetWeights();
+        runData.baseUpgradePoints++;
         return results;
     }
 
@@ -103,10 +105,22 @@ public class StudyProgressionHandler : MonoBehaviour
     {
         switch (type)
         {
-            case StatType.spd: if (runData.spdLevel < 5) runData.spdLevel++; break;
-            case StatType.wit: if (runData.witLevel < 5) runData.witLevel++; break;
-            case StatType.mem: if (runData.memLevel < 5) runData.memLevel++; break;
-            case StatType.luk: if (runData.lukLevel < 5) runData.lukLevel++; break;
+            case StatType.spd: 
+                if (runData.spdLevel < 5) runData.spdLevel++;
+                if (runData.spdLevel >= 5) runData.spdWeight = 0;
+                break;
+            case StatType.wit: 
+                if (runData.witLevel < 5) runData.witLevel++;
+                if (runData.witLevel >= 5) runData.witWeight = 0;
+                break;
+            case StatType.mem: 
+                if (runData.memLevel < 5) runData.memLevel++;
+                if (runData.memLevel >= 5) runData.memWeight = 0;
+                break;  
+            case StatType.luk: 
+                if (runData.lukLevel < 5) runData.lukLevel++;
+                if (runData.lukLevel >= 5) runData.lukWeight = 0;
+                break;
         }
     }
 
