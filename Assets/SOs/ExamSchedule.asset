@@ -15,6 +15,7 @@ MonoBehaviour:
   exams:
   - ExamName: Year 1 final
     Turn: 4
+    ExamYear: 1
     FailureFlagToSet: 
     SuccessFlagToSet: 
     nodeNamePass: PostTest_pass_test1
@@ -25,6 +26,7 @@ MonoBehaviour:
     Luck: 300
   - ExamName: Year 2 final
     Turn: 5
+    ExamYear: 2
     FailureFlagToSet: 
     SuccessFlagToSet: 
     nodeNamePass: PostTest_pass_test2
@@ -35,6 +37,7 @@ MonoBehaviour:
     Luck: 300
   - ExamName: Year 3 final
     Turn: 6
+    ExamYear: 3
     FailureFlagToSet: 
     SuccessFlagToSet: 
     nodeNamePass: PostTest_pass_test3

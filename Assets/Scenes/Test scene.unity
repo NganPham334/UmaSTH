@@ -172,6 +172,7 @@ MonoBehaviour:
   canvasTransform: {fileID: 1469311227}
   playerTransform: {fileID: 1046190254}
   testTransform: {fileID: 1780576289}
+  background: {fileID: 1730699391}
 --- !u!4 &1255339
 Transform:
   m_ObjectHideFlags: 0
