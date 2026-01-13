@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamSchedule
   exams:
   - ExamName: Year 1 final
-    Turn: 4
+    Turn: 24
     ExamYear: 1
     FailureFlagToSet: 
     SuccessFlagToSet: 
@@ -25,7 +25,7 @@ MonoBehaviour:
     Memory: 300
     Luck: 300
   - ExamName: Year 2 final
-    Turn: 5
+    Turn: 48
     ExamYear: 2
     FailureFlagToSet: 
     SuccessFlagToSet: 
@@ -36,7 +36,7 @@ MonoBehaviour:
     Memory: 500
     Luck: 300
   - ExamName: Year 3 final
-    Turn: 6
+    Turn: 72
     ExamYear: 3
     FailureFlagToSet: 
     SuccessFlagToSet: 

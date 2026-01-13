@@ -16,6 +16,7 @@ public class CombatLogic : MonoBehaviour
     [SerializeField] private Transform canvasTransform;
     [SerializeField] private Transform playerTransform, testTransform;
     [SerializeField] private TestSceneBg background;
+    [SerializeField] private TestModel testModel;
     
     private int playerSpeed, playerWit, playerMemory, playerLuck;
     private int testSpeed, testWit, testMemory, testLuck;
@@ -39,6 +40,7 @@ public class CombatLogic : MonoBehaviour
         }
 
         background.SetBackground(exam.ExamYear);
+        testModel.SetTestSprite(exam.ExamYear);
 
         mood = currentRunData.GetMood();
         Debug.Log($"Current Mood: {mood}");

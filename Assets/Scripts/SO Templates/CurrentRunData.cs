@@ -42,12 +42,13 @@ public class CurrentRunData : ScriptableObject
         Memory = 70;
         Luck = 50;
         Clarity = 100;
-        Mood = 4;
+        Mood = 2;
 
         // Reset Levels and Weights
         baseUpgradePoints = 2;
         spdLevel = witLevel = memLevel = lukLevel = 1;
         spdWeight = witWeight = memWeight = lukWeight = 1;
+        isFullyUpgraded = false;
         
         // Reset progress
         CurrentTurn = 1;
