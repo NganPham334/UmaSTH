@@ -46,14 +46,14 @@ public class DamagePopUp : MonoBehaviour
         if (isCrit)
         {
             textColor = Color.orangeRed;
-            textMesh.fontSize = 50;
+            textMesh.fontSize = 60;
             textMesh.SetText('-'+damageAmount.ToString()+'!');
 
         }
         else 
         {
             textColor = Color.yellow;
-            textMesh.fontSize = 40;
+            textMesh.fontSize = 50;
             textMesh.SetText('-'+damageAmount.ToString());
         }
         textMesh.color = textColor;
@@ -62,7 +62,7 @@ public class DamagePopUp : MonoBehaviour
     public void SetupMiss()
     {
         textColor = Color.white;
-        textMesh.fontSize = 40;
+        textMesh.fontSize = 50;
         textMesh.SetText("Missed!");
         textMesh.color = textColor;
     }
