@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Yarn.Unity;
+using DG.Tweening;
+using System.Collections;
 
 public class ClarityBar : MonoBehaviour
 {
+    private static WaitForSeconds _waitForSeconds0_05 = new(0.05f);
     [SerializeField] private Slider clarityBarSlider;
     private static float maxClarity = 100f;
     private static float currentClarity = maxClarity;
@@ -14,6 +16,7 @@ public class ClarityBar : MonoBehaviour
     [SerializeField] private Gradient clarityGradient;
     [SerializeField] private Image fill, moodBox;
     [SerializeField] private TextMeshProUGUI moodText;
+    [SerializeField] private RectTransform moodRect;
     [SerializeField] private CurrentRunData currentRunData;
     private void Awake()
     {
@@ -21,7 +24,6 @@ public class ClarityBar : MonoBehaviour
     }
     void Start()
     {
-        SetMoodText(currentMood);
         currentClarity = targetClarity = currentRunData.Clarity;
         clarityBarSlider.value = currentClarity / maxClarity;
         fill.color = clarityGradient.Evaluate(clarityBarSlider.normalizedValue);
@@ -49,6 +51,7 @@ public class ClarityBar : MonoBehaviour
         if (currentMood != previousMood)
         {
             Instance.SetMoodText(currentMood);
+            Instance.Animate();
             previousMood = currentMood;
         }
     }
@@ -79,5 +82,16 @@ public class ClarityBar : MonoBehaviour
                 moodText.fontSize = 30;
                 break;
         }
+    }
+
+    public void Animate()
+    {
+        StartCoroutine(AnimateMood());
+    }
+
+    public IEnumerator AnimateMood()
+    {
+        yield return _waitForSeconds0_05;
+        moodRect.DOPunchScale(Vector3.one * 0.4f, 0.3f, 1, 0.3f).SetLink(gameObject);
     }
 }

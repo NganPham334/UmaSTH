@@ -814,6 +814,7 @@ MonoBehaviour:
   fill: {fileID: 8028904726713436216}
   moodBox: {fileID: 7110874101388306349}
   moodText: {fileID: 3460894915028386676}
+  moodRect: {fileID: 1353296176836749385}
   currentRunData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
 --- !u!1 &8718790539131040138
 GameObject:
