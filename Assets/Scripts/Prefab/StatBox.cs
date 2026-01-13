@@ -14,11 +14,27 @@ public class StatBox : MonoBehaviour
     private int statValue;
     private static int speed, wit, memory, luck;
     private static int testSpeed, testWit, testMemory, testLuck;
-    private enum StatBoxType {Speed, Wit, Memory, Luck};
-    private enum StatBoxSide {Player, Test};
+
+    private enum StatBoxType
+    {
+        Speed,
+        Wit,
+        Memory,
+        Luck
+    };
+
+    private enum StatBoxSide
+    {
+        Player,
+        Test
+    };
+
     [SerializeField] private StatBoxType statBoxType;
     [SerializeField] private StatBoxSide statBoxSide;
-    [SerializeField] private TextMeshProUGUI statNameText, statValueText;
+    [SerializeField] private TextMeshProUGUI statNameText;
+    [SerializeField] private GameObject statValueText;
+    private TextMeshProUGUI _statValueTextMesh;
+    private RectTransform _statValueRect;
 
     private void OnEnable()
     {
@@ -30,6 +46,12 @@ public class StatBox : MonoBehaviour
         allBoxes.Remove(this);
     }
 
+    void Awake()
+    {
+        _statValueTextMesh = statValueText.GetComponent<TextMeshProUGUI>();
+        _statValueRect =  statValueText.GetComponent<RectTransform>();
+    }
+
     void Start()
     {
         statNameText.SetText(statBoxType.ToString());
@@ -38,7 +60,7 @@ public class StatBox : MonoBehaviour
             // Set the internal value immediately, the first Update check
             // will likely find statValue = currentValue anyway
             statValue = currentRunData.GetStatValue(GetStatType());
-            statValueText.SetText(statValue.ToString());
+            _statValueTextMesh.SetText(statValue.ToString());
         }
         if (statBoxSide == StatBoxSide.Test)
             UpdateTestStat(examSchedule.GetExamForTurn(currentRunData.CurrentTurn));
@@ -82,7 +104,7 @@ public class StatBox : MonoBehaviour
                     break;
             }
         }
-        statValueText.SetText(statValue.ToString());
+        _statValueTextMesh.SetText(statValue.ToString());
     }
 
     public void UpdateLocalPlayerStat()
@@ -91,15 +113,20 @@ public class StatBox : MonoBehaviour
         // 1. If the value is the same, return
         if (statValue == targetValue)
         {
-            statValueText.SetText(statValue.ToString());
+            _statValueTextMesh.SetText(statValue.ToString());
             return;
         }
         // 2. If there is difference, play animation
         DOTween.Kill(this.gameObject);
+        DOTween.Kill(statValueText.transform);
+        // Number bounce
+        _statValueRect.DOPunchScale(Vector3.one * 0.3f, 0.6f, 1, 0.3f)
+            .SetTarget(this.gameObject);
+        // Number rise
         DOTween.To(() => statValue, x =>
             {
                 statValue = x;
-                statValueText.SetText(x.ToString());
+                _statValueTextMesh.SetText(x.ToString());
             }, targetValue, 0.8f)
             .SetEase(Ease.OutQuad)
             .SetTarget(this.gameObject);

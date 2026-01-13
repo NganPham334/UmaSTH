@@ -73,7 +73,7 @@ public class StatsManager : MonoBehaviour
         progressionHandler.ProcessStudyWeight(primaryStatType);
         
 		// 4. Delay: 1s to finish DOTween animation
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(0.9f);
 		
 		// 5. Notify StudyButton that all tasks are finished
 		OnStudyActionFinished?.Invoke();
