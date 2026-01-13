@@ -120,7 +120,7 @@ public class StatBox : MonoBehaviour
         DOTween.Kill(this.gameObject);
         DOTween.Kill(statValueText.transform);
         // Number bounce
-        _statValueRect.DOPunchScale(Vector3.one * 0.3f, 0.6f, 1, 0.3f)
+        _statValueRect.DOPunchScale(Vector3.one * 0.4f, 0.3f, 1, 0.3f)
             .SetTarget(this.gameObject);
         // Number rise
         DOTween.To(() => statValue, x =>
