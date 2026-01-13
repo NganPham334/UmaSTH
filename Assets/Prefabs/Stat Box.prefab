@@ -233,7 +233,7 @@ MonoBehaviour:
   statBoxType: 0
   statBoxSide: 0
   statNameText: {fileID: 2024590225977932370}
-  statValueText: {fileID: 3168553068711412452}
+  statValueText: {fileID: 140302717402036120}
 --- !u!1 &4524427465799527696
 GameObject:
   m_ObjectHideFlags: 0

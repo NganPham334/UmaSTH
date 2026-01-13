@@ -25,7 +25,7 @@ public class ScheduledExam
     [Header("Info")]
     public string ExamName;
     public int Turn;
-    
+    public int ExamYear;
     // IDEK if these flags are needed, phuc u decide
     [Tooltip("Flag to set if the player *fails* the objective (e.g., 'failed_quang_ads')")]
     public string FailureFlagToSet;

@@ -153,6 +153,7 @@ MonoBehaviour:
   exam:
     ExamName: 
     Turn: 0
+    ExamYear: 0
     FailureFlagToSet: 
     SuccessFlagToSet: 
     nodeNamePass: 
@@ -2871,6 +2872,7 @@ GameObject:
   - component: {fileID: 1730699388}
   - component: {fileID: 1730699390}
   - component: {fileID: 1730699389}
+  - component: {fileID: 1730699391}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -2935,6 +2937,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730699387}
   m_CullTransparentMesh: 1
+--- !u!114 &1730699391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730699387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14d84cc67be92d40b540409eb862402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestSceneBg
+  background: {fileID: 1730699389}
+  BackgroundSprite1: {fileID: 21300000, guid: ba828b8b7755378449586cc6f20121df, type: 3}
+  BackgroundSprite2: {fileID: 21300000, guid: de638158de77d6e408661d635d1da3ba, type: 3}
+  BackgroundSprite3: {fileID: 21300000, guid: b1145cb033234ce40b322bdb8c890108, type: 3}
 --- !u!1 &1780576288
 GameObject:
   m_ObjectHideFlags: 0

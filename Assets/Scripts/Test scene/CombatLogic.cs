@@ -15,6 +15,7 @@ public class CombatLogic : MonoBehaviour
     [SerializeField] private RectTransform playerHpRect, TestHpRect;
     [SerializeField] private Transform canvasTransform;
     [SerializeField] private Transform playerTransform, testTransform;
+    [SerializeField] private TestSceneBg background;
     
     private int playerSpeed, playerWit, playerMemory, playerLuck;
     private int testSpeed, testWit, testMemory, testLuck;
@@ -34,9 +35,10 @@ public class CombatLogic : MonoBehaviour
         if (exam == null)
         {
             Debug.Log("No exam found for the current turn!");
-            Time.timeScale = 1.0f;
             return;
         }
+
+        background.SetBackground(exam.ExamYear);
 
         mood = currentRunData.GetMood();
         Debug.Log($"Current Mood: {mood}");
@@ -56,8 +58,10 @@ public class CombatLogic : MonoBehaviour
         testHitChance = (double)testLuck/playerLuck;
         testCritChance = (double)testLuck/1000;
 
+        //Set hp(temporary value)
         playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 7);
         testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 7);
+        
         playerActionBar.SetSpeed(playerSpeed);
         testActionBar.SetSpeed(testSpeed);
 
@@ -71,9 +75,7 @@ public class CombatLogic : MonoBehaviour
         float height = playerHpRect.rect.height;
         float xPosition = -playerHpRect.rect.width;
         float yPosition = (height * playerHpBar.GetComponent<HpBarController>().GetValue()) - (height / 2);
-        testTransform.DOMoveX(- 640f, 0.2f).SetRelative().SetEase(Ease.OutQuad).OnComplete(
-            () => testTransform.DOMoveX(640f, 0.2f).SetRelative().SetEase(Ease.OutQuad)
-            );
+        AnimateTestAttack();
 
         if (Random.value >= (testHitChance))
         {
@@ -98,9 +100,7 @@ public class CombatLogic : MonoBehaviour
         float height = TestHpRect.rect.height;
         float xPosition = TestHpRect.rect.width;
         float yPosition = (height * testHpBar.GetComponent<HpBarController>().GetValue()) - (height / 2);
-        playerTransform.DOMoveX(640f, 0.2f).SetRelative().SetEase(Ease.OutQuad).OnComplete(
-            () => playerTransform.DOMoveX(-640f, 0.2f).SetRelative().SetEase(Ease.OutQuad)
-        );
+        AnimatePlayerAttack();
         if (Random.value >= (playerHitChance))
         {
             Debug.Log("Player's attack missed!");
@@ -117,6 +117,20 @@ public class CombatLogic : MonoBehaviour
         testHpBar.GetComponent<HpBarController>().TakeDamage(playerWit);
         Debug.Log($"Test takes {playerWit} damage.");
         SpawnDamagePopUp(playerWit, testHpBar.transform.position + new Vector3(xPosition, yPosition, 0), false);
+    }
+
+    private void AnimatePlayerAttack()
+    {
+        playerTransform.DOMoveX(640f, 0.2f).SetRelative().SetEase(Ease.OutQuad).OnComplete(
+            () => playerTransform.DOMoveX(-640f, 0.2f).SetRelative().SetEase(Ease.OutQuad)
+        );
+    }
+
+    private void AnimateTestAttack()
+    {
+        testTransform.DOMoveX(- 640f, 0.2f).SetRelative().SetEase(Ease.OutQuad).OnComplete(
+            () => testTransform.DOMoveX(640f, 0.2f).SetRelative().SetEase(Ease.OutQuad)
+            );
     }
 
     public double GetMoodMultiplier()
@@ -159,7 +173,7 @@ public class CombatLogic : MonoBehaviour
             {{"vn_type", "post_test"}, {"post_test_node", exam.nodeNamePass}});
     }
 
-    public void OnDestroy()
+    private void OnDestroy()
     {
         Time.timeScale = 1.0f;
     }
