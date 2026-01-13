@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e80e6ea4984538ab353d141672c9dd, type: 3}
   m_Name: CurrentRunData
   m_EditorClassIdentifier: Assembly-CSharp::CurrentRunData
-  Speed: 82
-  Wit: 72
-  Memory: 70
-  Luck: 50
-  Clarity: 84
-  CurrentTurn: 4
+  Speed: 321
+  Wit: 276
+  Memory: 260
+  Luck: 100
+  Clarity: 100
+  CurrentTurn: 21
   TotalTurns: 72
   Mood: 4
   DefaultFlags:
@@ -33,4 +33,5 @@ MonoBehaviour:
   witWeight: 0
   memWeight: 0
   lukWeight: 0
-  baseUpgradePoints: 11
+  baseUpgradePoints: 16
+  isFullyUpgraded: 1

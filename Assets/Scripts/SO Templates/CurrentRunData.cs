@@ -31,6 +31,8 @@ public class CurrentRunData : ScriptableObject
 
     [Header("Upgrade Points")]
     public int baseUpgradePoints;
+
+    public bool isFullyUpgraded;
     
     // Run once on a new run
     public void InitializeRun()
@@ -43,7 +45,7 @@ public class CurrentRunData : ScriptableObject
         Mood = 4;
 
         // Reset Levels and Weights
-        baseUpgradePoints = 1;
+        baseUpgradePoints = 2;
         spdLevel = witLevel = memLevel = lukLevel = 1;
         spdWeight = witWeight = memWeight = lukWeight = 1;
         

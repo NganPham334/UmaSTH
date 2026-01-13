@@ -69,6 +69,8 @@ public class StudyProgressionHandler : MonoBehaviour
         
         // 5. Reset all Weight to 1 (to 0 if maxed) in preparation for next Upgrade Event
         ResetWeights();
+        if (runData.spdWeight == 0 && runData.memWeight == 0 && runData.witWeight == 0 && runData.lukWeight == 0)
+        {runData.isFullyUpgraded = true;}
         runData.baseUpgradePoints++;
         return results;
     }
