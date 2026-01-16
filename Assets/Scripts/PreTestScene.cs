@@ -14,7 +14,7 @@ public class PreTestScene : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dateText;
 
     [Header("Scene Configuration")]
-    // Tên Scene bạn muốn chuyển đến (nhập chính xác tên file .unity)
+    // The names of the scenes to load
     [SerializeField] private string testSceneName = "Test scene";
     [SerializeField] private string gameSceneName = "Game Scene";
 
@@ -22,25 +22,30 @@ public class PreTestScene : MonoBehaviour
     {
         if (currentRunData != null)
         {
-            Debug.Log($"Scene PreTest Loaded. Current Turn: {currentRunData.CurrentTurn}");
+            Debug.Log($"PreTest Loaded. Current Turn: {currentRunData.CurrentTurn}");
+        }
+
+        if (dateText != null)
+        {
+            dateText.text = System.DateTime.Now.ToString("dd/MM/yyyy HH:mm");
         }
     }
 
-    // Gắn hàm này vào sự kiện OnClick() của nút "Test"
+    // Attach this function to the OnClick() event of the "Start Test" button
     public void OnTestButtonPress()
     {
-        // Kiểm tra xem tên Scene có trống không trước khi chuyển
+        // Check if the test scene name is set
         if (!string.IsNullOrEmpty(testSceneName))
         {
             SceneManager.LoadScene(testSceneName);
         }
         else
         {
-            Debug.LogError("Chưa nhập tên Test Scene trong Inspector!");
+            Debug.LogError("Test Scene name missing in Inspector!");
         }
     }
 
-    // Gắn hàm này vào sự kiện OnClick() của nút "Return"
+    // Attach this function to the OnClick() event of the "Return" button
     public void OnReturnButtonPress()
     {
         if (!string.IsNullOrEmpty(gameSceneName))
@@ -49,7 +54,7 @@ public class PreTestScene : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Chưa nhập tên Game Scene trong Inspector!");
+            Debug.LogError("Game Scene name missing in Inspector!");
         }
     }
 }
