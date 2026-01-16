@@ -129,7 +129,7 @@ public class GameStateMan : MonoBehaviour
         }
         
         int turn = CurrentRun.CurrentTurn;
-        if (turn > 1 && turn % 4 == 0 && flag != "from_random" && flag != "from_upgrade_event" && !CurrentRun.isFullyUpgraded)
+        if (turn > 1 && turn % 6 == 0 && flag != "from_random" && flag != "from_upgrade_event" && !CurrentRun.isFullyUpgraded)
         {
             RequestState(GameState.UpgradeEvent);
             return;

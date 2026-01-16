@@ -9,10 +9,10 @@ public class StudyProgressionHandler : MonoBehaviour
     private Dictionary<int, (int primary, int secondary)> levelRewards = new Dictionary<int, (int, int)>
     {
         { 1, (10, 2) },
-        { 2, (14, 4) },
-        { 3, (18, 6) },
-        { 4, (22, 8) },
-        { 5, (26, 10) }
+        { 2, (17, 8) },
+        { 3, (26, 13) },
+        { 4, (35, 25) },
+        { 5, (46, 35) }
     };
 
     [Header("Study Gains Relationship")]

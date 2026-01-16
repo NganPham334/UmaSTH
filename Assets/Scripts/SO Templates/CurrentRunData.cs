@@ -45,7 +45,7 @@ public class CurrentRunData : ScriptableObject
         Mood = 2;
 
         // Reset Levels and Weights
-        baseUpgradePoints = 2;
+        baseUpgradePoints = 1;
         spdLevel = witLevel = memLevel = lukLevel = 1;
         spdWeight = witWeight = memWeight = lukWeight = 1;
         isFullyUpgraded = false;
