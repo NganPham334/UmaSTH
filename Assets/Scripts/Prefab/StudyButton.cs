@@ -21,7 +21,6 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private StudyLvBar studyLvBar;
     private RectTransform rectTransform;
     private float originalX;
-    private static bool isProcessingClick = false;
 
     // Helper method for switch case
     private StatType MyStatType => buttonType switch
@@ -142,12 +141,8 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Mouse is clicking on: " + buttonType);
-        // 0. If any button is processing, do not execute
-        if (isProcessingClick) return;
         if (StatsManager.Instance != null)
         {
-            isProcessingClick = true;
-            Debug.Log($"Button locked for {buttonType}");
             // 1. Subscribe to the finish event
             StatsManager.OnStudyActionFinished += HandleStudySequenceFinished;
               
@@ -160,9 +155,6 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         // Unsubscribe and don't hit that like button
         StatsManager.OnStudyActionFinished -= HandleStudySequenceFinished;
-        // Release lock
-        isProcessingClick = false;
-        Debug.Log("Unlocked");
         if (GameStateMan.Instance != null)
         {
             GameStateMan.Instance.ReportActionComplete("from_study");

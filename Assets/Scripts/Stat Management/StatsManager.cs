@@ -10,6 +10,8 @@ public class StatsManager : MonoBehaviour
 	public CurrentRunData runData;
 	public StudyProgressionHandler progressionHandler;
     public StatsProcessor statsProcessor;
+
+    [Header("UI")] public CanvasGroup studyButtonGroup;
     
     // An Event, this tell StudyButton.cs that the wait is over and it can continue
     public static System.Action OnStudyActionFinished;
@@ -45,6 +47,9 @@ public class StatsManager : MonoBehaviour
 	private IEnumerator StudyRoutine(StatType primaryStatType)
 	{
 		if (runData == null) yield break;
+		
+		// Lock the UI
+		SetUILock(true);
 
 		// 0. Consume Clarity (Whether fail or success)
 		int clrCost = statsProcessor.GetClarityCost(primaryStatType);
@@ -75,8 +80,17 @@ public class StatsManager : MonoBehaviour
 		// 4. Delay: 1s to finish DOTween animation
 		yield return new WaitForSeconds(0.9f);
 		
-		// 5. Notify StudyButton that all tasks are finished
+		// 5. Unlcok and notify StudyButton that all tasks are finished
+		SetUILock(false);
 		OnStudyActionFinished?.Invoke();
+	}
+	
+	private void SetUILock(bool locked)
+	{
+		if (studyButtonGroup == null) return;
+		studyButtonGroup.alpha = 0.7f;
+		studyButtonGroup.interactable = !locked;
+		studyButtonGroup.blocksRaycasts = !locked;
 	}
 	
 	// Calculator for Preview UI
