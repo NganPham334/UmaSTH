@@ -1,5 +1,5 @@
 ﻿title: Rest
-tags: scene:navia_test
+tags: scene:BG_ClassStairs
 ---
 <<set $roll = random_range(0, 2)>>
 

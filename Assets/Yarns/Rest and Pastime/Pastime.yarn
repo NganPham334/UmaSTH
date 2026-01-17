@@ -1,5 +1,5 @@
 ﻿title:Pastime
-tags: scene:navia_test
+tags: scene:BG_CityOffice
 ---
 <<set $roll = random_range(0, 2)>>
 <<if $roll == 0>>
