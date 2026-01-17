@@ -1283,7 +1283,7 @@ GameObject:
   - component: {fileID: 553826085}
   - component: {fileID: 553826084}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2306,6 +2306,11 @@ MonoBehaviour:
   levelText: {fileID: 1971176379}
   studyNameText: {fileID: 1079147294}
   rectTransform: {fileID: 1267075943}
+  Icon: {fileID: 553826084}
+  SpeedIcon: {fileID: 21300000, guid: 59872813f1c32a8438435a6b713c4d75, type: 3}
+  WitIcon: {fileID: 21300000, guid: 3f74d06259f4caa479b5ed7b644d2d2b, type: 3}
+  MemoryIcon: {fileID: 21300000, guid: 43d7e99869403924b9a34507e5f35567, type: 3}
+  LuckIcon: {fileID: 21300000, guid: 9d6befda29d238c4e8496b9f3b56c494, type: 3}
 --- !u!1 &1291785415 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1998507073736068474, guid: 1a710e8725f038d489e369838b19ae08, type: 3}
