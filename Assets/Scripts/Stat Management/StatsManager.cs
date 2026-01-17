@@ -59,28 +59,27 @@ public class StatsManager : MonoBehaviour
 			ClarityBar.UpdateClarity(-clrCost);
 		}
 		
-		// 1. Check for Failure (Clarity check)
 		bool success = statsProcessor.RollForSuccess(runData.Clarity);
+		if (success)
+		{
+			// 1. Calculate and apply stats
+			var expectedValue = GetExpectedGains(primaryStatType);
+			ApplyStatGain(primaryStatType, expectedValue.pGain);
+			ApplyStatGain(expectedValue.sType, expectedValue.sGain);
+			
+			// 2. Update Weight for Upgrade Event
+			progressionHandler.ProcessStudyWeight(primaryStatType);
+		}
+		// 3. Check for Failure
 		if (!success)
 		{
 			HandleStudyFailure(primaryStatType);
-			yield break;
 		}
 		
-		// In preparation for StatsBox Tweening, the calculation
-		// have to be done beforehand
-		// 2. Calculate and apply stats
-		var expectedValue = GetExpectedGains(primaryStatType);
-        ApplyStatGain(primaryStatType, expectedValue.pGain);
-        ApplyStatGain(expectedValue.sType, expectedValue.sGain);
-        
-        // 3. Update Weight for Upgrade Event
-        progressionHandler.ProcessStudyWeight(primaryStatType);
-        
 		// 4. Delay: 1s to finish DOTween animation
 		yield return new WaitForSeconds(0.9f);
 		
-		// 5. Unlcok and notify StudyButton that all tasks are finished
+		// 5. Unlock and notify StudyButton that all tasks are finished
 		SetUILock(false);
 		OnStudyActionFinished?.Invoke();
 	}
