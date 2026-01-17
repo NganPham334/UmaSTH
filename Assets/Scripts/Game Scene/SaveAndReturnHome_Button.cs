@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class SaveAndReturnHome : MonoBehaviour
 {
+    // Just in case we unexpectedly exited the game
+    private void OnApplicationQuit()
+    {
+        Debug.Log("Application quitting: Emergency Save triggered.");
+        SaveGame();
+    }
     public void OnSaveAndReturnHomePressed()
     {
         // Save the current game state

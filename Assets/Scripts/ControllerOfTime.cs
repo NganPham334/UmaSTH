@@ -30,7 +30,7 @@ public class ControllerOfTime : MonoBehaviour
                 }
             }
 
-            _turnsLabel.text = $"{nextTurn - curTurn}";
+            _turnsLabel.text = $"{nextTurn - curTurn} turns";
             _dateLabel.text = FormatTime();
         }
     }
