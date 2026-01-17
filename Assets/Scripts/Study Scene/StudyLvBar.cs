@@ -1,10 +1,13 @@
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
 public class StudyLvBar : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI levelText, studyNameText;
     [SerializeField] private RectTransform rectTransform;
+    [SerializeField] private Image Icon;
+    [SerializeField] private Sprite SpeedIcon, WitIcon, MemoryIcon, LuckIcon;
     
     public void UpdateLevelText(int level, string statName)
     {
@@ -17,6 +20,14 @@ public class StudyLvBar : MonoBehaviour
             "Luck" => "Praying",
             _ => statName
         });
+        Icon.sprite = statName switch
+        {
+            "Speed" => SpeedIcon,
+            "Wit" => WitIcon,
+            "Memory" => MemoryIcon,
+            "Luck" => LuckIcon,
+            _ => SpeedIcon
+        };
     }
 
     public void Activate()
