@@ -466,6 +466,8 @@ GameObject:
   - component: {fileID: 175355866}
   - component: {fileID: 175355868}
   - component: {fileID: 175355867}
+  - component: {fileID: 175355870}
+  - component: {fileID: 175355869}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -505,8 +507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuPopupLoader
   sceneMenuButton: {fileID: 1267365994}
-  saveScript: {fileID: 0}
-  giveUpScript: {fileID: 0}
+  saveScript: {fileID: 175355869}
+  giveUpScript: {fileID: 175355870}
 --- !u!114 &175355868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,7 +524,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 6bb0aec81ee0f4f49bda79edd0de03a3, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 6043d54c54f97a841b8266216558087a, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Position: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -530,6 +532,31 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &175355869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175355865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb71c120fac755439a029f7351102b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveAndReturnHome
+--- !u!114 &175355870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175355865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e5d70277f660428cd283bf0fa8aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuitToHomeButton
+  requireConfirmation: 0
 --- !u!1001 &211520511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4548,6 +4575,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1988604081767180890, guid: 5ea1e78df0a8f103ea511d1e9500f324, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3838052951000100658, guid: 5ea1e78df0a8f103ea511d1e9500f324, type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6509791937121266290, guid: 5ea1e78df0a8f103ea511d1e9500f324, type: 3}
