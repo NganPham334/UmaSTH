@@ -1,0 +1,24 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="BlurBG" style="flex-grow: 1; position: absolute; top: -5px; left: 2px; bottom: 8px; right: -1px; background-color: rgba(255, 255, 255, 0.5); align-items: stretch; justify-content: center; align-self: center; align-content: stretch;">
+        <ui:VisualElement name="popup" style="flex-grow: 1; width: 60%; height: 80%; background-color: rgb(255, 255, 255); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; align-items: center; justify-content: center; align-self: center; align-content: center; border-left-color: rgb(215, 213, 215); border-right-color: rgb(215, 213, 215); border-top-color: rgb(215, 213, 215); border-bottom-color: rgb(215, 213, 215); border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;">
+            <ui:VisualElement name="popup-header" style="flex-grow: 1; height: 10%; width: 100%; background-color: rgb(43, 60, 150);">
+                <ui:Label text="Menu" name="header-label" style="align-self: center; font-size: 40px; color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="popup-container" style="flex-grow: 1; width: 100%; padding-top: 40px; padding-right: 40px; padding-bottom: 40px; padding-left: 40px;">
+                <ui:VisualElement name="player-info" style="flex-grow: 1; padding-right: 300px; padding-bottom: 0; padding-left: 300px;">
+                    <ui:Label text="Blay" name="player-name" style="align-self: center; font-size: 36px;" />
+                    <ui:VisualElement name="divider" style="flex-grow: 1; background-color: rgb(0, 0, 0); height: 1px; background-size: 100% 1px;" />
+                    <ui:Label text="1st Year Early Aug" name="current-time" style="align-self: center; font-size: 36px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="stat-container" style="flex-grow: 1; padding-right: 40px; padding-left: 40px; padding-top: 100px; padding-bottom: 100px;" />
+                <ui:VisualElement name="buttons" style="flex-grow: 1;">
+                    <ui:Button text="Settings" name="settings" style="background-image: none; background-color: rgb(233, 233, 233);" />
+                    <ui:Button text="Give Up" name="giveup" style="background-color: rgb(237, 34, 38);" />
+                    <ui:Button text="Save &amp; Exit" name="savegame" style="background-color: rgb(43, 60, 150);" />
+                    <ui:Button text="Help" name="help" style="background-color: rgb(233, 233, 233);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button text="Close" name="close" style="background-color: rgb(231, 231, 231);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
