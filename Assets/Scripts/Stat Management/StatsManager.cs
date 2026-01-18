@@ -50,6 +50,10 @@ public class StatsManager : MonoBehaviour
 		
 		// Lock the UI
 		SetUILock(true);
+		
+		// Roll for success first, using the Clarity the
+		// player actually has at the moment
+		bool success = statsProcessor.RollForSuccess(runData.Clarity);
 
 		// 0. Consume Clarity (Whether fail or success)
 		int clrCost = statsProcessor.GetClarityCost(primaryStatType);
@@ -59,7 +63,6 @@ public class StatsManager : MonoBehaviour
 			ClarityBar.UpdateClarity(-clrCost);
 		}
 		
-		bool success = statsProcessor.RollForSuccess(runData.Clarity);
 		if (success)
 		{
 			// 1. Calculate and apply stats
