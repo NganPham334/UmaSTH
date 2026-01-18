@@ -59,11 +59,6 @@ public class StudyProgressionHandler : MonoBehaviour
             // 3. Add winners (upgraded stat) to list
             results.Add(winner);
 
-            // TODO
-            // 4. Call Pop-up UI
-            //whateverUIManager.Instance.UpgradePopUp(winner);
-            // Something like that
-
             Debug.Log($"Upgrade Event: {winner} is now level {runData.GetStatLevel(winner)}");
         }
         

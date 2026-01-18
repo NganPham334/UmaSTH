@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class StatsProcessor : MonoBehaviour
 {
-    public float failChance;
+    // I see that Blay made this declaration:
+    // public float failChance;
+    // Which I suppose is to be able to see how the failChance is calculated real-time
+    // For your sanity after my new implementation, please have this instead
+    [SerializeField, Range(0,1)] private float failChance;
     public int GetClarityCost(StatType type)
     {
         return type switch
@@ -14,20 +18,26 @@ public class StatsProcessor : MonoBehaviour
             _ => 0
         };
     }
+
+    // Standalone Failure calculation (return 0.0 to 1.0)
+    public float GetFailureChance(int clarityValue)
+    {
+        if (clarityValue >= 50) return 0f;
+        
+        int displacement = 50 - clarityValue;
+        float chance = (displacement * 2f) / 100f; // Normalize [0,1] range
+        failChance = chance; // Visual debugging
+        return chance;
+    }
     
-    // Chance of Failure based on Clarity
-    // Formula: 2% * (50 - currentClarity) if clarity < 50
+    // Updated Roll method
     public bool RollForSuccess(int clarityValue)
     {
-        if (clarityValue >= 50) return true; // Always success Study
-
-        int displacement = 50 - clarityValue;
-        failChance = displacement * 2f;
+        float chance = GetFailureChance(clarityValue);
+        float roll = Random.value;
         
-        float roll = Random.Range(0f, 100f);
-        
-        // E.g. If we roll a 10 and failChance is 30, it's a fail
-        return roll > failChance; 
+        // roll 0.1, chance 0.3 => fail
+        return roll > chance; 
     }
 
     // Mood System

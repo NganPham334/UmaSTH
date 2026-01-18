@@ -70,14 +70,15 @@ public class StatsManager : MonoBehaviour
 			// 2. Update Weight for Upgrade Event
 			progressionHandler.ProcessStudyWeight(primaryStatType);
 		}
-		// 3. Check for Failure
+		
+		// 3. Delay: 1s to finish DOTween animation
+		yield return new WaitForSeconds(0.9f);
+		
+		// 4. Check for Failure
 		if (!success)
 		{
 			HandleStudyFailure(primaryStatType);
 		}
-		
-		// 4. Delay: 1s to finish DOTween animation
-		yield return new WaitForSeconds(0.9f);
 		
 		// 5. Unlock and notify StudyButton that all tasks are finished
 		SetUILock(false);
@@ -87,9 +88,18 @@ public class StatsManager : MonoBehaviour
 	private void SetUILock(bool locked)
 	{
 		if (studyButtonGroup == null) return;
-		studyButtonGroup.alpha = 0.7f;
+		studyButtonGroup.alpha = locked ? 0.7f : 1.0f;
 		studyButtonGroup.interactable = !locked;
 		studyButtonGroup.blocksRaycasts = !locked;
+	}
+
+	// Is this method needed? I wonder. It's a bridge method for the
+	// UI to "easily query information through the manager"
+	// Why can't we call GetFailureChance directly from statsProcessor to StudyButton?
+	public float GetFailurePercent()
+	{
+		if (runData == null || statsProcessor == null) return 0f;
+		return statsProcessor.GetFailureChance(runData.Clarity);
 	}
 	
 	// Calculator for Preview UI

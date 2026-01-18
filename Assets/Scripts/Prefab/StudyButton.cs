@@ -92,20 +92,9 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         rectTransform.DOAnchorPosX(originalX-30, 0.1f).SetLink(gameObject);
         rectTransform.DOScale(1.05f, 0.1f).SetLink(gameObject);
 
-        // NOTE: Possibly redundant
-        // // Show main and secondary stat gain popup
-        // if (mainStatGainPopup != null && secondaryStatGainPopup != null)
-        // {
-        //     mainStatGainPopup.SetActive(true);  
-        //     secondaryStatGainPopup.SetActive(true);
-        // }
-        // else
-        // {
-        //     Debug.LogWarning("Stat gain popups are not assigned.");
-        // }
-        
         // Get number from calculator
         var gains = StatsManager.Instance.GetExpectedGains(MyStatType);
+        float currentFailPercent = StatsManager.Instance.GetFailurePercent();
         // update text
         if (mainStatGainPopup != null && secondaryStatGainPopup != null)
         {
@@ -124,7 +113,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (failurePercent != null)
         {
-            failurePercent.DisplayFailurePercent(0.2f);
+            failurePercent.DisplayFailurePercent(currentFailPercent);
         }
     }
 
