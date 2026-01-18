@@ -6,18 +6,48 @@ public class ControllerOfTime : MonoBehaviour
 {
     private Label _turnsLabel;
     private Label _dateLabel;
+    private Label _displayLabel;
+    
+    private VisualElement _clickableArea;
 
     public ExamSchedule schedule;
     public CurrentRunData runData;
+    
+    private bool _showFinalsCountdown = true;
 
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         
+        _displayLabel = root.Q<Label>("display-header");
         _turnsLabel = root.Q<Label>("turn-counter");
         _dateLabel = root.Q<Label>("time-label");
+        _clickableArea = root.Q<VisualElement>("ThingiesContainer");
+        
+        if (_clickableArea != null)
+        {
+            _clickableArea.RegisterCallback<ClickEvent>(_ =>
+            {
+                ToggleDisplay();
+            });
+        }
 
-        if (schedule != null && runData != null)
+        UpdateUI();
+    }
+
+    private void ToggleDisplay()
+    {
+        _showFinalsCountdown = !_showFinalsCountdown;
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (schedule == null && runData == null)
+        {
+            return;
+        }
+        if (_showFinalsCountdown)
         {
             int curTurn = runData.CurrentTurn;
             int nextTurn = 0;
@@ -29,12 +59,19 @@ public class ControllerOfTime : MonoBehaviour
                     break;
                 }
             }
-
+            _displayLabel.text = "Until Finals";
             _turnsLabel.text = $"{nextTurn - curTurn} turns";
-            _dateLabel.text = FormatTime();
+            
         }
+        else
+        {
+            _displayLabel.text = "Current Turn";
+            _turnsLabel.text = $"Turn {runData.CurrentTurn}";
+        }
+        
+        _dateLabel.text = FormatTime();
     }
-    
+
     private string FormatTime()
     {
         int t = runData.CurrentTurn - 1;
