@@ -17,8 +17,8 @@ public class MenuPopupLoader : MonoBehaviour
     [Tooltip("Drag the GameObject that has the SaveAndReturnHome_Button script")]
     public SaveAndReturnHome saveScript;
     
-    [Tooltip("Drag the GameObject that has the GameScene_Button script")]
-    public GameScene_Button giveUpScript;
+    [Tooltip("Drag the GameObject that has the GiveUp_Button script")]
+    public QuitToHomeButton giveUpScript;
 
     private void OnEnable()
     {
@@ -60,7 +60,7 @@ public class MenuPopupLoader : MonoBehaviour
         if (giveUpBtn != null && giveUpScript != null)
         {
             // This assumes your script has a public method for the button logic
-            giveUpBtn.clicked += giveUpScript.OnStudyButtonPressed;
+            giveUpBtn.clicked += giveUpScript.OnQuitToHomePressed;
         }
     }
 
