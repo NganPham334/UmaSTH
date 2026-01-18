@@ -19,6 +19,7 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private Image lvImage;
     [SerializeField] private Color color1, color2, color3, color4, color5;
     [SerializeField] private StudyLvBar studyLvBar;
+    [SerializeField] private FailurePercent failurePercent;
     private RectTransform rectTransform;
     private float originalX;
 
@@ -120,6 +121,11 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             studyLvBar.UpdateLevelText(currentRunData.GetStatLevel(MyStatType), buttonType.ToString());
             studyLvBar.Activate();
         }
+
+        if (failurePercent != null)
+        {
+            failurePercent.DisplayFailurePercent(0.2f);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -134,7 +140,11 @@ public class StudyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
         if (studyLvBar != null)
         {
-            studyLvBar.Deactivate();
+            studyLvBar.Disable();
+        }
+        if (failurePercent != null)
+        {
+            failurePercent.Disable();
         }
     }
 

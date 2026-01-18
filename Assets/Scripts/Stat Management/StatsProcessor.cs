@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class StatsProcessor : MonoBehaviour
 {
+    public float failChance;
     public int GetClarityCost(StatType type)
     {
         return type switch
@@ -21,7 +22,7 @@ public class StatsProcessor : MonoBehaviour
         if (clarityValue >= 50) return true; // Always success Study
 
         int displacement = 50 - clarityValue;
-        float failChance = displacement * 2f;
+        failChance = displacement * 2f;
         
         float roll = Random.Range(0f, 100f);
         

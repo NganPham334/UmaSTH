@@ -36,7 +36,7 @@ public class StudyLvBar : MonoBehaviour
         rectTransform.DOAnchorPosX(200, 0.5f).SetEase(Ease.OutQuad).SetLink(gameObject);
     }
 
-    public void Deactivate()
+    public void Disable()
     {
         gameObject.SetActive(false);
         rectTransform.DOAnchorPosX(-200, 0.5f).SetEase(Ease.OutQuad).SetLink(gameObject);
