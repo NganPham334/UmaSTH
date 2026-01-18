@@ -4,11 +4,18 @@ using UnityEngine.UI;
 public class LoadGameButton : MonoBehaviour
 {
     [Header("Button References")]
-    [Tooltip("If assigned, button will be disabled when no save exists")]
+    [Tooltip("Load/Continue button - enabled when save exists")]
     public Button loadButton;
     
-    [Tooltip("If assigned, button will be disabled when no save exists")]
+    [Tooltip("Delete button - enabled when save exists")]
     public Button deleteButton;
+    
+    [Tooltip("New Game button - enabled when no save exists OR always enabled")]
+    public Button newGameButton;
+    
+    [Header("New Game Behavior")]
+    [Tooltip("If true, New Game is only available when no save exists. If false, always available.")]
+    public bool exclusiveNewGame = true;
 
     void Start()
     {
@@ -29,7 +36,33 @@ public class LoadGameButton : MonoBehaviour
 
         // Start the game from the saved state
         // Go directly to GameScene to continue playing
-        GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+        if (GameStateMan.Instance != null)
+        {
+            GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
+        }
+        else
+        {
+            Debug.LogError("GameStateMan instance not found!");
+        }
+    }
+
+    public void OnNewGamePressed()
+    {
+        // Clear any existing save data (optional - remove if you want to keep old save)
+        if (exclusiveNewGame && HasSavedGame())
+        {
+            Debug.Log("Starting new game will overwrite existing save");
+        }
+        
+        // Start a fresh new game
+        if (GameStateMan.Instance != null)
+        {
+            GameStateMan.Instance.StartGame();
+        }
+        else
+        {
+            Debug.LogError("GameStateMan instance not found!");
+        }
     }
 
     private void LoadGame()
@@ -63,16 +96,34 @@ public class LoadGameButton : MonoBehaviour
     {
         bool hasSave = HasSavedGame();
         
-        // Disable/enable load button based on save existence
-        if (loadButton != null)
+        if (exclusiveNewGame)
         {
-            loadButton.interactable = hasSave;
+            // Exclusive mode: Only show either "Continue/Delete" OR "New Game"
+            // When save exists: show Continue/Delete, hide New Game
+            // When no save: hide Continue/Delete, show New Game
+            
+            if (loadButton != null)
+                loadButton.interactable = hasSave;
+            
+            if (deleteButton != null)
+                deleteButton.interactable = hasSave;
+            
+            if (newGameButton != null)
+                newGameButton.interactable = !hasSave;
         }
-        
-        // Disable/enable delete button based on save existence
-        if (deleteButton != null)
+        else
         {
-            deleteButton.interactable = hasSave;
+            // Non-exclusive mode: New Game always available
+            // Continue/Delete only available when save exists
+            
+            if (loadButton != null)
+                loadButton.interactable = hasSave;
+            
+            if (deleteButton != null)
+                deleteButton.interactable = hasSave;
+            
+            if (newGameButton != null)
+                newGameButton.interactable = true;
         }
     }
 
