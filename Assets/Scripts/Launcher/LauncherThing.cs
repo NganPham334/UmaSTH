@@ -3,24 +3,30 @@ using UnityEngine.UIElements;
 
 public class LauncherThing : MonoBehaviour
 {
+    public static LauncherThing Instance { get; private set; }
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void OnEnable()
     {
+        // Initial check on load
+        RefreshUIState();
+    }
+    
+    public void RefreshUIState()
+    {
         var root = GetComponent<UIDocument>().rootVisualElement;
-
-        // 1. Query elements by their UXML names
         var loadBtn = root.Q<VisualElement>("loadgame");
         var exitBtn = root.Q<VisualElement>("exit");
 
-        // 2. Check if a save exists using the static helper from your Save script
         bool hasSave = SaveRunButton.HasSavedGame();
 
-        // 3. Apply state-based logic
         if (!hasSave)
         {
-            // Disable the load button visually and functionally
             SetElementEnabled(loadBtn, false);
-
-            // Flip the exit button's skew and position via USS
             ApplyMirroredState(exitBtn, true);
         }
         else
@@ -28,6 +34,8 @@ public class LauncherThing : MonoBehaviour
             SetElementEnabled(loadBtn, true);
             ApplyMirroredState(exitBtn, false);
         }
+        
+        Debug.Log($"Launcher UI Refreshed. Has Save: {hasSave}");
     }
 
     private void SetElementEnabled(VisualElement element, bool enabled)

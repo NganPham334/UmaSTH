@@ -123,8 +123,8 @@ public class MenuPopupLoader : MonoBehaviour
 
     private void SetupLauncherMenu()
     {
-        _headerLabel.text = "Start";
-        _blueBtn.text = "Continue Game";
+        _headerLabel.text = "Continue";
+        _blueBtn.text = "Load Save";
         _redBtn.text = "Abandon Save";
         _blueBtn.SetEnabled(SaveRunButton.HasSavedGame());
         _blueBtn.clicked += OnContinuePressed;
@@ -159,6 +159,11 @@ public class MenuPopupLoader : MonoBehaviour
         
         // 3. Update the External Trigger (Launcher Button) so it becomes unclickable
         RefreshTriggerInteractivity();
+        
+        if (LauncherThing.Instance != null)
+        {
+            LauncherThing.Instance.RefreshUIState();
+        }
 
         // 4. Close the popup
         TogglePopup();
