@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="CardGridTemplate" src="project://database/Assets/UI Toolkit/StatboxVariant.uxml" />
+    <ui:Template name="CardGridTemplate" src="project://database/Assets/UI%20Toolkit/StatboxVariant.uxml?fileID=9197481963319205126&amp;guid=ceeceab47c9db5c419f8c67ec9402a40&amp;type=3#StatboxVariant" />
     <ui:VisualElement name="BlurBG" style="flex-grow: 1; position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=993bce989efd6324fbda99e3226915cd&amp;type=3#NotInter-Regular&quot;);">
         <ui:VisualElement name="popup" style="width: 60%; height: 80%; background-color: rgb(255, 255, 255); border-radius: 15px; border-width: 1px; border-color: rgb(215, 213, 215); overflow: hidden;">
             <ui:VisualElement name="popup-header" style="height: 80px; width: 100%; background-color: rgb(43, 60, 150); justify-content: center;">
@@ -7,26 +7,19 @@
             </ui:VisualElement>
             <ui:VisualElement name="popup-container" style="flex-grow: 1; width: 100%; padding: 40px;">
                 <ui:VisualElement name="stat-container" style="flex-grow: 1; flex-direction: row; justify-content: space-around; align-items: center; padding: 20px;">
-                    
                     <ui:VisualElement name="player-info" style="align-items: center; justify-content: center;">
-                        <ui:Label text="[Player&apos;s Name]" name="player-name" style="font-size: 28px; -unity-font-style: bold; margin-bottom: 10px;" />
-                        
+                        <ui:Label text="Blay" name="player-name" style="font-size: 28px; -unity-font-style: bold; margin-bottom: 10px;" />
                         <ui:VisualElement name="portrait-placeholder" style="width: 150px; height: 150px; background-color: rgb(210, 210, 210); border-radius: 10px; margin-bottom: 15px;" />
-                        
-                        <ui:Label text="3rd Year Late May" name="time-label" style="font-size: 24px;" />
+                        <ui:Label name="time-label" style="font-size: 24px;" />
                     </ui:VisualElement>
-
                     <ui:Instance template="CardGridTemplate" name="PlayerStatsGrid" />
-
                 </ui:VisualElement>
-                <ui:VisualElement name="buttons" style="flex-direction: row; flex-wrap: wrap; justify-content: space-between; width: 100%; max-width: 800px; align-self: center; row-gap: 80px; margin-top: 0; margin-bottom: 0; padding-top: 100px; padding-right: 100px; padding-bottom: 100px; padding-left: 100px;">
-                    <ui:Button text="Settings" name="settings" style="width: 240px; height: 60px; border-radius: 20px; background-color: rgb(225, 225, 225); -unity-font-style: bold; margin-bottom: 40px; margin-top: 0; margin-right: 0; margin-left: 0; font-size: 24px;" />
-                    <ui:Button text="Help" name="help" style="width: 240px; height: 60px; border-radius: 20px; background-color: rgb(225, 225, 225); -unity-font-style: bold; margin-top: 0; margin-bottom: 40px; margin-right: 0; margin-left: 0; font-size: 24px;" />
+                <ui:VisualElement name="buttons" style="flex-direction: row; flex-wrap: wrap; justify-content: space-between; width: 100%; max-width: 900px; align-self: center; row-gap: 80px; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-right: 40px; padding-bottom: 0; padding-left: 40px;">
                     <ui:Button text="Give Up" name="giveup" style="width: 240px; height: 60px; background-color: rgb(237, 34, 38); color: white; border-radius: 20px; -unity-font-style: bold; margin-right: 0; margin-top: 40px; margin-left: 0; margin-bottom: 0; font-size: 24px;" />
+                    <ui:Button text="Close" name="close" style="width: 240px; height: 60px; align-self: center; margin-top: 40px; margin-bottom: 40px; border-radius: 20px; background-color: rgb(225, 225, 225); -unity-font-style: bold; font-size: 24px;" />
                     <ui:Button text="Save &amp; Exit" name="savegame" style="width: 240px; height: 60px; background-color: rgb(43, 60, 150); color: white; border-radius: 20px; -unity-font-style: bold; margin-top: 40px; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 24px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:Button text="Close" name="close" style="width: 240px; height: 60px; align-self: center; margin-top: 40px; margin-bottom: 40px; border-radius: 20px; background-color: rgb(225, 225, 225); -unity-font-style: bold; font-size: 24px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

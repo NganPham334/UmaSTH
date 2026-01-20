@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5a52ec3da70d18447868be295579fac2
+guid: ac5fd6861297bae4bb8dcf9782654830
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8312508661295202457
-    second: anime-anime-girls-uma-musume-pretty-derby-horse-girls-animal-ears-hd-wallpaper-f8c918980f0eeab18f11715f9d067051_0
+      213: -2675384761559928748
+    second: umasth_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: anime-anime-girls-uma-musume-pretty-derby-horse-girls-animal-ears-hd-wallpaper-f8c918980f0eeab18f11715f9d067051_0
+      name: umasth_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 5134
-        height: 2894
+        x: 45
+        y: 40
+        width: 410
+        height: 418
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 990cbdcf596fb5370800000000000000
-      internalID: 8312508661295202457
+      spriteID: 4503ab1fbbf1fdad0800000000000000
+      internalID: -2675384761559928748
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      anime-anime-girls-uma-musume-pretty-derby-horse-girls-animal-ears-hd-wallpaper-f8c918980f0eeab18f11715f9d067051_0: 8312508661295202457
+      umasth_0: -2675384761559928748
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,0 +1,17 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/launcher.uss?fileID=7433441132597879392&amp;guid=645c77c1b9181f94a8843617a3a89d4b&amp;type=3#launcher" />
+    <ui:VisualElement name="BG" style="flex-grow: 1; background-image: resource(&apos;Backgrounds/BG_CargoLauncher_Sky&apos;);">
+        <ui:VisualElement name="MenuContainer" style="flex-direction: column; width: 100%; height: 100%; justify-content: center; padding-top: 200px; padding-bottom: 200px; padding-right: 40px; padding-left: 40px;">
+            <SkewedRoundedBox name="newgame" fill-color="#2B3C96FF" corner-radius="30" radius-bottom-left="0" radius-top-right="0" radius-bottom-right="30" radius-top-left="30" style="width: 600px; height: 400px; rotate: -6deg; align-self: flex-end; margin-bottom: 0; margin-top: 0;">
+                <ui:Label text="New Game" name="Label" style="margin-top: 67px; color: rgb(255, 255, 255); font-size: 67px; -unity-text-align: upper-center; -unity-font-style: bold;" />
+            </SkewedRoundedBox>
+            <SkewedRoundedBox name="exit" fill-color="#ED2226FF" corner-radius="5" radius-top-left="0" radius-top-right="30" radius-bottom-left="30" radius-bottom-right="0" skew-amount="-20" style="width: 600px; height: 400px; rotate: 6deg; align-self: flex-start; margin-top: 0; margin-bottom: 0;">
+                <ui:Label text="Exit Game" style="margin-top: 67px; color: rgb(255, 255, 255); font-size: 67px; -unity-text-align: upper-center; -unity-font-style: bold;" />
+            </SkewedRoundedBox>
+            <SkewedRoundedBox name="loadgame" fill-color="#2B3C96FF" corner-radius="5" radius-top-left="30" radius-top-right="0" radius-bottom-left="0" radius-bottom-right="30" style="width: 600px; height: 400px; rotate: -6deg; align-self: flex-end; margin-bottom: 0; margin-top: 0;">
+                <ui:Label text="Continue Game" style="margin-top: 67px; color: rgb(255, 255, 255); font-size: 67px; -unity-text-align: upper-center; -unity-font-style: bold;" />
+            </SkewedRoundedBox>
+        </ui:VisualElement>
+        <ui:VisualElement name="game-logo" style="position: absolute; top: 50%; left: 50%; width: 500px; height: 500px; translate: -50% -50%; background-image: resource(&apos;icons/umasth&apos;); -unity-background-image-tint-color: rgb(255, 255, 255);" />
+    </ui:VisualElement>
+</ui:UXML>
