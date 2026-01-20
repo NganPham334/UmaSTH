@@ -47,6 +47,7 @@ namespace VisualNovel
          * determined
          * random
          * intro
+         * run_end
          */
         
         private string _vnType;
@@ -121,6 +122,10 @@ namespace VisualNovel
                     nodeName = "Introduction";
                     break;
                 
+                case "run_end":
+                    nodeName = "RunEnd";
+                    break;
+                
                 default:
                     Debug.Log(_vnType);
                     Debug.LogError("VN Type not found /!\\ this is bad, closing scene...");
@@ -174,7 +179,13 @@ namespace VisualNovel
                 GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
                 return; // god knows why this is needed
             }
-            
+
+            if (_vnType == "run_end")
+            {
+                GameStateMan.Instance.RequestState(GameStateMan.GameState.Launcher);
+                return;
+            }
+
             GameStateMan.Instance.ReportActionComplete(_vnType == "random" ? "from_random" : null);
         }
         

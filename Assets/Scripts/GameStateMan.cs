@@ -17,6 +17,7 @@ public class GameStateMan : MonoBehaviour
 
     // This is NOT thread safe as the name might suggest
     private bool _transitionLock = false;
+    private bool _endRun = false;
 
     public enum GameState
     {
@@ -120,6 +121,11 @@ public class GameStateMan : MonoBehaviour
         result = default;
         return false;
     }
+
+    public void EndRun()
+    {
+        _endRun = true;
+    }
     
     public void ReportActionComplete(string flag = null)
     {
@@ -129,6 +135,12 @@ public class GameStateMan : MonoBehaviour
         }
         
         int turn = CurrentRun.CurrentTurn;
+        if (turn >= 72)
+        {
+            RequestState(GameState.VisualNovel, new() {{"vn_type", "run_end"}});
+            return;
+        }
+        
         if (turn > 1 && turn % 6 == 0 && flag != "from_random" && flag != "from_upgrade_event" && !CurrentRun.isFullyUpgraded)
         {
             RequestState(GameState.UpgradeEvent);
@@ -137,7 +149,7 @@ public class GameStateMan : MonoBehaviour
         
         if (Random.Range(0.0F, 1.0F) > 0.8 && flag != "from_random")
         {
-            RequestState(GameState.VisualNovel, new() { { "vn_type", "random" } });
+            RequestState(GameState.VisualNovel, new() {{ "vn_type", "random" }});
             return;
         }
         
