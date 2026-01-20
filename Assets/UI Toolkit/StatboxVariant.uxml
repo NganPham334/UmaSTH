@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="GridContainer" style="flex-direction: row; flex-wrap: wrap; width: 600px; justify-content: flex-start;">
+        <ui:VisualElement name="Card" style="width: 240px; height: 120px; margin: 30px; border-radius: 10px; border-width: 1px; border-color: rgb(167, 167, 167); background-color: rgb(231, 231, 231); overflow: hidden; flex-shrink: 0;">
+            <ui:VisualElement name="Header" style="height: 40px; background-color: rgb(43, 60, 150); justify-content: center;">
+                <ui:Label name="Speed" text="Speed" style="color: white; -unity-font-style: bold; padding-left: 0; align-self: center; font-size: 24px; padding-top: 0; padding-right: 0; padding-bottom: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            </ui:VisualElement>
+            <ui:Label name="Value" style="padding: 10px; color: black; align-self: center; font-size: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Card" style="width: 240px; height: 120px; margin: 30px; border-radius: 10px; border-width: 1px; border-color: rgb(167, 167, 167); background-color: rgb(231, 231, 231); overflow: hidden; flex-shrink: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+            <ui:VisualElement name="Header" style="height: 40px; background-color: rgb(43, 60, 150); justify-content: center;">
+                <ui:Label name="Memory" text="Memory" style="color: white; -unity-font-style: bold; padding-left: 0; align-self: center; font-size: 24px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0;" />
+            </ui:VisualElement>
+            <ui:Label name="Value" style="padding: 10px; color: black; align-self: center; font-size: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Card" style="width: 240px; height: 120px; margin: 30px; border-radius: 10px; border-width: 1px; border-color: rgb(167, 167, 167); background-color: rgb(231, 231, 231); overflow: hidden; flex-shrink: 0;">
+            <ui:VisualElement name="Header" style="height: 40px; background-color: rgb(43, 60, 150); justify-content: center;">
+                <ui:Label name="Wit" text="Wit" style="color: white; -unity-font-style: bold; padding-left: 0; align-self: center; font-size: 24px; padding-top: 0; padding-right: 0; padding-bottom: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            </ui:VisualElement>
+            <ui:Label name="Value" style="padding: 10px; color: black; align-self: center; font-size: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Card" style="width: 240px; height: 120px; margin: 30px; border-radius: 10px; border-width: 1px; border-color: rgb(167, 167, 167); background-color: rgb(231, 231, 231); overflow: hidden; flex-shrink: 0;">
+            <ui:VisualElement name="Header" style="height: 40px; background-color: rgb(43, 60, 150); justify-content: center;">
+                <ui:Label name="Luck" text="Luck" style="color: white; -unity-font-style: bold; padding-left: 0; align-self: center; font-size: 24px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0;" />
+            </ui:VisualElement>
+            <ui:Label name="Value" style="padding: 10px; color: black; align-self: center; font-size: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

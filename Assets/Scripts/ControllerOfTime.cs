@@ -72,7 +72,7 @@ public class ControllerOfTime : MonoBehaviour
         _dateLabel.text = FormatTime();
     }
 
-    private string FormatTime()
+    public string FormatTime()
     {
         int t = runData.CurrentTurn - 1;
         int yearNum = (t / 24) + 1;

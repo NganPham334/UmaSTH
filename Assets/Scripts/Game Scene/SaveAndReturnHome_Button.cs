@@ -14,7 +14,7 @@ public class SaveAndReturnHome : MonoBehaviour
         SaveGame();
         
         // Return to main menu
-        GameStateMan.Instance.RequestState(GameStateMan.GameState.MainMenu);
+        GameStateMan.Instance.RequestState(GameStateMan.GameState.Launcher);
     }
 
     private void SaveGame()

@@ -468,6 +468,7 @@ GameObject:
   - component: {fileID: 175355867}
   - component: {fileID: 175355870}
   - component: {fileID: 175355869}
+  - component: {fileID: 175355871}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -506,6 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234d7147da6d5fe4995e81b2b1b06fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuPopupLoader
+  _formatted_time: {fileID: 1451052395}
   sceneMenuButton: {fileID: 1267365994}
   saveScript: {fileID: 175355869}
   giveUpScript: {fileID: 175355870}
@@ -557,6 +559,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuitToHomeButton
   requireConfirmation: 0
+--- !u!114 &175355871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175355865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864b71c2ddd946e3853d13398fe683de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatboxVariant
+  uiDocument: {fileID: 175355868}
+  currentRunData: {fileID: 11400000, guid: dda3aa7cd2b6324e7804157099751089, type: 2}
+  examSchedule: {fileID: 11400000, guid: af0786ec63477058ba8713e2c43b6506, type: 2}
+  statBoxType: 0
+  statBoxSide: 0
 --- !u!1001 &211520511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4595,6 +4614,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1988604081767180890, guid: 5ea1e78df0a8f103ea511d1e9500f324, type: 3}
   m_PrefabInstance: {fileID: 1451052393}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1451052395 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2973464899824725210, guid: 5ea1e78df0a8f103ea511d1e9500f324, type: 3}
+  m_PrefabInstance: {fileID: 1451052393}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f14bc672c877e6f8b13b2b3cd1ecd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControllerOfTime
 --- !u!1 &1468665845
 GameObject:
   m_ObjectHideFlags: 0
