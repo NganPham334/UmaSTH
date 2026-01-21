@@ -31,8 +31,8 @@ public class AbandonRunButton : MonoBehaviour
         if (PlayerPrefs.HasKey(SAVE_KEY))
         {
             PlayerPrefs.DeleteKey(SAVE_KEY);
-            //PlayerPrefs.Save(); // Ensure it's deleted immediately
-            Debug.Log("Save deleted .");
+            PlayerPrefs.Save();
+            Debug.Log("<color=red>Save System:</color> Save data deleted.");
         }
 
         // 2. Clear the data in memory

@@ -193,5 +193,20 @@ public class GameStateMan : MonoBehaviour
             Debug.LogWarning("No saved game found!");
         }
     }
+    private void OnApplicationQuit()
+    {
+        // Check the internal _currentState variable, not the Instance itself
+        if (_currentState == GameState.Launcher || _currentState == GameState.MainMenu)
+        {
+            return; // Don't auto-save in menus
+        }
+
+        // Check if the run has actually moved past turn 0/1
+        if (CurrentRun != null && CurrentRun.CurrentTurn > 1 && !_endRun)
+        {
+            SaveRunButton.SaveGame(); 
+            Debug.Log("Emergency Auto-Save complete.");
+        }
+    }
 }
 

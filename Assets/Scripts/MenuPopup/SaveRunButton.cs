@@ -4,15 +4,7 @@ public class SaveRunButton : MonoBehaviour
 {
     private const string SAVE_KEY = "SavedGameData";
 
-    // --- Emergency Auto-Save ---
-    private void OnApplicationQuit()
-    {
-        // On Desktop, this triggers on Alt+F4 or clicking the 'X'
-        Debug.Log("Application quitting: Emergency Save triggered.");
-        SaveGame();
-    }
-
-    // --- UI Button Handlers ---
+    // --- UI Button Handlers (Bridges for MenuPopupLoader) ---
 
     public void OnSaveAndReturnHomePressed()
     {
@@ -29,7 +21,7 @@ public class SaveRunButton : MonoBehaviour
         if (HasSavedGame())
         {
             LoadGame();
-            // After loading data, tell the manager to enter the game state
+            // Transition is handled by GameStateMan to ensure parameters/logic are set
             GameStateMan.Instance.RequestState(GameStateMan.GameState.GameScene);
         }
         else
@@ -38,9 +30,9 @@ public class SaveRunButton : MonoBehaviour
         }
     }
 
-    // --- Core Functionality ---
+    // --- Core Logic (Static so other scripts can call it) ---
 
-    public void SaveGame()
+    public static void SaveGame()
     {
         if (GameStateMan.Instance == null || GameStateMan.Instance.CurrentRun == null)
         {
@@ -50,9 +42,9 @@ public class SaveRunButton : MonoBehaviour
 
         string json = JsonUtility.ToJson(GameStateMan.Instance.CurrentRun);
         PlayerPrefs.SetString(SAVE_KEY, json);
-        //PlayerPrefs.Save(); // Forces the data to disk immediately
+        PlayerPrefs.Save(); 
         
-        Debug.Log("Game saved successfully to PlayerPrefs!");
+        Debug.Log("<color=green>Save System:</color> Game saved successfully.");
     }
 
     public static void LoadGame()
@@ -63,9 +55,8 @@ public class SaveRunButton : MonoBehaviour
         
         if (GameStateMan.Instance != null && GameStateMan.Instance.CurrentRun != null)
         {
-            // This overwrites the values in the existing CurrentRun object
             JsonUtility.FromJsonOverwrite(json, GameStateMan.Instance.CurrentRun);
-            Debug.Log("Game data restored successfully.");
+            Debug.Log("<color=cyan>Save System:</color> Data restored via Overwrite.");
         }
     }
 
