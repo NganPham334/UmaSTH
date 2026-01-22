@@ -157,7 +157,7 @@ public class GameStateMan : MonoBehaviour
         turn = CurrentRun.CurrentTurn;
         _stateParameters.Clear();
         
-        if (HasEventForCurrentTurn(turn))
+        if (HasEventForTurn(turn))
         {
             RequestState(GameState.VisualNovel, new() {{"vn_type", "determined"}});
             return;
@@ -166,7 +166,7 @@ public class GameStateMan : MonoBehaviour
         RequestState(GameState.GameScene);
     }
 
-    public bool HasEventForCurrentTurn(int turn)
+    public bool HasEventForTurn(int turn)
     {
         if (mainScript == null) return false;
         string expectedNode = $"Turn_{turn}";
