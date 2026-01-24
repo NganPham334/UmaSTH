@@ -1,6 +1,7 @@
 ﻿title:Random_TryHard
 tags: scene:BG_ClassRoom2
 ---
+<<main blay>>
 You study like a machine, notes piling up rapidly. #line:0cf8b01 
 A surge of productivity flows through you. #line:09376f7 
 Knowledge starts to settle in. #line:04978c6 
@@ -8,6 +9,7 @@ Knowledge starts to settle in. #line:04978c6
 When you finally stop, you collapse into your chair—exhausted, but proud. #line:0eb4d1a 
 Like you’ve beaten your own limits. #line:001cc1e 
 <<stat spd+10 wit+5 mem+5>>
-Blay:Wait… why does this suddenly make so much sense? Did I just unlock a skill? #line:0969e99 
+<<main blay_surprised>>
+Blay:Wait… why does this suddenly make so much sense? #line:0969e99 
 <<stop>>
 ===

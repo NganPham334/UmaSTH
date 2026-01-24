@@ -1,6 +1,7 @@
 ﻿title:Study_wit_fail
 tags: scene:BG_ClassRoom
 ---
+<<main Blay_confused>>
 Blay:Today’s just not my day.Maybe I should stop here. #line:0407022 
 ->Stop studying for now. #line:06c371b 
     <<stat wit-5 >>

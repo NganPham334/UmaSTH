@@ -1,6 +1,7 @@
 ﻿title: Rest
 tags: scene:BG_ClassStairs
 ---
+<<main blay_relaxed>>
 <<set $roll = random_range(0, 2)>>
 
 <<if $roll == 0>>

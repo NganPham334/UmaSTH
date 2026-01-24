@@ -1,6 +1,7 @@
 ﻿title:Pastime
 tags: scene:BG_CityOffice
 ---
+<<main blay_happy>>
 <<set $roll = random_range(0, 2)>>
 <<if $roll == 0>>
     <<stat mood+1>>

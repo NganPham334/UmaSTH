@@ -4,7 +4,7 @@ tags: scene:BG_AbydosCouncilRoom
 ---
 The classroom is empty. #line:07c496c 
 Only textbooks and a cold cup of coffee remain on the desk. #line:03f1fca 
-
+<<main blay_confused>>
 Blay:I could stop here…Or push just a little further. #line:0288e9c 
 -> Study for extra luck.  #line:0aeee52 
     <<stat luk+5 clr-5>>

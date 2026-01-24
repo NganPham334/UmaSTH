@@ -2,6 +2,7 @@
 tags: scene:BG_ClassRoom2
 ---
 <<stat spd+12 mem+12 wit+12 clr+12 mood+1>>
+<<main blay_happy>>
 Blay:These test… they’re starting to make sense. #line:0696ce0 
 Blay is no longer someone who only studies blindly. #line:04b6e3f 
 Blay begins to understand themself. #line:0075e5f 

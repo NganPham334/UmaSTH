@@ -3,16 +3,21 @@ tags: scene:BG_CityDowntown2
 ---
 The summer break is almost over.  #line:0bc46c9 
 Soon, you’ll be back on campus.  #line:0c3839c 
-
+<<main blay_confused>>
 Blay:Summer’s nearly over… what should I do?   #line:0341e92 
 
 ->Read books and review knowledge.  #line:06199e6 
     <<stat wit+10>> 
-    Blay:Just understanding things a little deeper each day.My mind feels noticeably sharper.  #line:07ba129 
+    <<scene BG_ClassRoom>>
+    <<main blay>>
+    Blay:Just understanding things a little deeper each day. My mind feels noticeably sharper.  #line:07ba129 
+    <<scene BG_ClassRoom>>
 ->Forget it—go out and experience life.  #line:05dcdf1 
     <<stat luk+10>> 
+    <<scene BG_Campus>>
+    <<main blay>>
     Blay:College life isn’t only about studying.Sometimes, luck comes from things you never planned.  #line:006e423 
-
+    
 The break comes to an end.  #line:048baaf 
 AA is still there… waiting for you to return.  #line:0a3ddca 
 <<stop>>

@@ -1,16 +1,22 @@
 ﻿title:Random_GoingOutWithFriends
-tags: 2sp scene:BG_CityDowntown2
+tags: 2sp scene:BG_ClassStairs
 ---
+<<main blay>>
 Right after class, you receive a message from your close friend #line:0338d42 
-
+<<side navia>>
 Friend:“Hey! Wanna hang out? I’m pretty bored.” #line:0525d6a 
-
+<<side none>>
+<<main blay_confused>>
 You hesitate. #line:030bf70 
 It sounds fun… but you’re tired. #line:0a4c552 
 ->Sure! I’m coming down right now. #line:0febfbe 
+    <<scene BG_CityDowntown>>
+    <<main blay_happy>>
     <<stat clr-20 mood+1 >>
     Blay:Friendship fixes mood better than Netflix. #line:0786aa8 
 ->I think I’ll stay home tonight… I’m really exhausted. #line:016270c 
+    <<scene BG_ClassStairs>>
+    <<main blay>>
     <<stat clr+20 mood-1 >>
     Blay:Skipping one outing doesn’t mean losing a friend.Sometimes, staying in is the better choice. #line:0427e4e 
     <<stop>>

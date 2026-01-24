@@ -3,5 +3,7 @@ tags: scene:BG_ClassRoom2
 ---
 <<stat spd+15 mem+15 wit+15 clr+15 mood+1>>
 Blay passes all three exams and completes three years at AA. #line:06a6002 
+<<main blay_happy>>
+Blay:Wow… I actually did it. #line:05292dc 
 Blay realizes:Success isn’t about being the best—it’s about not giving up. #line:0cc21d3 
 ===

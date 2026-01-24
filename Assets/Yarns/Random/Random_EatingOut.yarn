@@ -6,22 +6,25 @@ After a three-hour lecture, you drag yourself out of the lecture hall, your stom
 
 The dorm is out of food. #line:0ff1f52 
 The cafeteria is closed. #line:05a3977 
-
+<<main blay_hungry>>
 Eating out is the only option. #line:0bc871c 
 You stand before a row of restaurants near AA—spicy noodles, fried rice, beef noodle soup… #line:02c0245 
 Your wallet, however, is screaming. #line:0e06292 
-
+<<main blay_confused>>
 ->Screw it… I’m getting something good. #line:082f396 
     <<set $roll = random_range(0, 1)>>
     <<if $roll == 0>>
         <<stat clr+30>>
+        <<main blay_full>>
         Blay:This hit the spot. I feel so much better now. #line:0f4d3e1 
     <<elseif $roll == 1>>
         <<stat mood-1 spd-10>>
+        <<main blay_sluggish>>
         Blay:Ugh, I think I overdid it... I feel sluggish now. #line:07e2f3b 
     <<endif>>
 ->I’ll eat light—cheap and healthy. #line:08f0e7a 
     <<stat clr+10>>
+    <<main blay>>
     Blay:That was a good choice. I feel energized now. #line:0c5f4a2
     <<stop>>
 ===

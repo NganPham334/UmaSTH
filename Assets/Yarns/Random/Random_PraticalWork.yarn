@@ -2,12 +2,13 @@
 tags: scene:BG_AbydosCouncilRoom3
 position: -27,-71
 ---
+<<main blay>>
 You enter the lab. #line:07b8c75 
 The smell of chemicals, the hum of computers, the clinking of tools—it’s familiar. #line:01de46e 
 This session is tougher than usual, but incredibly rewarding. #line:0120f10 
 You work nonstop—testing, recording, adjusting. #line:00f31e7 
 By the end, you feel noticeably stronger… like your brain stats just increased. #line:0a93620 
-
+<<main blay_thinkful>>
 You tell yourself: #line:000c4f0 
 ->Painful—but worth it. #line:0292953 
     <<stat mem+20 wit+20 >>

@@ -1,6 +1,7 @@
 ﻿title:Study_mem_fail
 tags: scene:BG_ClassRoom
 ---
+<<main Blay_confused>>
 Blay:Today’s just not my day.Maybe I should stop here. #line:03e4e71 
 ->Stop studying for now. #line:050104c 
     <<stat mem-5 >>

@@ -4,7 +4,7 @@ tags: scene:BG_AbydosCouncilRoom
 ---
 The classroom is empty. #line:09e9129 
 Only textbooks and a cold cup of coffee remain on the desk. #line:03ed65e 
-
+<<main blay_confused>>
 Blay:I could stop here…Or push just a little further. #line:0212cbc 
 -> Study for extra memory.  #line:065bf20 
     <<stat mem+5 clr-5>>

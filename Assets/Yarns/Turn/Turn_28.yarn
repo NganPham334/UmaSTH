@@ -7,21 +7,28 @@ Red banners hang along the walkways.  #line:0d41a07
 
 Lunar New Year at last…  #line:0789c6f 
 A rare break after months of tension.   #line:0693966 
+<<main blay_confused>>
 How should I spend this time?  #line:0ec1642 
 
 Blay:“Lunar New Year at last…A rare break after months of tension.How should I spend this time?  #line:0ef273e 
 ->Stay home and rest properly.  #line:0a10284 
     <<stat clr+20>> 
+    <<scene BG_Citysqaure>>
+    <<main blay_relaxed>>
     You sleep in more than usual.  #line:05133ec 
     No deadlines. No alarms.  #line:0619c4d 
     Maybe resting at the right time is a smart choice. #line:03b5007 
 ->Rest, but review what really matters. #line:05b1b56 
-    <<randMod 10>> 
+    <<randMod 10>>
+    <<scene BG_ClassRoom2>>
+    <<main blay>> 
     You revisit the parts you once overlooked.  #line:073ee33 
     No pressure, but still making progress.  #line:07c58cf 
     At least… you’re not falling behind.   #line:0aad9c2 
 ->Use the break to prepare for the long road ahead.  #line:0b439dd 
     <<stat mood+2>>
+    <<scene BG_CityDowntown>>
+    <<main blay_thoughtful>>
     You spend time thinking deeply.  #line:0a8f915 
     About how you study, how you work, how you face pressure.  #line:00e7635 
     You feel more prepared than before  #line:0184769 
