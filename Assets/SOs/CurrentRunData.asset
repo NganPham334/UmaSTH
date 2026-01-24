@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e80e6ea4984538ab353d141672c9dd, type: 3}
   m_Name: CurrentRunData
   m_EditorClassIdentifier: Assembly-CSharp::CurrentRunData
-  Speed: 321
-  Wit: 276
-  Memory: 260
-  Luck: 100
-  Clarity: 100
-  CurrentTurn: 24
+  Speed: 80
+  Wit: 72
+  Memory: 70
+  Luck: 50
+  Clarity: 84
+  CurrentTurn: 1
   TotalTurns: 72
-  Mood: 4
+  Mood: 2
   DefaultFlags:
   - Name: club_ucc
     IsSet: 0
   - Name: mej_may_beo
     IsSet: 0
-  spdLevel: 5
-  witLevel: 5
-  memLevel: 5
-  lukLevel: 5
-  spdWeight: 0
-  witWeight: 0
-  memWeight: 0
-  lukWeight: 0
-  baseUpgradePoints: 16
-  isFullyUpgraded: 1
+  spdLevel: 1
+  witLevel: 1
+  memLevel: 1
+  lukLevel: 1
+  spdWeight: 2
+  witWeight: 1
+  memWeight: 1
+  lukWeight: 1
+  baseUpgradePoints: 1
+  isFullyUpgraded: 0
