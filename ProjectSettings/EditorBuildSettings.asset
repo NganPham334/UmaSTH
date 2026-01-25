@@ -6,31 +6,31 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Game Scene.unity
-    guid: 7959abde601fd5349a175c6164ceeed9
-  - enabled: 1
-    path: Assets/Scenes/HomeScreen.unity
-    guid: 4bb6464887f9f16408eb2e88bb839265
-  - enabled: 1
     path: Assets/Scenes/LauncherScreen.unity
     guid: 434c6f968920a6b40ac30e91b3a0b4ad
   - enabled: 1
-    path: Assets/Scenes/PreTestUI.unity
-    guid: 98852c9e0e7a3b647baa17e37bbf93cc
-  - enabled: 0
-    path: Assets/Scenes/Resting Scene.unity
-    guid: 3a5472b41c459e840bfef5c68c948a31
+    path: Assets/Scenes/Game Scene.unity
+    guid: 7959abde601fd5349a175c6164ceeed9
   - enabled: 1
     path: Assets/Scenes/Study Screen.unity
     guid: d2f10b65c39b8e24594049faa9a07039
-  - enabled: 1
-    path: Assets/Scenes/Test scene.unity
-    guid: dc6548874c3c1c443b6aba952526c41e
   - enabled: 1
     path: Assets/Scenes/Visual Novel Screen.unity
     guid: cd373450a504a584dbb42278b38317cd
   - enabled: 1
     path: Assets/Scenes/Upgrade Scene.unity
     guid: d43a8ce737ab70a4f828a3c6095d526f
+  - enabled: 1
+    path: Assets/Scenes/PreTestUI.unity
+    guid: 98852c9e0e7a3b647baa17e37bbf93cc
+  - enabled: 1
+    path: Assets/Scenes/Test scene.unity
+    guid: dc6548874c3c1c443b6aba952526c41e
+  - enabled: 0
+    path: Assets/Scenes/HomeScreen.unity
+    guid: 4bb6464887f9f16408eb2e88bb839265
+  - enabled: 0
+    path: Assets/Scenes/Resting Scene.unity
+    guid: 3a5472b41c459e840bfef5c68c948a31
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
