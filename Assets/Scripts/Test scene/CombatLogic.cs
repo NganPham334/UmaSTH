@@ -42,6 +42,22 @@ public class CombatLogic : MonoBehaviour
         background.SetBackground(exam.ExamYear);
         testModel.SetTestSprite(exam.ExamYear);
 
+        GetCurrentStat();
+
+        //Set hp(temporary value)
+        playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 7);
+        testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 7);
+        
+        playerActionBar.SetSpeed(playerSpeed);
+        testActionBar.SetSpeed(testSpeed);
+
+        Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}, testHitChance: {testHitChance},testCritChance: {testCritChance}");
+        Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}, playerHitChance: {playerHitChance},playerCritChance: {playerCritChance}");
+
+    }
+
+    private void GetCurrentStat()
+    {
         mood = currentRunData.GetMood();
         Debug.Log($"Current Mood: {mood}");
 
@@ -59,17 +75,6 @@ public class CombatLogic : MonoBehaviour
         playerCritChance = (double)playerLuck/1000;
         testHitChance = (double)testLuck/playerLuck;
         testCritChance = (double)testLuck/1000;
-
-        //Set hp(temporary value)
-        playerHpBar.GetComponent<HpBarController>().SetMaxHp(playerMemory * 7);
-        testHpBar.GetComponent<HpBarController>().SetMaxHp(testMemory * 7);
-        
-        playerActionBar.SetSpeed(playerSpeed);
-        testActionBar.SetSpeed(testSpeed);
-
-        Debug.Log($"Player Stats - Speed: {playerSpeed}, Wit: {playerWit}, Memory: {playerMemory}, Luck: {playerLuck}, testHitChance: {testHitChance},testCritChance: {testCritChance}");
-        Debug.Log($"Test Stats - Speed: {testSpeed}, Wit: {testWit}, Memory: {testMemory}, Luck: {testLuck}, playerHitChance: {playerHitChance},playerCritChance: {playerCritChance}");
-
     }
 
     public void PlayerTakeDamage()
