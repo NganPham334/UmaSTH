@@ -8,7 +8,7 @@ It’s a real academic cheatsheet—concise, clear, and incredibly easy to under
 <<main blay_confused>>
 Blay eyes light up:Which hero left this sacred artifact behind!? #line:08f6f79 
     <<stat  spd+10 mem+10 wit+10 clr+10 mood+2>>
-
+<<main blay_happy>>
 You read it once, and the knowledge sinks right in. #line:0bfb910 
 Confidence surges—as if you’ve just leveled up. #line:024c28c 
     <<stop>>

@@ -15,7 +15,7 @@ Your wallet, however, is screaming. #line:0e06292
     <<set $roll = random_range(0, 1)>>
     <<if $roll == 0>>
         <<stat clr+30>>
-        <<main blay_full>>
+        <<main blay_happy>>
         Blay:This hit the spot. I feel so much better now. #line:0f4d3e1 
     <<elseif $roll == 1>>
         <<stat mood-1 spd-10>>

@@ -14,7 +14,7 @@ Blay:“Lunar New Year at last…A rare break after months of tension.How should
 ->Stay home and rest properly.   #line:00f372d 
     <<stat clr+20>> 
     <<scene BG_Citysqaure>>
-    <<main blay_relaxed>>
+    <<main blay_happy>>
     You sleep in more than usual.  #line:0d32063 
     No deadlines. No alarms.  #line:03b06ed 
     Maybe resting at the right time is a smart choice.  #line:0d8f70c 
@@ -28,7 +28,7 @@ Blay:“Lunar New Year at last…A rare break after months of tension.How should
 ->Use the break to prepare for the long road ahead.  #line:03cc963 
     <<stat mood+2>>
     <<scene BG_CityDowntown>>
-    <<main blay_thoughtful>>
+    <<main blay_confused>>
     You spend time thinking deeply.  #line:0f8f480 
     About how you study, how you work, how you face pressure. #line:0670308 
     You feel more prepared than before  #line:077762b 
